@@ -161,7 +161,7 @@ CREATE TABLE trn_cash (
     police_number_reference VARCHAR(200) DEFAULT NULL,
     total_value DOUBLE(15,2) DEFAULT NULL,
     total_payment_before DOUBLE(15,2) DEFAULT NULL,
-    cutoff DOUBLE(15,2) DEFAULT NULL,
+    discount DOUBLE(15,2) DEFAULT NULL,
     cash_total DOUBLE(15,2) DEFAULT NULL,
     total_payment DOUBLE(15,2) DEFAULT NULL,
     status VARCHAR(50) DEFAULT NULL,

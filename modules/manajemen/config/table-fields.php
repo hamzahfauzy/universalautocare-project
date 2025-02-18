@@ -630,7 +630,7 @@ return [
                 'min' => 1
             ]
         ],
-        'cutoff' => [
+        'discount' => [
             'label' => 'Potongan',
             'type' => 'number',
             'attr' => [
