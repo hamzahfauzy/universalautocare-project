@@ -9,7 +9,7 @@ $db = new Database;
 
 $data = $db->all('trn_purchases');
 
-$unit = $db->single('trn_purchase_items', ['purchase_id' => $data[0]->id])->unit ?? "PCS";
+$unit = count($data) ? $db->single('trn_purchase_items', ['purchase_id' => $data[0]->id])->unit : "PCS";
 
 // page section
 $title = 'Laporan Pembelian';
