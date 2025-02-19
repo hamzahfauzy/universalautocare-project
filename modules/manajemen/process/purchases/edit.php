@@ -13,25 +13,57 @@ $db = new Database;
 if (Request::isMethod('POST')) {
     $data = isset($_POST[$tableName]) ? $_POST[$tableName] : [];
     $items = $_POST['items'];
-    $data['total_item'] = count($items);
-    $data['total_qty'] = array_sum(array_column($items, 'total_qty'));
-    $data['total_value'] = str_replace(',', '', $data['total_value']);
-    $purchase = $db->insert('trn_purchases', $data);
-
     foreach ($items as $index => $item) {
-        $item['purchase_id'] = $purchase->id;
+        $item['purchase_id'] = $_GET['id'];
         $item['total_price'] = $item['price'] * $item['total_qty'];
         $db->insert('trn_purchase_items', $item);
     }
 
-    set_flash_msg(['success' => "Pembelian berhasil ditambahkan"]);
+    $new_items = (array) $db->all('trn_purchase_items', ['purchase_id' => $_GET['id']]);
+
+    $data['total_item'] = count($new_items);
+    $data['total_qty'] = array_sum(array_column($new_items, 'total_qty'));
+    $data['total_value'] = str_replace(',', '', $data['total_value']);
+    $purchase = $db->update('trn_purchases', $data, ['id' => $_GET['id']]);
+
+
+    set_flash_msg(['success' => "Pembelian berhasil diedit"]);
 
     header('location:' . routeTo('crud/index', ['table' => 'trn_purchases']));
     die();
 }
 
+
+$db->query = "SELECT COUNT(*) as `counter` FROM trn_purchases WHERE created_at LIKE '%" . date('Y-m') . "%'";
+$counter = $db->exec('single')?->counter ?? 0;
+
+$data = $db->single('trn_purchases', ['id' => $_GET['id']]);
+
+$code = $data->code;
+
+$data_items = $db->all('trn_purchase_items', ['purchase_id' => $_GET['id']]);
+
+$items = [];
+
+foreach ($data_items as $index => $item) {
+    $product = $db->single('mst_items', ['id' => $item->item_id]);
+    $category = $db->single('mst_categories', ['id' => $product->category_id]);
+    $items[] = [
+        'id' => $item->id,
+        'key' => $index + 1,
+        'name' => $product->name,
+        'qty' => (int) $item->total_qty,
+        'price' => (int) $item->price,
+        'total_price' => (int) $item->total_price,
+        'unit' => $item->unit,
+        'category_name' => $category->name,
+        'category' => $category->id,
+        'product' => $product->id,
+    ];
+}
+
 // page section
-$title = 'Pembelian';
+$title = 'Edit Pembelian';
 Page::setActive("manajemen.purchases.create");
 Page::setTitle($title);
 Page::setModuleName($title);
@@ -66,15 +98,10 @@ tinymce.init({
 Page::pushHead('<style>.select2,.select2-selection{height:38px!important;} .select2-container--default .select2-selection--single .select2-selection__rendered{line-height:38px!important;}.select2-selection__arrow{height:34px!important;}</style>');
 Page::pushFoot('<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>');
 Page::pushFoot("<script src='" . asset('assets/crud/js/crud.js') . "'></script>");
-Page::pushFoot("<script>var items = []</script>");
+Page::pushFoot("<script>var items = " . json_encode($items) . "</script>");
 Page::pushFoot("<script src='" . asset('assets/manajemen/js/purchases.js') . "'></script>");
 Page::pushFoot("<script>$('.select2insidemodal').select2({dropdownParent: $('#itemModal .modal-body')});</script>");
 
-Page::pushHook('create');
+Page::pushHook('edit');
 
-$db->query = "SELECT COUNT(*) as `counter` FROM trn_purchases WHERE created_at LIKE '%" . date('Y-m') . "%'";
-$counter = $db->exec('single')?->counter ?? 0;
-
-$code = "FKT" . date('Ym') . sprintf("%04d", $counter + 1);
-
-return view('manajemen/views/purchases/create', compact('error_msg', 'old', 'tableName', 'code'));
+return view('manajemen/views/purchases/edit', compact('error_msg', 'old', 'tableName', 'code', 'data', 'items'));

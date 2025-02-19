@@ -4,7 +4,7 @@ use Core\Database;
 use Core\Page;
 use Core\Request;
 
-$tableName = 'trn_purchases';
+$tableName = 'trn_orders';
 $module = 'manajemen';
 $error_msg  = get_flash_msg('error');
 $old        = get_flash_msg('old');
@@ -13,26 +13,26 @@ $db = new Database;
 if (Request::isMethod('POST')) {
     $data = isset($_POST[$tableName]) ? $_POST[$tableName] : [];
     $items = $_POST['items'];
-    $data['total_item'] = count($items);
-    $data['total_qty'] = array_sum(array_column($items, 'total_qty'));
     $data['total_value'] = str_replace(',', '', $data['total_value']);
-    $purchase = $db->insert('trn_purchases', $data);
+    $data['total_service_value'] = str_replace(',', '', $data['total_service_value']);
+    $data['order_type'] = $_GET['filter']['order_type'];
+    $order = $db->insert('trn_orders', $data);
 
-    foreach ($items as $index => $item) {
-        $item['purchase_id'] = $purchase->id;
-        $item['total_price'] = $item['price'] * $item['total_qty'];
-        $db->insert('trn_purchase_items', $item);
+    foreach ($items as $item) {
+        $item['order_id'] = $order->id;
+        $item['total_price'] = $item['price'] * $item['qty'];
+        $db->insert('trn_order_items', $item);
     }
 
-    set_flash_msg(['success' => "Pembelian berhasil ditambahkan"]);
+    set_flash_msg(['success' => "Job Order berhasil ditambahkan"]);
 
-    header('location:' . routeTo('crud/index', ['table' => 'trn_purchases']));
+    header('location:' . routeTo('crud/index', ['table' => 'trn_orders', 'filter' => ['order_type' => $_GET['filter']['order_type']]]));
     die();
 }
 
 // page section
-$title = 'Pembelian';
-Page::setActive("manajemen.purchases.create");
+$title = 'Data Job Order';
+Page::setActive("manajemen.orders.create");
 Page::setTitle($title);
 Page::setModuleName($title);
 Page::setBreadcrumbs([
@@ -41,8 +41,8 @@ Page::setBreadcrumbs([
         'title' => __('crud.label.home')
     ],
     [
-        'url' => routeTo('crud/index', ['table' => 'trn_purchases']),
-        'title' => 'Data Pembelian'
+        'url' => routeTo('crud/index', ['table' => 'trn_orders', 'order_type' => $_GET['filter']['order_type']]),
+        'title' => 'Data Job Order'
     ],
     [
         'title' => $title
@@ -67,14 +67,14 @@ Page::pushHead('<style>.select2,.select2-selection{height:38px!important;} .sele
 Page::pushFoot('<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>');
 Page::pushFoot("<script src='" . asset('assets/crud/js/crud.js') . "'></script>");
 Page::pushFoot("<script>var items = []</script>");
-Page::pushFoot("<script src='" . asset('assets/manajemen/js/purchases.js') . "'></script>");
+Page::pushFoot("<script src='" . asset('assets/manajemen/js/orders.js') . "'></script>");
 Page::pushFoot("<script>$('.select2insidemodal').select2({dropdownParent: $('#itemModal .modal-body')});</script>");
 
 Page::pushHook('create');
 
-$db->query = "SELECT COUNT(*) as `counter` FROM trn_purchases WHERE created_at LIKE '%" . date('Y-m') . "%'";
+$db->query = "SELECT COUNT(*) as `counter` FROM trn_orders WHERE created_at LIKE '%" . date('Y-m') . "%'";
 $counter = $db->exec('single')?->counter ?? 0;
 
-$code = "FKT" . date('Ym') . sprintf("%04d", $counter + 1);
+$code = "ORD" . date('Ym') . sprintf("%04d", $counter + 1);
 
-return view('manajemen/views/purchases/create', compact('error_msg', 'old', 'tableName', 'code'));
+return view('manajemen/views/orders/create', compact('error_msg', 'old', 'tableName', 'code'));

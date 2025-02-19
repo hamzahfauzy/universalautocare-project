@@ -33,21 +33,21 @@ $attr  = ['class' => "form-control"];
                     <div class="row mb-3">
                         <label class="mb-2 col-4">Tgl. Pembelian</label>
                         <div class="col-8">
-                            <?= \Core\Form::input('date', $tableName . '[date]', array_merge($attr, ['placeholder' => 'Tgl. Pembelian', 'required' => ''])) ?>
+                            <?= \Core\Form::input('date', $tableName . '[date]', array_merge($attr, ['placeholder' => 'Tgl. Pembelian', 'required' => '', 'value' => $data->date])) ?>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <label class="mb-2 col-4">Supplier</label>
                         <div class="col-8">
                             <div class="d-flex">
-                                <?= \Core\Form::input('options-obj:mst_suppliers,id,name', $tableName . '[supplier_id]', array_merge($attr, ['placeholder' => 'Pilih Customer', 'required' => ''])) ?>
+                                <?= \Core\Form::input('options-obj:mst_suppliers,id,name', $tableName . '[supplier_id]', array_merge($attr, ['placeholder' => 'Pilih Customer', 'required' => '', 'value' => $data->supplier_id])) ?>
                             </div>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <label class="mb-2 col-4">Karyawan</label>
                         <div class="col-8">
-                            <?= \Core\Form::input('options-obj:mst_employees,id,name', $tableName . '[employee_id]', array_merge($attr, ['placeholder' => 'Pilih Customer', 'required' => ''])) ?>
+                            <?= \Core\Form::input('options-obj:mst_employees,id,name', $tableName . '[employee_id]', array_merge($attr, ['placeholder' => 'Pilih Customer', 'required' => '', 'value' => $data->employee_id])) ?>
                         </div>
                     </div>
                 </div>
@@ -55,25 +55,25 @@ $attr  = ['class' => "form-control"];
                     <div class="row mb-3">
                         <label class="mb-2 col-4">Total Item</label>
                         <div class="col-8">
-                            <input type="text" name="<?= $tableName ?>[total_item]" class="form-control" placeholder="Total Item" readonly value="">
+                            <input type="text" name="<?= $tableName ?>[total_item]" class="form-control" placeholder="Total Item" readonly value="<?= $data->total_item ?>">
                         </div>
                     </div>
                     <div class="row mb-3">
                         <label class="mb-2 col-4">Total Qty</label>
                         <div class="col-8">
-                            <input type="text" name="<?= $tableName ?>[total_qty]" class="form-control" placeholder="Total Qty" readonly value="">
+                            <input type="text" name="<?= $tableName ?>[total_qty]" class="form-control" placeholder="Total Qty" readonly value="<?= $data->total_qty ?>">
                         </div>
                     </div>
                     <div class="row mb-3">
                         <label class="mb-2 col-4">Total Nilai Pembelian</label>
                         <div class="col-8">
-                            <?= \Core\Form::input('text', $tableName . '[total_value]', array_merge($attr, ['placeholder' => 'Total Nilai Pembelian', 'readonly' => 'readonly'])) ?>
+                            <?= \Core\Form::input('text', $tableName . '[total_value]', array_merge($attr, ['placeholder' => 'Total Nilai Pembelian', 'readonly' => 'readonly', 'value' => number_format($data->total_value)])) ?>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <label class="mb-2 col-4">Keterangan</label>
                         <div class="col-8">
-                            <?= \Core\Form::input('textarea', $tableName . '[description]', array_merge($attr, ['placeholder' => 'Keterangan', 'class' => 'form-control select2-search__field'])) ?>
+                            <?= \Core\Form::input('textarea', $tableName . '[description]', array_merge($attr, ['placeholder' => 'Keterangan', 'class' => 'form-control select2-search__field', 'value' => $data->description])) ?>
                         </div>
                     </div>
                 </div>
@@ -93,9 +93,24 @@ $attr  = ['class' => "form-control"];
                         </tr>
                     </thead>
                     <tbody>
-                        <tr id="empty_item">
+                        <tr id="empty_item" style="<?= count($items) ? 'display:none' : '' ?>">
                             <td colspan="8" class="text-center"><i>Belum ada item</i></td>
                         </tr>
+
+                        <?php foreach ($items as $idx => $item): ?>
+                            <tr id="item_<?= $idx + 1 ?>">
+                                <td>
+                                    <?= $idx + 1 ?>
+                                </td>
+                                <td><?= $item['category_name'] ?></td>
+                                <td><?= $item['name'] ?></td>
+                                <td>Rp. <?= number_format($item['price']) ?></td>
+                                <td><?= $item['qty'] ?></td>
+                                <td><?= $item['unit'] ?></td>
+                                <td id="total_price_<?= $idx + 1 ?>">Rp. <?= number_format($item['total_price']) ?></td>
+                                <td><a href="<?= routeTo('crud/delete', ['table' => 'trn_purchase_items', 'id' => $item['id'], 'purchase_id' => $_GET['id']]) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Apakah anda yakin menghapus data ini?')"><i class="fas fa-trash"></i></button></td>
+                            </tr>
+                        <?php endforeach ?>
                     </tbody>
                 </table>
             </div>

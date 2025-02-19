@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 return [
     'mst_employees' => [
@@ -322,18 +322,6 @@ return [
         '_userstamp' => true,
     ],
     'trn_orders' => [
-        'employee_id' => [
-            'label' => 'Karyawan',
-            'type' => 'options-obj:mst_employees,id,name',
-        ],
-        'customer_id' => [
-            'label' => 'Customer',
-            'type' => 'options-obj:mst_customers,id,name',
-        ],
-        'partner_id' => [
-            'label' => 'Partner',
-            'type' => 'options-obj:mst_partners,id,name',
-        ],
         'code' => [
             'label' => 'No. Order',
             'type' => 'text',
@@ -342,52 +330,16 @@ return [
             'label' => 'Tanggal Order',
             'type' => 'date',
         ],
-        'done_date' => [
-            'label' => 'Tanggal Selesai',
-            'type' => 'date',
+        'employee_id' => [
+            'label' => 'Karyawan',
+            'type' => 'options-obj:mst_employees,id,name',
         ],
-        'close_date' => [
-            'label' => 'Tanggal Closing',
-            'type' => 'date',
-        ],
-        'order_type' => [
-            'label' => 'Tipe Order',
-            'type' => 'options:BENGKEL|DOORSMEER',
-        ],
-        'customer_police_number' => [
-            'label' => 'Nomor Polisi Kendaraan',
-            'type' => 'text',
-        ],
-        'customer_vehicle_type' => [
-            'label' => 'Jenis Kendaraan',
-            'type' => 'text',
-        ],
-        'customer_vehicle_color' => [
-            'label' => 'Warna Kendaraan',
-            'type' => 'text',
-        ],
-        'total_item_value' => [
-            'label' => 'Total Nilai Barang',
-            'type' => 'number',
-            'attr' => [
-                'data-type' => 'currency',
-                'class' => 'form-control',
-                'required' => 'required',
-                'min' => 1
-            ]
-        ],
-        'total_service_value' => [
-            'label' => 'Total Nilai Jasa',
-            'type' => 'number',
-            'attr' => [
-                'data-type' => 'currency',
-                'class' => 'form-control',
-                'required' => 'required',
-                'min' => 1
-            ]
+        'partner_id' => [
+            'label' => 'Partner',
+            'type' => 'options-obj:mst_partners,id,name',
         ],
         'total_value' => [
-            'label' => 'Total Nilai Order',
+            'label' => 'Nilai Order',
             'type' => 'number',
             'attr' => [
                 'data-type' => 'currency',
@@ -396,24 +348,72 @@ return [
                 'min' => 1
             ]
         ],
-        'total_payment' => [
-            'label' => 'Total Pembayaran',
-            'type' => 'number',
-            'attr' => [
-                'data-type' => 'currency',
-                'class' => 'form-control',
-                'required' => 'required',
-                'min' => 1
-            ]
+        'customer_id' => [
+            'label' => 'Customer',
+            'type' => 'options-obj:mst_customers,id,name',
         ],
-        'description' => [
-            'label' => 'Keterangan',
-            'type' => 'textarea',
-        ],
-        'pic_url' => [
-            'label' => 'Foto Order',
-            'type' => 'text',
-        ],
+        // 'order_type' => [
+        //     'label' => 'Tipe Order',
+        //     'type' => 'options:BENGKEL|DOORSMEER',
+        // ],
+        // 'done_date' => [
+        //     'label' => 'Tanggal Selesai',
+        //     'type' => 'date',
+        // ],
+        // 'close_date' => [
+        //     'label' => 'Tanggal Closing',
+        //     'type' => 'date',
+        // ],
+        // 'customer_police_number' => [
+        //     'label' => 'Nomor Polisi Kendaraan',
+        //     'type' => 'text',
+        // ],
+        // 'customer_vehicle_type' => [
+        //     'label' => 'Jenis Kendaraan',
+        //     'type' => 'text',
+        // ],
+        // 'customer_vehicle_color' => [
+        //     'label' => 'Warna Kendaraan',
+        //     'type' => 'text',
+        // ],
+        // 'total_item_value' => [
+        //     'label' => 'Total Nilai Barang',
+        //     'type' => 'number',
+        //     'attr' => [
+        //         'data-type' => 'currency',
+        //         'class' => 'form-control',
+        //         'required' => 'required',
+        //         'min' => 1
+        //     ]
+        // ],
+        // 'total_service_value' => [
+        //     'label' => 'Total Nilai Jasa',
+        //     'type' => 'number',
+        //     'attr' => [
+        //         'data-type' => 'currency',
+        //         'class' => 'form-control',
+        //         'required' => 'required',
+        //         'min' => 1
+        //     ]
+        // ],
+        // 'total_payment' => [
+        //     'label' => 'Total Pembayaran',
+        //     'type' => 'number',
+        //     'attr' => [
+        //         'data-type' => 'currency',
+        //         'class' => 'form-control',
+        //         'required' => 'required',
+        //         'min' => 1
+        //     ]
+        // ],
+        // 'description' => [
+        //     'label' => 'Keterangan',
+        //     'type' => 'textarea',
+        // ],
+        // 'pic_url' => [
+        //     'label' => 'Foto Order',
+        //     'type' => 'text',
+        // ],
         'status' => [
             'label' => 'Status',
             'type' => 'options:NEW|APPROVE|CANCEL',
@@ -464,14 +464,6 @@ return [
         '_userstamp' => true,
     ],
     'trn_outgoings' => [
-        'order_id' => [
-            'label' => 'Order',
-            'type' => 'options-obj:trn_orders,id,code',
-        ],
-        'employee_id' => [
-            'label' => 'Karyawan',
-            'type' => 'options-obj:mst_employees,id,name',
-        ],
         'code' => [
             'label' => 'No. Pengeluaran',
             'type' => 'text',
@@ -480,46 +472,54 @@ return [
             'label' => 'Tanggal Pengeluaran',
             'type' => 'date',
         ],
-        'customer_police_number' => [
-            'label' => 'Nomor Polisi Kendaraan',
-            'type' => 'text',
-        ],
-        'total_value' => [
-            'label' => 'Total Nilai Order',
-            'type' => 'number',
-            'attr' => [
-                'data-type' => 'currency',
-                'class' => 'form-control',
-                'required' => 'required',
-                'min' => 1
-            ]
+        'employee_id' => [
+            'label' => 'Karyawan',
+            'type' => 'options-obj:mst_employees,id,name',
         ],
         'total_outgoing_items' => [
-            'label' => 'Total Item Pengeluaran',
+            'label' => 'Total Item',
             'type' => 'number',
         ],
         'total_outgoing_qty' => [
-            'label' => 'Total Kuantitas Pengeluaran',
+            'label' => 'Total Kuantitas',
             'type' => 'number',
-        ],
-        'total_outgoing_value' => [
-            'label' => 'Total Nilai Pengeluaran',
-            'type' => 'number',
-            'attr' => [
-                'data-type' => 'currency',
-                'class' => 'form-control',
-                'required' => 'required',
-                'min' => 1
-            ]
-        ],
-        'description' => [
-            'label' => 'Keterangan',
-            'type' => 'textarea',
         ],
         'status' => [
             'label' => 'Status',
             'type' => 'options:NEW|APPROVE|CANCEL',
         ],
+        // 'order_id' => [
+        //     'label' => 'Order',
+        //     'type' => 'options-obj:trn_orders,id,code',
+        // ],
+        // 'customer_police_number' => [
+        //     'label' => 'Nomor Polisi Kendaraan',
+        //     'type' => 'text',
+        // ],
+        // 'total_value' => [
+        //     'label' => 'Total Nilai Order',
+        //     'type' => 'number',
+        //     'attr' => [
+        //         'data-type' => 'currency',
+        //         'class' => 'form-control',
+        //         'required' => 'required',
+        //         'min' => 1
+        //     ]
+        // ],
+        // 'total_outgoing_value' => [
+        //     'label' => 'Total Nilai Pengeluaran',
+        //     'type' => 'number',
+        //     'attr' => [
+        //         'data-type' => 'currency',
+        //         'class' => 'form-control',
+        //         'required' => 'required',
+        //         'min' => 1
+        //     ]
+        // ],
+        // 'description' => [
+        //     'label' => 'Keterangan',
+        //     'type' => 'textarea',
+        // ],
         '_userstamp' => true,
     ],
     'trn_outgoing_items' => [

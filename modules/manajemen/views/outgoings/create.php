@@ -11,7 +11,7 @@ $attr  = ['class' => "form-control"];
     <div class="card-header d-flex flex-grow-1 align-items-center">
         <p class="h4 m-0"><?php get_title() ?></p>
         <div class="right-button ms-auto">
-            <a href="<?= routeTo('crud/index', ['table' => 'trn_purchases']) ?>" class="btn btn-warning btn-sm">
+            <a href="<?= routeTo('crud/index', ['table' => 'trn_outgoings']) ?>" class="btn btn-warning btn-sm">
                 <?= __('crud.label.back') ?>
             </a>
         </div>
@@ -25,23 +25,29 @@ $attr  = ['class' => "form-control"];
             <div class="row">
                 <div class="col-12 col-md-6">
                     <div class="row mb-3">
-                        <label class="mb-2 col-4">No. Pembelian</label>
+                        <label class="mb-2 col-4">No. Pengeluaran</label>
                         <div class="col-8">
-                            <?= \Core\Form::input('text', $tableName . '[code]', array_merge($attr, ['placeholder' => 'No. Pembelian', 'readonly' => 'readonly', 'value' => $code])) ?>
+                            <?= \Core\Form::input('text', $tableName . '[code]', array_merge($attr, ['placeholder' => 'No. Pengeluaran', 'readonly' => 'readonly', 'value' => $code])) ?>
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label class="mb-2 col-4">Tgl. Pembelian</label>
+                        <label class="mb-2 col-4">Tgl. Pengeluaran</label>
                         <div class="col-8">
-                            <?= \Core\Form::input('date', $tableName . '[date]', array_merge($attr, ['placeholder' => 'Tgl. Pembelian', 'required' => ''])) ?>
+                            <?= \Core\Form::input('date', $tableName . '[date]', array_merge($attr, ['placeholder' => 'Tgl. Pengeluaran', 'required' => ''])) ?>
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label class="mb-2 col-4">Supplier</label>
+                        <label class="mb-2 col-4">No. Order</label>
                         <div class="col-8">
                             <div class="d-flex">
-                                <?= \Core\Form::input('options-obj:mst_suppliers,id,name', $tableName . '[supplier_id]', array_merge($attr, ['placeholder' => 'Pilih Customer', 'required' => ''])) ?>
+                                <?= \Core\Form::input('options-obj:trn_orders,id,code', $tableName . '[order_id]', array_merge($attr, ['placeholder' => 'Pilih Customer', 'required' => ''])) ?>
                             </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="mb-2 col-4"></label>
+                        <div class="col-8">
+                            <h6 id="customer">Nama Customer - No. Polisi</h6>
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -55,19 +61,19 @@ $attr  = ['class' => "form-control"];
                     <div class="row mb-3">
                         <label class="mb-2 col-4">Total Item</label>
                         <div class="col-8">
-                            <input type="text" name="<?= $tableName ?>[total_item]" class="form-control" placeholder="Total Item" readonly value="">
+                            <input type="text" name="<?= $tableName ?>[total_outgoing_items]" class="form-control" placeholder="Total Item" readonly value="">
                         </div>
                     </div>
                     <div class="row mb-3">
                         <label class="mb-2 col-4">Total Qty</label>
                         <div class="col-8">
-                            <input type="text" name="<?= $tableName ?>[total_qty]" class="form-control" placeholder="Total Qty" readonly value="">
+                            <input type="text" name="<?= $tableName ?>[total_outgoing_qty]" class="form-control" placeholder="Total Qty" readonly value="">
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label class="mb-2 col-4">Total Nilai Pembelian</label>
+                        <label class="mb-2 col-4">Total Nilai Pengeluaran</label>
                         <div class="col-8">
-                            <?= \Core\Form::input('text', $tableName . '[total_value]', array_merge($attr, ['placeholder' => 'Total Nilai Pembelian', 'readonly' => 'readonly'])) ?>
+                            <?= \Core\Form::input('text', $tableName . '[total_outgoing_value]', array_merge($attr, ['placeholder' => 'Total Nilai Pengeluaran', 'readonly' => 'readonly'])) ?>
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -83,18 +89,19 @@ $attr  = ['class' => "form-control"];
                     <thead>
                         <tr>
                             <th>No</th>
+                            <th>No. Pembelian</th>
                             <th>Kategori</th>
-                            <th>Deskripsi Keterangan Pembelian</th>
+                            <th>Deskripsi Keterangan Pengeluaran</th>
                             <th>@Harga</th>
                             <th>Qty</th>
                             <th>Satuan</th>
-                            <th>Jumlah Pembelian</th>
+                            <th>Jumlah Pengeluaran</th>
                             <th><button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#itemModal">Tambah Item</button></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr id="empty_item">
-                            <td colspan="8" class="text-center"><i>Belum ada item</i></td>
+                            <td colspan="9" class="text-center"><i>Belum ada item</i></td>
                         </tr>
                     </tbody>
                 </table>
@@ -122,6 +129,10 @@ $attr  = ['class' => "form-control"];
                 <div class="form-group mb-3">
                     <label class="mb-2 w-100">Produk</label>
                     <select name="product" id="product-select" class="form-control select2insidemodal"></select>
+                </div>
+                <div class="form-group mb-3">
+                    <label class="mb-2 w-100">No Pembelian</label>
+                    <?= \Core\Form::input('options-obj:trn_purchases,id,code', 'purchase', array_merge($attr, ['class' => 'form-control select2insidemodal', 'placeholder' => 'Pilih No Pembelian'])) ?>
                 </div>
             </div>
             <div class="modal-footer">

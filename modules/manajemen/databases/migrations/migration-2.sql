@@ -63,7 +63,7 @@ CREATE TABLE trn_orders (
     total_payment DOUBLE(15,2),
     description TEXT DEFAULT NULL,
     pic_url VARCHAR (100) DEFAULT NULL,
-    status VARCHAR(100) DEFAULT NULL,
+    status VARCHAR(100) DEFAULT "NEW",
 
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
@@ -111,7 +111,7 @@ CREATE TABLE trn_outgoings (
     total_outgoing_qty INT(8) DEFAULT NULL,
     total_outgoing_value DOUBLE(15,2) DEFAULT NULL,
     description TEXT DEFAULT NULL,
-    status VARCHAR(100) DEFAULT NULL,
+    status VARCHAR(100) DEFAULT "NEW",
 
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
@@ -164,7 +164,7 @@ CREATE TABLE trn_cash (
     discount DOUBLE(15,2) DEFAULT NULL,
     cash_total DOUBLE(15,2) DEFAULT NULL,
     total_payment DOUBLE(15,2) DEFAULT NULL,
-    status VARCHAR(50) DEFAULT NULL,
+    status VARCHAR(100) DEFAULT "NEW",
     description TEXT DEFAULT NULL,
 
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
