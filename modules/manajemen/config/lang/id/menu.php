@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 return [
     'module_name' => 'Manajemen',
@@ -26,6 +26,7 @@ return [
     'cash_income' => 'Pemasukan Kas',
     'cash_outcome' => 'Pengeluaran Kas',
     'cash_cost' => 'Biaya Kas',
+    'orders' => 'Job Order',
     'workshop_order' => 'Job Order Bengkel',
     'workshop_invoice' => 'Invoice Bengkel',
     'carwash_order' => 'Job Order Doorsmeer',

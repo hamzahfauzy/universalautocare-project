@@ -244,10 +244,22 @@ return [
         ],
         'items' => [
             [
-                'label' => 'manajemen.menu.workshop_order',
+                'label' => 'manajemen.menu.purchases',
                 'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-stream',
-                'route' => routeTo('crud/index', ['table' => 'trn_cash']),
-                'activeState' => 'manajemen.trn_cash'
+                'route' => routeTo('manajemen/report/purchases'),
+                'activeState' => 'manajemen.report.purchases'
+            ],
+            [
+                'label' => 'manajemen.menu.outgoings',
+                'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-stream',
+                'route' => routeTo('manajemen/report/outgoings'),
+                'activeState' => 'manajemen.report.outgoings'
+            ],
+            [
+                'label' => 'manajemen.menu.orders',
+                'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-stream',
+                'route' => routeTo('manajemen/report/orders', ['filter' => ['order_type' => 'BENGKEL']]),
+                'activeState' => 'manajemen.report.orders'
             ],
             [
                 'label' => 'manajemen.menu.workshop_invoice',
