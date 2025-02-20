@@ -245,7 +245,9 @@ return [
         'label' => 'manajemen.menu.report',
         'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-scroll',
         'activeState' => [
-            'manajemen.trn_cash',
+            'manajemen.report.purchases',
+            'manajemen.report.outgoings',
+            'manajemen.report.orders'
         ],
         'items' => [
             [

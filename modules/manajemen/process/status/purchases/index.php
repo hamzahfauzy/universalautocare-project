@@ -46,4 +46,6 @@ Page::pushFoot('<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dis
 
 Page::pushHook('index');
 
+Page::pushFoot("<script>$('.datatable').dataTable()</script>");
+
 return view('manajemen/views/status/purchases/index', compact('error_msg', 'success_msg', 'old', 'data', 'unit'));

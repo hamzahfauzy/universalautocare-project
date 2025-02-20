@@ -56,7 +56,7 @@ $attr = 'form-control';
         </div>
 
         <div class="table-responsive my-4">
-            <table class="table table-striped datatable-crud" style="width:100%">
+            <table class="table table-striped datatable" style="width:100%">
                 <thead>
                     <tr>
                         <th>No. Pembelian</th>

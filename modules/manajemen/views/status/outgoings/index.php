@@ -31,7 +31,7 @@ $attr = 'form-control';
         <?php endif ?>
 
         <div class="table-responsive my-4">
-            <table class="table table-striped datatable-crud" style="width:100%">
+            <table class="table table-striped datatable" style="width:100%">
                 <thead>
                     <tr>
                         <th>No. Pengeluaran</th>
