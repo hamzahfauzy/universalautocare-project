@@ -156,32 +156,35 @@ return [
         'label' => 'manajemen.menu.update_status',
         'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-pen-square',
         'activeState' => [
-            'manajemen.trn_cash',
+            'manajemen.status.purchases',
+            'manajemen.status.outgoings',
+            'manajemen.status.workshop_orders',
+            'manajemen.status.carwash_orders',
         ],
         'items' => [
             [
                 'label' => 'manajemen.menu.purchases',
                 'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-stream',
-                'route' => routeTo('crud/index', ['table' => 'trn_cash']),
-                'activeState' => 'manajemen.trn_cash'
+                'route' => routeTo('manajemen/status/purchases'),
+                'activeState' => 'manajemen.status.purchases'
             ],
             [
                 'label' => 'manajemen.menu.outgoings',
                 'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-stream',
-                'route' => routeTo('crud/index', ['table' => 'trn_cash']),
-                'activeState' => 'manajemen.trn_cash'
+                'route' => routeTo('manajemen/status/outgoings'),
+                'activeState' => 'manajemen.status.outgoings'
             ],
             [
                 'label' => 'manajemen.menu.workshop',
                 'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-stream',
-                'route' => routeTo('crud/index', ['table' => 'trn_cash']),
-                'activeState' => 'manajemen.trn_cash'
+                'route' => routeTo('manajemen/status/orders', ['filter' => ['order_type' => 'BENGKEL']]),
+                'activeState' => 'manajemen.status.workshop_orders'
             ],
             [
                 'label' => 'manajemen.menu.carwash',
                 'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-stream',
-                'route' => routeTo('crud/index', ['table' => 'trn_cash']),
-                'activeState' => 'manajemen.trn_cash'
+                'route' => routeTo('manajemen/status/orders', ['filter' => ['order_type' => 'DOORSMEER']]),
+                'activeState' => 'manajemen.status.carwash_orders'
             ],
             [
                 'label' => 'manajemen.menu.cash_income',
