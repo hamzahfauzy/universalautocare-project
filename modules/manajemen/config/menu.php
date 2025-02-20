@@ -129,26 +129,28 @@ return [
         'label' => 'manajemen.menu.payment_data',
         'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-cash-register',
         'activeState' => [
-            'manajemen.trn_cash',
+            'manajemen.cash_income',
+            'manajemen.cash_outcome',
+            'manajemen.cash_cost',
         ],
         'items' => [
             [
                 'label' => 'manajemen.menu.cash_income',
                 'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-stream',
                 'route' => routeTo('crud/index', ['table' => 'trn_cash', 'filter' => ['cash_group' => 'PENERIMAAN KAS']]),
-                'activeState' => 'manajemen.trn_cash'
+                'activeState' => 'manajemen.cash_income'
             ],
             [
                 'label' => 'manajemen.menu.cash_outcome',
                 'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-stream',
                 'route' => routeTo('crud/index', ['table' => 'trn_cash', 'filter' => ['cash_group' => 'PENGELUARAN KAS']]),
-                'activeState' => 'manajemen.trn_cash'
+                'activeState' => 'manajemen.cash_outcome'
             ],
             [
                 'label' => 'manajemen.menu.cash_cost',
                 'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-stream',
                 'route' => routeTo('crud/index', ['table' => 'trn_cash', 'filter' => ['cash_group' => 'BIAYA KAS']]),
-                'activeState' => 'manajemen.trn_cash'
+                'activeState' => 'manajemen.cash_cost'
             ],
         ]
     ],
