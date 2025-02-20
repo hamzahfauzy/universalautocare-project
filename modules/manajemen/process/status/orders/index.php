@@ -14,11 +14,9 @@ $unit = count($data) ? $db->single('trn_order_items', ['order_id' => $data[0]->i
 
 // page section
 $title = 'Update Status Job Order ' . $_GET['filter']['order_type'];
-if ($_GET['filter']['order_type'] == 'BENGKEL') {
-    Page::setActive("manajemen.status.workshop_orders");
-} else {
-    Page::setActive("manajemen.status.carwash_orders");
-}
+$types = ['BENGKEL' => 'workshop', 'DOORSMEER' => 'carwash'];
+$order_type = $_GET['filter']['order_type'];
+Page::setActive('manajemen.status.' . $types[$order_type] . '_orders');
 Page::setTitle($title);
 Page::setModuleName($title);
 Page::setBreadcrumbs([
