@@ -1,6 +1,7 @@
 <?php
 
 use Core\Page;
+use Core\Request;
 use Core\Route;
 
 // Route::additional_allowed_routes([
@@ -17,5 +18,17 @@ use Core\Route;
 
 $types = ['PENERIMAAN KAS' => 'cash_income', 'PENGELUARAN KAS' => 'cash_outcome', 'BIAYA KAS' => 'cash_cost'];
 $cash_group = $_GET['filter']['cash_group'];
-Page::set_title(__('manajemen.label.'.$types[$cash_group]));
-Page::setActive('manajemen.'.$types[$cash_group]);
+$route = Request::getRoute();
+
+if($route == 'crud/index')
+{
+    Page::set_title(__('manajemen.label.'.$types[$cash_group]));
+    Page::setActive('manajemen.'.$types[$cash_group]);
+}
+
+else 
+
+{
+    Page::set_title(__('manajemen.label.'.$types[$cash_group]));
+    Page::setActive('manajemen.status.'.$types[$cash_group]);
+}

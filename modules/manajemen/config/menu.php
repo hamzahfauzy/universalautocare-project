@@ -162,6 +162,9 @@ return [
             'manajemen.status.outgoings',
             'manajemen.status.workshop_orders',
             'manajemen.status.carwash_orders',
+            'manajemen.status.cash_income',
+            'manajemen.status.cash_outcome',
+            'manajemen.status.cash_cost',
         ],
         'items' => [
             [
@@ -191,20 +194,20 @@ return [
             [
                 'label' => 'manajemen.menu.cash_income',
                 'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-stream',
-                'route' => routeTo('crud/index', ['table' => 'trn_cash']),
-                'activeState' => 'manajemen.trn_cash'
+                'route' => routeTo('manajemen/status/cash', ['filter' => ['cash_group' => 'PENERIMAAN KAS']]),
+                'activeState' => 'manajemen.status.cash_income'
             ],
             [
                 'label' => 'manajemen.menu.cash_outcome',
                 'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-stream',
-                'route' => routeTo('crud/index', ['table' => 'trn_cash']),
-                'activeState' => 'manajemen.trn_cash'
+                'route' => routeTo('manajemen/status/cash', ['filter' => ['cash_group' => 'PENGELUARAN KAS']]),
+                'activeState' => 'manajemen.status.cash_outcome'
             ],
             [
                 'label' => 'manajemen.menu.cash_cost',
                 'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-stream',
-                'route' => routeTo('crud/index', ['table' => 'trn_cash']),
-                'activeState' => 'manajemen.trn_cash'
+                'route' => routeTo('manajemen/status/cash', ['filter' => ['cash_group' => 'BIAYA KAS']]),
+                'activeState' => 'manajemen.status.cash_cost'
             ],
         ]
     ],
