@@ -1,126 +1,9 @@
 <?php
 
 return [
-    'mst_employees' => [
-        'name' => [
-            'label' => 'Nama',
-            'type'  => 'text',
-        ],
-        'address' => [
-            'label' => 'Alamat',
-            'type'  => 'textarea',
-            'attr'  => [
-                'class' => 'form-control select2-search__field'
-            ]
-        ],
-        'address_2' => [
-            'label' => 'Alamat 2',
-            'type'  => 'textarea',
-            'attr'  => [
-                'class' => 'form-control select2-search__field'
-            ]
-        ],
-        'city' => [
-            'label' => 'Kota',
-            'type'  => 'text',
-        ],
-        'phone' => [
-            'label' => 'No. HP',
-            'type'  => 'text',
-        ],
-        'description' => [
-            'label' => 'Keterangan',
-            'type'  => 'textarea',
-            'attr'  => [
-                'class' => 'form-control select2-search__field'
-            ]
-        ],
-        'status' => [
-            'label' => 'Status',
-            'type'  => 'options:ACTIVE|INACTIVE',
-        ],
-        '_userstamp' => true,
-    ],
-    'mst_suppliers' => [
-        'name' => [
-            'label' => 'Nama',
-            'type'  => 'text',
-        ],
-        'address' => [
-            'label' => 'Alamat',
-            'type'  => 'textarea',
-            'attr'  => [
-                'class' => 'form-control select2-search__field'
-            ]
-        ],
-        'address_2' => [
-            'label' => 'Alamat 2',
-            'type'  => 'textarea',
-            'attr'  => [
-                'class' => 'form-control select2-search__field'
-            ]
-        ],
-        'city' => [
-            'label' => 'Kota',
-            'type'  => 'text',
-        ],
-        'phone' => [
-            'label' => 'No. HP',
-            'type'  => 'text',
-        ],
-        'description' => [
-            'label' => 'Keterangan',
-            'type'  => 'textarea',
-            'attr'  => [
-                'class' => 'form-control select2-search__field'
-            ]
-        ],
-        'status' => [
-            'label' => 'Status',
-            'type'  => 'options:ACTIVE|INACTIVE',
-        ],
-        '_userstamp' => true,
-    ],
-    'mst_customers' => [
-        'name' => [
-            'label' => 'Nama',
-            'type'  => 'text',
-        ],
-        'address' => [
-            'label' => 'Alamat',
-            'type'  => 'textarea',
-            'attr'  => [
-                'class' => 'form-control select2-search__field'
-            ]
-        ],
-        'address_2' => [
-            'label' => 'Alamat 2',
-            'type'  => 'textarea',
-            'attr'  => [
-                'class' => 'form-control select2-search__field'
-            ]
-        ],
-        'city' => [
-            'label' => 'Kota',
-            'type'  => 'text',
-        ],
-        'phone' => [
-            'label' => 'No. HP',
-            'type'  => 'text',
-        ],
-        'description' => [
-            'label' => 'Keterangan',
-            'type'  => 'textarea',
-            'attr'  => [
-                'class' => 'form-control select2-search__field'
-            ]
-        ],
-        'status' => [
-            'label' => 'Status',
-            'type'  => 'options:ACTIVE|INACTIVE',
-        ],
-        '_userstamp' => true,
-    ],
+    'mst_employees' => require 'tablefields/mst_employees.php',
+    'mst_suppliers' => require 'tablefields/mst_suppliers.php',
+    'mst_customers' => require 'tablefields/mst_customers.php',
     'mst_items' => [
         'category_id' => [
             'label' => 'Kategori',
@@ -272,6 +155,7 @@ return [
             'label' => 'Status',
             'type' => 'options:NEW|APPROVE|CANCEL',
         ],
+        '_action' => true,
         '_userstamp' => true,
     ],
     'trn_purchase_items' => [
