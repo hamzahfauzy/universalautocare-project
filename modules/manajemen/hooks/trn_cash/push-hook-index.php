@@ -29,6 +29,6 @@ if($route == 'crud/index')
 else 
 
 {
-    Page::set_title(__('manajemen.label.'.$types[$cash_group]));
+    Page::set_title('Update status '.__('manajemen.label.'.$types[$cash_group]));
     Page::setActive('manajemen.status.'.$types[$cash_group]);
 }

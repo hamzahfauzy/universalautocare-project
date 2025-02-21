@@ -13,7 +13,7 @@ $data = $db->all('trn_orders', ['order_type' => $_GET['filter']['order_type']]);
 $unit = count($data) ? $db->single('trn_order_items', ['order_id' => $data[0]->id])->unit : "PCS";
 
 // page section
-$title = 'Update Status Job Order ' . $_GET['filter']['order_type'];
+$title = 'Update Status Job Order ' . ucwords(strtolower($_GET['filter']['order_type']));
 $types = ['BENGKEL' => 'workshop', 'DOORSMEER' => 'carwash'];
 $order_type = $_GET['filter']['order_type'];
 Page::setActive('manajemen.status.' . $types[$order_type] . '_orders');
