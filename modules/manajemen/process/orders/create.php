@@ -3,6 +3,7 @@
 use Core\Database;
 use Core\Page;
 use Core\Request;
+use Core\Storage;
 
 $tableName = 'trn_orders';
 $module = 'manajemen';
@@ -16,6 +17,15 @@ if (Request::isMethod('POST')) {
     $data['total_value'] = str_replace(',', '', $data['total_value']);
     $data['total_service_value'] = str_replace(',', '', $data['total_service_value']);
     $data['order_type'] = $_GET['filter']['order_type'];
+
+    $file = $_FILES['pic_url'];
+    $name = $file['name'];
+
+    if(!empty($name))
+    {
+        $data['pic_url'] = Storage::upload($file);
+    }
+    
     $order = $db->insert('trn_orders', $data);
 
     foreach ($items as $item) {
@@ -23,6 +33,9 @@ if (Request::isMethod('POST')) {
         $item['total_price'] = $item['price'] * $item['qty'];
         $db->insert('trn_order_items', $item);
     }
+
+    
+
 
     set_flash_msg(['success' => "Job Order berhasil ditambahkan"]);
 
@@ -32,7 +45,9 @@ if (Request::isMethod('POST')) {
 
 // page section
 $title = 'Data Job Order';
-Page::setActive("manajemen.orders.create");
+$types = ['BENGKEL' => 'workshop', 'DOORSMEER' => 'carwash'];
+$order_type = $_GET['filter']['order_type'];
+Page::setActive('manajemen.'.$types[$order_type].'_orders');
 Page::setTitle($title);
 Page::setModuleName($title);
 Page::setBreadcrumbs([

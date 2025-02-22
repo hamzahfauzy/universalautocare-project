@@ -7,7 +7,7 @@ return [
     'services' => 'Jasa',
     'customers' => 'Customer',
     'employees' => 'Karyawan',
-    'suppliers' => 'Suplier',
+    'suppliers' => 'Supplier',
     'partners' => 'Partner',
     'banks' => 'Bank',
     'costs' => 'Biaya',

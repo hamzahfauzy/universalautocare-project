@@ -9,6 +9,13 @@ $('.add-item-button').click(function(){
         category: sanitizeSelected(selectedItem.category.text),
         service: sanitizeSelected(selectedItem.service.text),
     }
+
+    // validate
+    const validator = items.find(item => item.service == $('select[name=service]').val())
+    if(validator){
+        alert('Jasa sudah ada dalam daftar')
+        return
+    }
     
     const data = {
         key:items.length+1,
@@ -92,7 +99,10 @@ $('#customer').on('select2:selecting', function(e) {
     const customer_id = e.params.args.data.id
     fetch('/manajemen/orders/load-form-customer-options?customer_id='+customer_id).then(res => res.json())
     .then(res => {
-        $('input[name=phone]').val(res.data.customer.phone)
+        $('#phone').val(res.data.customer.phone)
+        $('#police_number').val(res.data.customer.customer_police_number)
+        $('#vehicle_type').val(res.data.customer.customer_vehicle_type)
+        $('#vehicle_color').val(res.data.customer.customer_vehicle_color)
     })
 });
 
@@ -127,9 +137,11 @@ function calculateTotalOrder()
 {
     var totalServiceValue = 0
     items.forEach(item => {
-        totalServiceValue += item.total_price
+        totalServiceValue += parseInt(item.total_price)
     })
 
+    const total_item_value = $("#total_item_value").val() == '' ? 0 : $("#total_item_value").val().replace(',','')
+
     $('input[name="trn_orders[total_service_value]"]').val(format_number(totalServiceValue))
-    $('input[name="trn_orders[total_value]"]').val(format_number(totalServiceValue+parseInt($("#total_item_value").val())))
+    $('input[name="trn_orders[total_value]"]').val(format_number(totalServiceValue+parseInt(total_item_value)))
 }

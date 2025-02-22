@@ -3,6 +3,7 @@
 use Core\Database;
 use Core\Page;
 use Core\Request;
+use Core\Storage;
 
 $tableName = 'trn_orders';
 $module = 'manajemen';
@@ -25,6 +26,15 @@ if (Request::isMethod('POST')) {
     $data['total_value'] = str_replace(',', '', $data['total_value']);
     $data['total_service_value'] = str_replace(',', '', $data['total_service_value']);
     $data['order_type'] = $_GET['filter']['order_type'];
+
+    $file = $_FILES['pic_url'];
+    $name = $file['name'];
+
+    if(!empty($name))
+    {
+        $data['pic_url'] = Storage::upload($file);
+    }
+    
     $order = $db->update('trn_orders', $data, ['id' => $_GET['id']]);
 
     set_flash_msg(['success' => "Job Order berhasil ditambahkan"]);
@@ -68,7 +78,9 @@ $data->customer = $customer;
 
 // page section
 $title = 'Edit Data Job Order';
-Page::setActive("manajemen.orders.create");
+$types = ['BENGKEL' => 'workshop', 'DOORSMEER' => 'carwash'];
+$order_type = $_GET['filter']['order_type'];
+Page::setActive('manajemen.'.$types[$order_type].'_orders');
 Page::setTitle($title);
 Page::setModuleName($title);
 Page::setBreadcrumbs([

@@ -14,6 +14,7 @@
         <?php endif ?>
         <form action="" method="post" enctype="multipart/form-data">
             <?= csrf_field() ?>
+            <div class="row">
             <?php 
             foreach($fields as $key => $field): 
                 if($field == '_action_button') continue;
@@ -46,12 +47,15 @@
                 {
                     $fieldname .= "[]";
                 }
+
+                $col = isset($attr['col']) ? $attr['col'] : 'col-12';
             ?>
-            <div class="form-group mb-3">
+            <div class="form-group mb-3 <?= $col ?>">
                 <label class="mb-2"><?=$label?></label>
                 <?= \Core\Form::input($type, $fieldname, $attr) ?>
             </div>
             <?php endforeach ?>
+            </div>
             <div class="form-group">
                 <button class="btn btn-primary">Submit</button>
             </div>

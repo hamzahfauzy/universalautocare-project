@@ -9,7 +9,7 @@ return [
     'mst_customers' => 'Customer',
     'mst_employees' => 'Karyawan',
     'mst_partners' => 'Partner',
-    'mst_suppliers' => 'Suplier',
+    'mst_suppliers' => 'Supplier',
     'mst_banks' => 'Bank',
     'trn_purchases' => 'Pembelian',
     'trn_purchase_items' => 'Item Pembelian',
@@ -17,5 +17,10 @@ return [
     'trn_order_items' => 'Item Order',
     'trn_outgoings' => 'Pengeluaran',
     'trn_outgoing_items' => 'Item Pengeluaran',
-    'trn_cash' => 'Kas'
+    'trn_cash' => 'Kas',
+    'workshop_orders' => 'Job Order Bengkel',
+    'carwash_orders' => 'Job Order Doorsmeer',
+    'cash_income' => 'Penerimaan Kas',
+    'cash_outcome' => 'Pengeluaran Kas',
+    'cash_cost' => 'Biaya Kas',
 ];

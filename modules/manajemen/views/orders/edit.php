@@ -59,7 +59,7 @@ $attr  = ['class' => "form-control"];
                     <div class="row mb-3">
                         <label class="mb-2 col-4">Total Barang</label>
                         <div class="col-8">
-                            <input type="text" name="<?= $tableName ?>[total_item_value]" id="total_item_value" class="form-control" placeholder="Total Barang" value="<?= (int)$data->total_item_value ?>">
+                            <input type="text" name="<?= $tableName ?>[total_item_value]" id="total_item_value" data-type="currency" class="form-control" placeholder="Total Barang" value="<?= (int)$data->total_item_value ?>">
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -93,19 +93,29 @@ $attr  = ['class' => "form-control"];
                     <div class="row mb-3">
                         <label class="mb-2 col-4">No. Plat/Polisi</label>
                         <div class="col-8">
-                            <?= \Core\Form::input('tex', $tableName . '[customer_police_number]', array_merge($attr, ['placeholder' => 'No. Plat/Polisi', 'required' => '', 'value' => $data->customer_police_number])) ?>
+                            <?= \Core\Form::input('tex', $tableName . '[customer_police_number]', array_merge($attr, ['placeholder' => 'No. Plat/Polisi', 'readonly' => 'readonly', 'value' => $data->customer_police_number])) ?>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <label class="mb-2 col-4">Jenis Kendaraan</label>
                         <div class="col-8">
-                            <?= \Core\Form::input('text', $tableName . '[customer_vehicle_type]', array_merge($attr, ['placeholder' => 'Jenis Kendaraan', 'required' => '', 'value' => $data->customer_vehicle_type])) ?>
+                            <?= \Core\Form::input('text', $tableName . '[customer_vehicle_type]', array_merge($attr, ['placeholder' => 'Jenis Kendaraan', 'readonly' => 'readonly', 'value' => $data->customer_vehicle_type])) ?>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <label class="mb-2 col-4">Warna Kendaraan</label>
                         <div class="col-8">
-                            <?= \Core\Form::input('text', $tableName . '[customer_vehicle_color]', array_merge($attr, ['placeholder' => 'Warna Kendaraan', 'required' => '', 'value' => $data->customer_vehicle_color])) ?>
+                            <?= \Core\Form::input('text', $tableName . '[customer_vehicle_color]', array_merge($attr, ['placeholder' => 'Warna Kendaraan', 'readonly' => 'readonly', 'value' => $data->customer_vehicle_color])) ?>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="mb-2 col-4">File Dokumen</label>
+                        <div class="col-8">
+                            <input type="file" name="pic_url" class="form-control">
+
+                            <?php if($data->pic_url): ?>
+                                <a href="<?=$data->pic_url?>" target="_blank">Lihat File</a>
+                            <?php endif ?>
                         </div>
                     </div>
                     <div class="row mb-3">

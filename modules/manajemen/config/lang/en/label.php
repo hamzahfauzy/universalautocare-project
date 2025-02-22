@@ -9,6 +9,6 @@ return [
     'mst_customers' => 'Customer',
     'mst_employees' => 'Karyawan',
     'mst_partners' => 'Partner',
-    'mst_suppliers' => 'Suplier',
+    'mst_suppliers' => 'Supplier',
     'mst_banks' => 'Bank',
 ];

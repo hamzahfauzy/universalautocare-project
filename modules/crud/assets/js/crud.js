@@ -19,14 +19,18 @@ try {
     
 }
 
+function refreshCurrencyField()
+{
+  $("input[data-type='currency']").each(function(){
+    const el = $(this)
+    el.attr('type','text')
+    formatCurrency(el);
+  })
+}
+
 if($("input[data-type='currency']"))
 {
-    
-    $("input[data-type='currency']").each(function(){
-        const el = $(this)
-        el.attr('type','text')
-        formatCurrency(el);
-    })
+    refreshCurrencyField()
 }
 
 $("input[data-type='currency']").on({
