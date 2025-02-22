@@ -2,10 +2,21 @@
 
 use Core\Database;
 use Core\Page;
+use Core\Request;
 
 $old        = get_flash_msg('old');
 $error_msg  = get_flash_msg('error');
 $success_msg = get_flash_msg('success');
+$db = new Database;
+
+if (Request::isMethod('POST')) {
+    $order = $db->single('trn_orders', ['code' => $_POST['code']]);
+    $customer = $db->single('mst_customers', ['id' => $order->customer_id]);
+    $order->customer = $customer;
+    $items = $db->all('trn_order_items', ['order_id' => $order->id]);
+    $order->items = $items;
+    return view('manajemen/views/print/workshop-invoice', compact('order', 'db'));
+}
 
 // page section
 $title = 'Cetak Job Order ' . $_GET['filter']['order_type'];

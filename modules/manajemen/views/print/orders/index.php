@@ -30,12 +30,12 @@ $attr = 'form-control';
             <div class="alert alert-success"><?= $success_msg ?></div>
         <?php endif ?>
 
-        <form action="" method="post" enctype="multipart/form-data">
+        <form method="post" enctype="multipart/form-data">
             <?= csrf_field() ?>
 
             <div class="form-group mb-3">
                 <label class="mb-2 col-4">No. Order</label>
-                <?= \Core\Form::input('options-obj:trn_orders,id,code|order_type,' . $_GET['filter']['order_type'], 'code', ['class' => 'form-control', 'placeholder' => 'Pilih Order', 'required' => '']) ?>
+                <?= \Core\Form::input('options-obj:trn_orders,code,code|order_type,' . $_GET['filter']['order_type'], 'code', ['class' => 'form-control', 'placeholder' => 'Pilih Order', 'required' => '']) ?>
             </div>
 
             <div class="form-group">
