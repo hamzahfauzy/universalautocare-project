@@ -10,19 +10,29 @@ $success_msg = get_flash_msg('success');
 $db = new Database;
 
 if (Request::isMethod('POST')) {
+
     $order = $db->single('trn_orders', ['code' => $_POST['code']]);
     $customer = $db->single('mst_customers', ['id' => $order->customer_id]);
     $order->customer = $customer;
-    $items = $db->all('trn_order_items', ['order_id' => $order->id]);
-    $order->items = $items;
-    return view('manajemen/views/print/workshop-invoice', compact('order', 'db'));
+    $employee = $db->single('mst_employees', ['id' => $order->employee_id]);
+    $order->employee = $employee;
+    $partner = $db->single('mst_partners', ['id' => $order->partner_id]);
+    $order->partner = $partner;
+
+    if ($_GET['filter']['type'] == 'invoice') {
+        $items = $db->all('trn_order_items', ['order_id' => $order->id]);
+        $order->items = $items;
+        return view('manajemen/views/print/orders/invoice', compact('order', 'db'));
+    } else if ($_GET['filter']['type'] == 'detail') {
+        return view('manajemen/views/print/orders/detail', compact('order', 'db'));
+    }
 }
 
 // page section
-$title = 'Cetak Job Order ' . $_GET['filter']['order_type'];
+$title = 'Cetak ' . $_GET['filter']['type'] . ' Job Order ' . $_GET['filter']['order_type'];
 $types = ['BENGKEL' => 'workshop', 'DOORSMEER' => 'carwash'];
 $order_type = $_GET['filter']['order_type'];
-Page::setActive('manajemen.print.' . $types[$order_type] . '_orders');
+Page::setActive('manajemen.print.' . $types[$order_type] . '_' . $_GET['filter']['type']);
 Page::setTitle($title);
 Page::setModuleName($title);
 Page::setBreadcrumbs([

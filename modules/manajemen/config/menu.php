@@ -215,33 +215,34 @@ return [
         'label' => 'manajemen.menu.print',
         'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-print',
         'activeState' => [
-            'manajemen.print.workshop_orders',
-            'manajemen.print.carwash_orders'
+            'manajemen.print.workshop_detail',
+            'manajemen.print.workshop_invoice',
+            'manajemen.print.carwash_detail'
         ],
         'items' => [
             [
                 'label' => 'manajemen.menu.workshop_order',
                 'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-stream',
-                'route' => routeTo('manajemen/print/orders', ['filter' => ['order_type' => 'BENGKEL']]),
-                'activeState' => 'manajemen.print.workshop_orders'
+                'route' => routeTo('manajemen/print/orders', ['filter' => ['order_type' => 'BENGKEL', 'type' => 'detail']]),
+                'activeState' => 'manajemen.print.workshop_detail'
             ],
             [
                 'label' => 'manajemen.menu.workshop_invoice',
                 'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-stream',
-                'route' => routeTo('crud/index', ['table' => 'trn_cash']),
-                'activeState' => 'manajemen.trn_cash'
+                'route' => routeTo('manajemen/print/orders', ['filter' => ['order_type' => 'BENGKEL', 'type' => 'invoice']]),
+                'activeState' => 'manajemen.print.workshop_invoice'
             ],
             [
                 'label' => 'manajemen.menu.carwash_order',
                 'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-stream',
-                'route' => routeTo('manajemen/print/orders', ['filter' => ['order_type' => 'DOORSMEER']]),
-                'activeState' => 'manajemen.print.carwash_orders'
+                'route' => routeTo('manajemen/print/orders', ['filter' => ['order_type' => 'DOORSMEER', 'type' => 'detail']]),
+                'activeState' => 'manajemen.print.carwash_detail'
             ],
             [
                 'label' => 'manajemen.menu.carwash_invoice',
                 'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-stream',
-                'route' => routeTo('crud/index', ['table' => 'trn_cash']),
-                'activeState' => 'manajemen.trn_cash'
+                'route' => routeTo('manajemen/print/orders', ['filter' => ['order_type' => 'DOORSMEER', 'type' => 'invoice']]),
+                'activeState' => 'manajemen.print.carwash_invoice'
             ],
         ]
     ],

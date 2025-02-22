@@ -20,14 +20,10 @@ $doneDate = \Core\Form::getData('date', $order->done_date);
 <?= centerText("INVOICE", 32) ?>
 
 --------------------------------
-NO ORDER : #<?= $order->code ?> <?= renderRight($order->customer->name, 31 - strlen("NO ORDER : #" . $order->code)) ?>
-
-<?= $date ?> <?= renderRight($order->customer->phone, 31 - strlen($date)) ?>
-
-Tgl. Est. Selesai : <?= $doneDate ?>
+NO ORDER : <?= renderRight('#' . $order->code, 31 - strlen("NO ORDER :")) ?>
 
 --------------------------------
-<?= centerText("Item(s) Order", 32) ?>
+<?= centerText("Item(s) Jasa", 32) ?>
 
 --------------------------------
 <?php
@@ -44,24 +40,22 @@ x <?= $item->qty ?> <?= $item->unit ?> @<?= number_format($item->price) ?> <?= r
 
 ................................
 <?php endforeach ?>
+Total Barang <?= renderRight('Rp. ' . number_format($order->total_item_value), 31 - strlen("Total Barang")) ?>
 
-
-Total Items <?= renderRight(count($order->items) . ' Item(s)', 20) ?>
-
-Total Qty <?= renderRight($qty, 22) ?>
+Total Jasa <?= renderRight('Rp. ' . number_format($order->total_service_value),  31 - strlen("Total Jasa")) ?>
 
 --------------------------------
-Grand Total <?= renderRight('Rp. ' . number_format($total), 20) ?>
+Grand Total <?= renderRight('Rp. ' . number_format($order->total_value), 31 - strlen("Grand Total")) ?>
 
 --------------------------------
-Total Bayar <?= renderRight('Rp. ' . number_format($order->total_value), 20) ?>
+<?= centerText('Notes', 32) ?>
 
-Sisa <?= renderRight('Rp. ' . number_format($total - $order->total_value), 27) ?>
+<?= centerText('Harap tidak meninggalkan barang berharga', 32) ?>
 
---------------------------------
-<?= centerText('Terima kasih sudah berbelanja disini', 32) ?>
+<?= centerText('Segala kehilangan bukan merupakan tanggung jawab Universal Auto Care', 32) ?>
+
+
+<?= centerText('Terima Kasih Atas Kunjungan Anda', 32) ?>
 
 <?= centerText(date('d-m-Y H:i:s'), 32) ?>
-
-<?= centerText("Barang yang sudah diorder tidak dapat ditukar atau dikembalikan", 32) ?>
 </pre>
