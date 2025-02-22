@@ -212,14 +212,15 @@ return [
         'label' => 'manajemen.menu.print',
         'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-print',
         'activeState' => [
-            'manajemen.trn_cash',
+            'manajemen.print.workshop_orders',
+            'manajemen.print.carwash_orders'
         ],
         'items' => [
             [
                 'label' => 'manajemen.menu.workshop_order',
                 'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-stream',
-                'route' => routeTo('crud/index', ['table' => 'trn_cash']),
-                'activeState' => 'manajemen.trn_cash'
+                'route' => routeTo('manajemen/print/orders', ['filter' => ['order_type' => 'BENGKEL']]),
+                'activeState' => 'manajemen.print.workshop_orders'
             ],
             [
                 'label' => 'manajemen.menu.workshop_invoice',
@@ -230,8 +231,8 @@ return [
             [
                 'label' => 'manajemen.menu.carwash_order',
                 'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-stream',
-                'route' => routeTo('crud/index', ['table' => 'trn_cash']),
-                'activeState' => 'manajemen.trn_cash'
+                'route' => routeTo('manajemen/print/orders', ['filter' => ['order_type' => 'DOORSMEER']]),
+                'activeState' => 'manajemen.print.carwash_orders'
             ],
             [
                 'label' => 'manajemen.menu.carwash_invoice',
