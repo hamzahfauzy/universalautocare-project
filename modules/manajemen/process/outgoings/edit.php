@@ -69,7 +69,7 @@ foreach ($data_items as $index => $item) {
 
 // page section
 $title = 'Edit Pengeluaran';
-Page::setActive("manajemen.outgoings.create");
+Page::setActive("manajemen.trn_outgoings");
 Page::setTitle($title);
 Page::setModuleName($title);
 Page::setBreadcrumbs([

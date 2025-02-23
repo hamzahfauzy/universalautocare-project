@@ -35,7 +35,7 @@ $attr = 'form-control';
 
             <div class="form-group mb-3">
                 <label class="mb-2 col-4">No. Order</label>
-                <?= \Core\Form::input('options-obj:trn_orders,code,code|order_type,' . $_GET['filter']['order_type'], 'code', ['class' => 'form-control', 'placeholder' => 'Pilih Order', 'required' => '']) ?>
+                <?= \Core\Form::input('options-obj:trn_orders,code,code|order_type,' . $_GET['filter']['order_type'], 'code', ['class' => 'form-control select2', 'placeholder' => 'Pilih Order', 'required' => '']) ?>
             </div>
 
             <div class="form-group">

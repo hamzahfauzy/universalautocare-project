@@ -32,7 +32,7 @@ if (Request::isMethod('POST')) {
 
 // page section
 $title = 'Pengeluaran';
-Page::setActive("manajemen.outgoings.create");
+Page::setActive("manajemen.trn_outgoings");
 Page::setTitle($title);
 Page::setModuleName($title);
 Page::setBreadcrumbs([

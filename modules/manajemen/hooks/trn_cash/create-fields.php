@@ -6,7 +6,7 @@ if(isset($_GET['filter']))
 {
     $cash_group = $_GET['filter']['cash_group'];
     $code = ['PENGELUARAN KAS' => 'BPK', 'PENERIMAAN KAS' => 'KAS', 'BIAYA KAS' => 'COST'];
-    $referenceType = ['PENGELUARAN KAS' => 'trn_purchases,id,code', 'PENERIMAAN KAS' => 'trn_orders,id,code', 'BIAYA KAS' => 'mst_costs,id,name'];
+    $referenceType = ['PENGELUARAN KAS' => 'trn_purchases,code,code', 'PENERIMAAN KAS' => 'trn_orders,code,code', 'BIAYA KAS' => 'mst_costs,name,name'];
 
     $db = new Database;
     $db->query = "SELECT COUNT(*) as `counter` FROM trn_cash WHERE cash_group = '$cash_group' AND created_at LIKE '%" . date('Y-m') . "%'";
@@ -31,6 +31,8 @@ if(isset($_GET['filter']))
         $fields['description']['attr']['col'] = 'col-6';
         $fields['reference_date']['attr']['col'] = 'col-6';
         $fields['total_value']['attr']['col'] = 'col-6';
+        $fields['reference_name']['attr']['col'] = 'col-6';
+        $fields['reference_number']['attr']['col'] = 'col-6';
     }
 
     if($cash_group == 'PENGELUARAN KAS')
@@ -44,15 +46,17 @@ if(isset($_GET['filter']))
         $fields['total_value']['label'] = 'Total Nilai Pembelian';
         $fields['reference_date']['attr']['col'] = 'col-6';
         $fields['total_value']['attr']['col'] = 'col-6';
+        $fields['reference_name']['attr']['col'] = 'col-6';
+        $fields['reference_number']['attr']['col'] = 'col-6';
     }
     
     if($cash_group == 'BIAYA KAS')
     {
         unset($fields['police_number_reference']);
         unset($fields['reference_date']);
+        unset($fields['reference_name']);
         unset($fields['total_value']);
-        $fields['reference_name']['label'] = 'Nama Biaya';
-        $fields['reference_number']['label'] = 'No. Referensi (ID Biaya)';
+        $fields['reference_number']['label'] = 'No. Referensi (Biaya)';
         $fields['total_payment']['label'] = 'Nilai Biaya Kas';
         $fields['cash_total']['label'] = 'Total Biaya Kas (Bayar)';
     }
@@ -63,8 +67,7 @@ if(isset($_GET['filter']))
     $fields['total_payment']['attr']['col'] = 'col-6';
     $fields['bank_id']['attr']['col'] = 'col-6';
     $fields['cash_total']['attr']['col'] = 'col-6';
-    $fields['reference_number']['attr']['col'] = 'col-6';
-    $fields['reference_name']['attr']['col'] = 'col-6';
+    
 }
 
 return $fields;
