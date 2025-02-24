@@ -48,6 +48,19 @@ Keterangan
 <?= $order->description ?>
 
 --------------------------------
+
+Pemilik/Pembawa <?= renderRight('Diterima Oleh', 31 - strlen("Pemilik/Pembawa")) ?>
+
+
+
+
+
+--------------- <?= renderRight('---------------', 31 - strlen("---------------")) ?>
+
+Nama & Ttd <?= renderRight('Nama & Ttd', 31 - strlen("Nama & Ttd")) ?>
+
+
+--------------------------------
 <?= centerText('Terima kasih atas kunjungan anda', 32) ?>
 
 <?= centerText(date('d-m-Y H:i:s'), 32) ?>
