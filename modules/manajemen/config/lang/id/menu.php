@@ -26,6 +26,7 @@ return [
     'workshop' => 'Bengkel',
     'carwash' => 'Doorsmeer',
     'cash_income' => 'Penerimaan Kas',
+    'cash_payment' => 'Pembayaran Kas',
     'cash_outcome' => 'Pengeluaran Kas',
     'cash_cost' => 'Biaya Kas',
     'orders' => 'Job Order',

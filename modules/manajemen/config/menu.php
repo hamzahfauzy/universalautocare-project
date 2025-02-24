@@ -255,6 +255,7 @@ return [
             'manajemen.report.orders',
             'manajemen.report.purchases.detail',
             'manajemen.report.outgoings.detail',
+            'manajemen.report.cash',
         ],
         'items' => [
             [
@@ -286,6 +287,12 @@ return [
                 'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-stream',
                 'route' => routeTo('manajemen/report/orders'),
                 'activeState' => 'manajemen.report.orders'
+            ],
+            [
+                'label' => 'manajemen.menu.cash_payment',
+                'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-stream',
+                'route' => routeTo('manajemen/report/cash'),
+                'activeState' => 'manajemen.report.cash'
             ],
         ]
     ],
