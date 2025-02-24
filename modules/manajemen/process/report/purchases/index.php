@@ -17,7 +17,7 @@ if(isset($_GET['draw']))
         'end_date' => date('Y-m-d'),
     ]);
 
-    $seach_fields = ['trn_purchases.code','trn_purchases.date','mst_suppliers.name','mst_employees.name','trn_purchases.total_value'];
+    $search_fields = ['trn_purchases.code','trn_purchases.date','mst_suppliers.name','mst_employees.name','trn_purchases.total_value'];
     $query = "SELECT 
                 trn_purchases.code, 
                 trn_purchases.date,
