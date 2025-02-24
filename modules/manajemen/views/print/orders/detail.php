@@ -5,7 +5,7 @@ $doneDate = \Core\Form::getData('date', $order->done_date);
 <pre>
 <div style="width:230px">
 <center>
-    <img src="<?= asset('assets/kaosful/img/logo.jpg') ?>" alt="" width="100" height="81">
+    <img src="<?= getSidebarLogo() ?>" alt="" width="100" height="81">
 </center>
 </div>
 --------------------------------
