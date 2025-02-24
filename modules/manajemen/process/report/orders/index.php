@@ -9,15 +9,14 @@ $old        = get_flash_msg('old');
 $error_msg  = get_flash_msg('error');
 $db = new Database;
 
-if(isset($_GET['draw']))
-{
-    $order   = Request::get('order', [['column' => 1,'dir' => 'asc']]);
+if (isset($_GET['draw'])) {
+    $order   = Request::get('order', [['column' => 1, 'dir' => 'asc']]);
     $filterByDate  = Request::get('filterByDate', [
         'start_date' => date('Y-m-d'),
         'end_date' => date('Y-m-d'),
     ]);
 
-    $search_fields = ['trn_orders.done_date','trn_orders.code','trn_orders.date','mst_customers.name','mst_employees.name','mst_partners.name'];
+    $search_fields = ['trn_orders.done_date', 'trn_orders.code', 'trn_orders.date', 'mst_customers.name', 'mst_employees.name', 'mst_partners.name'];
     $query = "SELECT 
                 trn_orders.order_type, 
                 trn_orders.code, 
@@ -37,9 +36,9 @@ if(isset($_GET['draw']))
               ";
 
     $where = "WHERE (trn_orders.date BETWEEN '$filterByDate[start_date]' AND '$filterByDate[end_date]')";
-    
+
     $search = buildSearch($search_fields);
-    $where .= ($search ? " AND " : "") . $search ;
+    $where .= ($search ? " AND " : "") . $search;
 
     $filter = buildFilter();
     $having = ($filter ? " HAVING " : "") . $filter;

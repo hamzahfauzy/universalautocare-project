@@ -16,21 +16,27 @@ if (isset($_GET['draw'])) {
         'end_date' => date('Y-m-d'),
     ]);
 
-    $search_fields = ['trn_purchases.code', 'trn_purchases.date', 'mst_suppliers.name', 'mst_employees.name', 'trn_purchases.total_value'];
+    $search_fields = ['trn_outgoings.code', 'trn_outgoings.date', 'mst_customers.name', 'mst_categories.name', 'mst_items.name', 'trn_outgoing_items.outgoing_qty', 'trn_outgoing_items.price', 'trn_outgoing_items.total_price'];
     $query = "SELECT 
-                trn_purchases.code, 
-                trn_purchases.date,
-                mst_suppliers.name supplier_name,
-                mst_employees.name employee_name,
-                CONCAT(trn_purchases.total_item,' item / ', trn_purchases.total_qty, ' Qty') item,
-                CONCAT('Rp. ',FORMAT(trn_purchases.total_value,0)) total,
-                trn_purchases.status
-              FROM trn_purchases
-              LEFT JOIN mst_employees ON mst_employees.id = trn_purchases.employee_id
-              LEFT JOIN mst_suppliers ON mst_suppliers.id = trn_purchases.supplier_id
-              ";
+            trn_outgoings.code, 
+            trn_outgoings.date,
+            mst_customers.name customer_name,
+            mst_categories.name category_name,
+            mst_items.name product_name,
+            CONCAT(FORMAT(trn_outgoing_items.outgoing_qty,0), ' ',trn_outgoing_items.unit),
+            CONCAT('Rp. ',FORMAT(trn_outgoing_items.price,0)) price,
+            CONCAT('Rp. ',FORMAT(trn_outgoing_items.total_price,0)) total,
+            trn_outgoings.status
+          FROM trn_outgoings
+          LEFT JOIN trn_orders ON trn_orders.id = trn_outgoings.order_id
+          LEFT JOIN mst_customers ON mst_customers.id = trn_orders.customer_id
+          LEFT JOIN trn_outgoing_items ON trn_outgoing_items.outgoing_id = trn_outgoings.id
+          LEFT JOIN mst_items ON mst_items.id = trn_outgoing_items.item_id
+          LEFT JOIN mst_categories ON mst_categories.ID = mst_items.category_id
+          ";
 
-    $where = "WHERE (trn_purchases.date BETWEEN '$filterByDate[start_date]' AND '$filterByDate[end_date]')";
+    $where = "WHERE (trn_outgoings.date BETWEEN '$filterByDate[start_date]' AND '$filterByDate[end_date]')";
+
     $search = buildSearch($search_fields);
     $where .= ($search ? " AND " : "") . $search;
 
@@ -43,8 +49,8 @@ if (isset($_GET['draw'])) {
 }
 
 // page section
-$title = 'Laporan Pembelian Barang';
-Page::setActive("manajemen.report.purchases");
+$title = 'Laporan Detail Pengeluaran';
+Page::setActive("manajemen.report.outgoings.detail");
 Page::setTitle($title);
 
 Page::pushHead('<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />');
@@ -53,4 +59,4 @@ Page::pushFoot('<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dis
 Page::pushFoot("<script src='https://cdnjs.cloudflare.com/ajax/libs/qs/6.11.0/qs.min.js'></script>");
 Page::pushFoot("<script src='" . asset('assets/manajemen/js/reports.js') . "'></script>");
 
-return view('manajemen/views/report/purchases/index', compact('error_msg', 'old'));
+return view('manajemen/views/report/outgoings/detail', compact('error_msg', 'old'));

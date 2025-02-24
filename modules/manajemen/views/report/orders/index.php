@@ -50,8 +50,8 @@
         </div>
 
         <div class="mt-4">
-        <button class="btn btn-primary" onclick="window.reportData.draw()">Submit</button>
-        <button class="btn btn-success" onclick="downloadReport()">Export XLS</button>
+            <button class="btn btn-primary" onclick="window.reportData.draw()">Submit</button>
+            <button class="btn btn-success" onclick="downloadReport()">Export XLS</button>
         </div>
 
         <div class="table-responsive my-4">

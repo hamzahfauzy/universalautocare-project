@@ -252,7 +252,9 @@ return [
         'activeState' => [
             'manajemen.report.purchases',
             'manajemen.report.outgoings',
-            'manajemen.report.orders'
+            'manajemen.report.orders',
+            'manajemen.report.purchases.detail',
+            'manajemen.report.outgoings.detail',
         ],
         'items' => [
             [
@@ -262,10 +264,22 @@ return [
                 'activeState' => 'manajemen.report.purchases'
             ],
             [
+                'label' => 'manajemen.menu.purchases_detail',
+                'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-stream',
+                'route' => routeTo('manajemen/report/purchases/detail'),
+                'activeState' => 'manajemen.report.purchases.detail'
+            ],
+            [
                 'label' => 'manajemen.menu.outgoings',
                 'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-stream',
                 'route' => routeTo('manajemen/report/outgoings'),
                 'activeState' => 'manajemen.report.outgoings'
+            ],
+            [
+                'label' => 'manajemen.menu.outgoings_detail',
+                'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-stream',
+                'route' => routeTo('manajemen/report/outgoings/detail'),
+                'activeState' => 'manajemen.report.outgoings.detail'
             ],
             [
                 'label' => 'manajemen.menu.orders',
