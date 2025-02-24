@@ -247,6 +247,31 @@ class CrudRepository
         return true;
     }
 
+    function dataTableFromQuery($query)
+    {
+        $draw    = Request::get('draw', 1);
+        $start   = Request::get('start', 0);
+        $length  = Request::get('length', 20);
+        
+        $this->db->query = $query;
+        $total = $this->db->exec('exists');
+        
+        $this->db->query .= " LIMIT $start,$length";
+        $data  = $this->db->exec('all');
+
+        $data = array_map(function($d){
+            $d = array_values((array) $d);
+            return $d;
+        }, $data);
+
+        return [
+            "draw" => $draw,
+            "recordsTotal" => (int)$total,
+            "recordsFiltered" => (int)$total,
+            "data" => $data
+        ];
+    }
+
     function dataTable($fields, $customAction = false)
     {
         $draw    = Request::get('draw', 1);
@@ -277,8 +302,6 @@ class CrudRepository
 
             $where = "WHERE (".implode(' OR ',$_where).")";
         }
-
-        
 
         $col_order = $order[0]['column']-1;
         $col_order = $col_order < 0 ? 'id' : $columns[$col_order];

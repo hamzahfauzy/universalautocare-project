@@ -1,13 +1,4 @@
-<?php
-
-use Core\Database;
-
-get_header();
-$db = new Database();
-
-$attr = 'form-control';
-
-?>
+<?php get_header(); ?>
 <style>
     table td img {
         max-width: 150px;
@@ -28,31 +19,31 @@ $attr = 'form-control';
         <?php endif ?>
 
         <div class="row">
-            <div class="col-2">
+            <div class="col">
                 <label>Dari Tgl. Pembelian</label>
-                <?= \Core\Form::input('date', 'from_date', ['class' => 'form-control', 'placeholder' => 'Dari Tgl. Pembelian']) ?>
+                <?= \Core\Form::input('date', 'start_date', ['class' => 'form-control filters', 'placeholder' => 'Dari Tgl. Pembelian']) ?>
             </div>
-            <div class="col-2">
+            <div class="col">
                 <label>Sampai Tgl. Pembelian</label>
-                <?= \Core\Form::input('date', 'to_date', ['class' => 'form-control', 'placeholder' => 'Sampai Tgl. Pembelian']) ?>
+                <?= \Core\Form::input('date', 'end_date', ['class' => 'form-control filters', 'placeholder' => 'Sampai Tgl. Pembelian']) ?>
             </div>
-            <div class="col-2">
+            <div class="col">
                 <label>Supplier</label>
-                <?= \Core\Form::input('options-obj:mst_suppliers,id,name', 'supplier_id', ['class' => 'form-control', 'placeholder' => 'Pilih supplier', 'required' => '']) ?>
+                <?= \Core\Form::input('options-obj:mst_suppliers,name,name', 'supplier_name', ['class' => 'form-control filters', 'placeholder' => 'Pilih supplier', 'required' => '']) ?>
             </div>
-            <div class="col-2">
+            <div class="col">
                 <label>Karyawan</label>
-                <?= \Core\Form::input('options-obj:mst_employees,id,name', 'employee_id', ['class' => 'form-control', 'placeholder' => 'Pilih Karyawan', 'required' => '']) ?>
+                <?= \Core\Form::input('options-obj:mst_employees,name,name', 'employee_name', ['class' => 'form-control filters', 'placeholder' => 'Pilih Karyawan', 'required' => '']) ?>
             </div>
-            <div class="col-2">
+            <div class="col">
                 <label>Status</label>
-                <?= \Core\Form::input('options:NEW|APPROVE|CANCEL', 'status', ['class' => 'form-control', 'placeholder' => 'Pilih Status', 'required' => '']) ?>
+                <?= \Core\Form::input('options:- Pilih -|NEW|APPROVE|CANCEL', 'status', ['class' => 'form-control filters', 'placeholder' => 'Pilih Status', 'required' => '']) ?>
             </div>
         </div>
 
         <div class="mt-4">
-            <button class="btn btn-primary">Submit</button>
-            <button class="btn btn-success">Export XLS</button>
+            <button class="btn btn-primary" onclick="window.reportData.draw()">Submit</button>
+            <button class="btn btn-success" onclick="downloadReport()">Export XLS</button>
         </div>
 
         <div class="table-responsive my-4">
@@ -68,30 +59,8 @@ $attr = 'form-control';
                         <th>Status</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <?php foreach ($data as $item):
-                        $supplier = $db->single('mst_suppliers', ['id' => $item->supplier_id]);
-                        $employee = $db->single('mst_employees', ['id' => $item->employee_id]);
-                    ?>
-                        <tr>
-                            <td><?= $item->code ?></td>
-                            <td><?= $item->date ?></td>
-                            <td><?= $supplier->name ?></td>
-                            <td><?= $employee->name ?></td>
-                            <td><?= $item->total_item . " / " . $item->total_qty . $unit ?></td>
-                            <td>Rp. <?= number_format($item->total_value) ?></td>
-                            <td><?= $item->status ?></td>
-                        </tr>
-                    <?php endforeach ?>
-                </tbody>
+                <tbody></tbody>
             </table>
-        </div>
-
-
-        <div>
-            <h6>Total Item(s) : <?= array_sum(array_column($data, 'total_item')); ?> Item(s)</h6>
-            <h6>Total Qty : <?= array_sum(array_column($data, 'total_qty')); ?> <?= $unit ?></h6>
-            <h6>Total Pembelian : Rp. <?= number_format(array_sum(array_column($data, 'total_value'))); ?></h6>
         </div>
     </div>
 </div>
