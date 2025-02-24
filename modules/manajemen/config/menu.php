@@ -270,26 +270,8 @@ return [
             [
                 'label' => 'manajemen.menu.orders',
                 'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-stream',
-                'route' => routeTo('manajemen/report/orders', ['filter' => ['order_type' => 'BENGKEL']]),
+                'route' => routeTo('manajemen/report/orders'),
                 'activeState' => 'manajemen.report.orders'
-            ],
-            [
-                'label' => 'manajemen.menu.workshop_invoice',
-                'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-stream',
-                'route' => routeTo('crud/index', ['table' => 'trn_cash']),
-                'activeState' => 'manajemen.trn_cash'
-            ],
-            [
-                'label' => 'manajemen.menu.carwash_order',
-                'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-stream',
-                'route' => routeTo('crud/index', ['table' => 'trn_cash']),
-                'activeState' => 'manajemen.trn_cash'
-            ],
-            [
-                'label' => 'manajemen.menu.carwash_invoice',
-                'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-stream',
-                'route' => routeTo('crud/index', ['table' => 'trn_cash']),
-                'activeState' => 'manajemen.trn_cash'
             ],
         ]
     ],
