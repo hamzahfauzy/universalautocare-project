@@ -21,7 +21,7 @@ if (Request::isMethod('POST')) {
         $db->insert('trn_order_items', $item);
     }
 
-    $new_items = (array) $db->all('trn_order_items', ['outgoing_id' => $_GET['id']]);
+    $new_items = (array) $db->all('trn_order_items', ['order_id' => $_GET['id']]);
 
     $data['total_value'] = str_replace(',', '', $data['total_value']);
     $data['total_service_value'] = str_replace(',', '', $data['total_service_value']);
@@ -30,11 +30,10 @@ if (Request::isMethod('POST')) {
     $file = $_FILES['pic_url'];
     $name = $file['name'];
 
-    if(!empty($name))
-    {
+    if (!empty($name)) {
         $data['pic_url'] = Storage::upload($file);
     }
-    
+
     $order = $db->update('trn_orders', $data, ['id' => $_GET['id']]);
 
     set_flash_msg(['success' => "Job Order berhasil ditambahkan"]);
@@ -80,7 +79,7 @@ $data->customer = $customer;
 $title = 'Edit Data Job Order';
 $types = ['BENGKEL' => 'workshop', 'DOORSMEER' => 'carwash'];
 $order_type = $_GET['filter']['order_type'];
-Page::setActive('manajemen.'.$types[$order_type].'_orders');
+Page::setActive('manajemen.' . $types[$order_type] . '_orders');
 Page::setTitle($title);
 Page::setModuleName($title);
 Page::setBreadcrumbs([
