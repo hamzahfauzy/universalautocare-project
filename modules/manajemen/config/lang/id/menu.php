@@ -23,6 +23,7 @@ return [
     'purchases_detail' => 'Detail Pembelian',
     'outgoings' => 'Pengeluaran',
     'outgoings_detail' => 'Detail Pengeluaran',
+    'orders_detail' => 'Detail Job Order',
     'workshop' => 'Bengkel',
     'carwash' => 'Doorsmeer',
     'cash_income' => 'Penerimaan Kas',
