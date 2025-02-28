@@ -254,8 +254,13 @@ return [
             'manajemen.report.outgoings',
             'manajemen.report.orders',
             'manajemen.report.purchases.detail',
+            'manajemen.report.purchases.recap',
             'manajemen.report.outgoings.detail',
+            'manajemen.report.outgoings.recap',
             'manajemen.report.orders.detail',
+            'manajemen.report.orders.outstanding',
+            'manajemen.report.stok_persediaan',
+            'manajemen.report.kartu_stok_persediaan',
             'manajemen.report.cash',
             'manajemen.report.piutang_customer',
             'manajemen.report.hutang_supplier',
@@ -274,6 +279,12 @@ return [
                 'activeState' => 'manajemen.report.purchases.detail'
             ],
             [
+                'label' => 'manajemen.menu.purchases_recap',
+                'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-stream',
+                'route' => routeTo('manajemen/report/purchases/recap'),
+                'activeState' => 'manajemen.report.purchases.recap'
+            ],
+            [
                 'label' => 'manajemen.menu.outgoings',
                 'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-stream',
                 'route' => routeTo('manajemen/report/outgoings'),
@@ -286,6 +297,24 @@ return [
                 'activeState' => 'manajemen.report.outgoings.detail'
             ],
             [
+                'label' => 'manajemen.menu.outgoings_recap',
+                'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-stream',
+                'route' => routeTo('manajemen/report/outgoings/recap'),
+                'activeState' => 'manajemen.report.outgoings.recap'
+            ],
+            [
+                'label' => 'manajemen.menu.stok_persediaan',
+                'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-stream',
+                'route' => routeTo('manajemen/report/stok_persediaan'),
+                'activeState' => 'manajemen.report.stok_persediaan'
+            ],
+            [
+                'label' => 'manajemen.menu.kartu_stok_persediaan',
+                'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-stream',
+                'route' => routeTo('manajemen/report/kartu_stok_persediaan'),
+                'activeState' => 'manajemen.report.kartu_stok_persediaan'
+            ],
+            [
                 'label' => 'manajemen.menu.orders',
                 'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-stream',
                 'route' => routeTo('manajemen/report/orders'),
@@ -296,6 +325,12 @@ return [
                 'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-stream',
                 'route' => routeTo('manajemen/report/orders/detail'),
                 'activeState' => 'manajemen.report.orders.detail'
+            ],
+            [
+                'label' => 'manajemen.menu.orders_outstanding',
+                'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-stream',
+                'route' => routeTo('manajemen/report/orders/outstanding'),
+                'activeState' => 'manajemen.report.orders.outstanding'
             ],
             [
                 'label' => 'manajemen.menu.cash_payment',

@@ -20,16 +20,8 @@
 
         <div class="row">
             <div class="col-3">
-                <label>Today (Fix)</label>
-                <?= \Core\Form::input('date', 'date', ['class' => 'form-control filters', 'placeholder' => 'Date', 'value' => date("Y-m-d"), 'readonly' => true]) ?>
-            </div>
-            <div class="col-3">
-                <label>Supplier</label>
-                <?= \Core\Form::input('options-obj:mst_suppliers,name,name', 'customer_name', ['class' => 'form-control filters', 'placeholder' => 'Pilih Supplier', 'required' => '']) ?>
-            </div>
-            <div class="col-3">
-                <label>Karyawan</label>
-                <?= \Core\Form::input('options-obj:mst_employees,name,name', 'employee_name', ['class' => 'form-control filters', 'placeholder' => 'Pilih Karyawan', 'required' => '']) ?>
+                <label>Periode Tgl. Pembelian</label>
+                <?= \Core\Form::input('month', 'month', ['class' => 'form-control filters', 'placeholder' => 'Periode Tgl. Pembelian', 'value'=>date("Y-m")]) ?>
             </div>
             <div class="col-3">
                 <label>Status</label>
@@ -46,17 +38,14 @@
             <table class="table table-striped datatable" style="width:100%">
                 <thead>
                     <tr>
-                        <th>No. Pembelian</th>
                         <th>Tgl. Pembelian</th>
-                        <th>Supplier</th>
-                        <th>Karyawan</th>
-                        <th>Nilai Bayar</th>
-                        <th>Nilai Pembelian</th>
-                        <th>Hutang</th>
+                        <th>Jlh. Pembelian</th>
+                        <th>Jlh. Item(s)</th>
+                        <th>Jlh. Qty</th>
+                        <th>Total Pembelian</th>
                     </tr>
                 </thead>
-                <tbody>
-                </tbody>
+                <tbody></tbody>
             </table>
         </div>
     </div>
