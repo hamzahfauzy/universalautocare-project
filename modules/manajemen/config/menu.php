@@ -257,6 +257,8 @@ return [
             'manajemen.report.outgoings.detail',
             'manajemen.report.orders.detail',
             'manajemen.report.cash',
+            'manajemen.report.piutang_customer',
+            'manajemen.report.hutang_supplier',
         ],
         'items' => [
             [
@@ -300,6 +302,18 @@ return [
                 'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-stream',
                 'route' => routeTo('manajemen/report/cash'),
                 'activeState' => 'manajemen.report.cash'
+            ],
+            [
+                'label' => 'manajemen.menu.piutang_customer',
+                'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-stream',
+                'route' => routeTo('manajemen/report/piutang_customer'),
+                'activeState' => 'manajemen.report.piutang_customer'
+            ],
+            [
+                'label' => 'manajemen.menu.hutang_supplier',
+                'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-stream',
+                'route' => routeTo('manajemen/report/hutang_supplier'),
+                'activeState' => 'manajemen.report.hutang_supplier'
             ],
         ]
     ],

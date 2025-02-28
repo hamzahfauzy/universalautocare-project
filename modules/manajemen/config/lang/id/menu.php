@@ -35,4 +35,6 @@ return [
     'workshop_invoice' => 'Invoice Bengkel',
     'carwash_order' => 'Job Order Doorsmeer',
     'carwash_invoice' => 'Invoice Doorsmeer',
+    'piutang_customer' => 'Piutang Customer',
+    'hutang_supplier' => 'Hutang Supplier',
 ];
