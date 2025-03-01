@@ -13,9 +13,9 @@ window.reportData = $('.datatable').DataTable({
             data.filterByDate = {}
             $('.filters').each(function(){
                 const filter = $(this)
-                if(filter.attr('name') == 'start_date' || filter.attr('name') == 'end_date' || filter.val() == '' || filter.val() == '- Pilih -')
+                if(filter.attr('name') == 'start_date' || filter.attr('name') == 'end_date' || filter.attr('name') == 'month' || filter.val() == '' || filter.val() == '- Pilih -')
                 {
-                    if(filter.attr('name') == 'start_date' || filter.attr('name') == 'end_date')
+                    if(filter.attr('name') == 'start_date' || filter.attr('name') == 'end_date' || filter.attr('name') == 'month')
                     {
                         data.filterByDate[filter.attr('name')] = filter.val()
                     }
@@ -49,9 +49,9 @@ function downloadReport()
     data.filterByDate = {}
     $('.filters').each(function(){
         const filter = $(this)
-        if(filter.attr('name') == 'start_date' || filter.attr('name') == 'end_date' || filter.val() == '' || filter.val() == '- Pilih -')
+        if(filter.attr('name') == 'start_date' || filter.attr('name') == 'end_date' || filter.attr('name') == 'month' || filter.val() == '' || filter.val() == '- Pilih -')
         {
-            if(filter.attr('name') == 'start_date' || filter.attr('name') == 'end_date')
+            if(filter.attr('name') == 'start_date' || filter.attr('name') == 'end_date' || filter.attr('name') == 'month')
             {
                 data.filterByDate[filter.attr('name')] = filter.val()
             }
