@@ -10,37 +10,33 @@ $error_msg  = get_flash_msg('error');
 $db = new Database;
 
 if (isset($_GET['draw'])) {
-    return;
+    unset($_GET['filter']['date']);
     $order   = Request::get('order', [['column' => 1, 'dir' => 'asc']]);
     $filterByDate  = Request::get('filterByDate', [
         'start_date' => date('Y-m-d'),
         'end_date' => date('Y-m-d'),
     ]);
 
-    $search_fields = ['trn_cash.cash_group', 'trn_cash.code', 'trn_cash.cash_resource', 'mst_banks.name', 'trn_cash.reference_number'];
+    $search_fields = ['trn_purchases.code', 'trn_purchases.date', 'mst_suppliers.name', 'mst_employees.name','mst_partners.name','trn_purchases.total_payment'];
     $query = "SELECT 
-                trn_cash.cash_group, 
-                trn_cash.code, 
-                trn_cash.date,
-                trn_cash.cash_type, 
-                trn_cash.cash_resource, 
-                mst_banks.name bank_name,
-                trn_cash.reference_number,
-                CONCAT('Rp. ',FORMAT(trn_cash.discount,0)) discount,
-                CONCAT('Rp. ',FORMAT(trn_cash.cash_total,0)) cash_total,
-                CONCAT('Rp. ',FORMAT(trn_cash.total_payment,0)) total_payment,
-                trn_cash.status
-              FROM trn_cash
-              LEFT JOIN mst_banks ON mst_banks.id = trn_cash.bank_id
+                trn_purchases.code,
+                trn_purchases.date,
+                mst_suppliers.name supplier_name,
+                mst_employees.name employee_name,
+                FORMAT(trn_purchases.total_payment,0) total_payment,
+                FORMAT(trn_purchases.total_value,0) total_value,
+                FORMAT(trn_purchases.total_value-COALESCE(total_payment,0),0) hutang,
+                trn_purchases.status
+              FROM trn_purchases
+              LEFT JOIN mst_suppliers ON mst_suppliers.id = trn_purchases.supplier_id
+              LEFT JOIN mst_employees ON mst_employees.id = trn_purchases.employee_id
               ";
 
-    $where = "WHERE (trn_cash.date BETWEEN '$filterByDate[start_date]' AND '$filterByDate[end_date]')";
-
     $search = buildSearch($search_fields);
-    $where .= ($search ? " AND " : "") . $search;
+    $where = ($search ? " WHERE " : "") . $search;
 
     $filter = buildFilter();
-    $having = ($filter ? " HAVING " : "") . $filter;
+    $having = "HAVING hutang > 0 " . ($filter ? " AND " : "") . $filter;
 
     $query .= $where . $having;
 

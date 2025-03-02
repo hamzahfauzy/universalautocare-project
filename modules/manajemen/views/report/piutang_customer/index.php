@@ -37,7 +37,7 @@
             </div>
             <div class="col">
                 <label>Order</label>
-                <?= \Core\Form::input('options:- Pilih -|BENGKEL|DOORSMEER', 'order', ['class' => 'form-control filters', 'placeholder' => 'Pilih Order', 'required' => '']) ?>
+                <?= \Core\Form::input('options:- Pilih -|BENGKEL|DOORSMEER', 'order_type', ['class' => 'form-control filters', 'placeholder' => 'Pilih Order', 'required' => '']) ?>
             </div>
             <div class="col">
                 <label>Status</label>
@@ -47,7 +47,7 @@
 
         <div class="mt-4">
             <button class="btn btn-primary" onclick="window.reportData.draw()">Submit</button>
-            <button class="btn btn-success" onclick="">Export XLS</button>
+            <button class="btn btn-success" onclick="downloadReport()">Export XLS</button>
         </div>
 
         <div class="table-responsive my-4">

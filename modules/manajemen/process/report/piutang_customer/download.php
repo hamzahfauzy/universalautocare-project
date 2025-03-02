@@ -10,38 +10,31 @@ $error_msg  = get_flash_msg('error');
 $db = new Database;
 
 $order   = Request::get('order', [['column' => 1, 'dir' => 'asc']]);
-$filterByDate  = Request::get('filterByDate', [
-    'start_date' => date('Y-m-d'),
-    'end_date' => date('Y-m-d'),
-]);
+unset($_GET['filter']['date']);
 
-$search_fields = ['trn_cash.code', 'trn_cash.cash_resource', 'mst_banks.name', 'trn_cash.reference_number'];
-
+$search_fields = ['trn_orders.code', 'trn_orders.date', 'trn_orders.order_type', 'mst_customers.name', 'mst_employees.name','mst_partners.name','trn_orders.total_payment'];
 $query = "SELECT 
-                trn_cash.cash_group, 
-                trn_cash.code, 
-                trn_cash.date,
-                trn_cash.cash_type, 
-                trn_cash.cash_resource, 
-                mst_banks.name bank_name,
-                trn_cash.reference_number,
-                CONCAT('Rp. ',FORMAT(trn_cash.discount,0)) discount,
-                CONCAT('Rp. ',FORMAT(trn_cash.cash_total,0)) cash_total,
-                CONCAT('Rp. ',FORMAT(trn_cash.total_payment,0)) total_payment,
-                trn_cash.status
-              FROM trn_cash
-              LEFT JOIN mst_banks ON mst_banks.id = trn_cash.bank_id
-              ";
-
-$where = "WHERE (trn_cash.date BETWEEN '$filterByDate[start_date]' AND '$filterByDate[end_date]')";
+            trn_orders.code,
+            trn_orders.date,
+            trn_orders.order_type,
+            mst_customers.name customer_name,
+            mst_employees.name employee_name,
+            mst_partners.name partner_name,
+            trn_orders.total_payment,
+            trn_orders.total_value,
+            trn_orders.total_value-COALESCE(total_payment,0) piutang,
+            trn_orders.status
+            FROM trn_orders
+            LEFT JOIN mst_customers ON mst_customers.id = trn_orders.customer_id
+            LEFT JOIN mst_employees ON mst_employees.id = trn_orders.employee_id
+            LEFT JOIN mst_partners ON mst_partners.id = trn_orders.partner_id
+            ";
 
 $search = buildSearch($search_fields);
-$where .= ($search ? " AND " : "") . $search;
+$where = ($search ? " WHERE " : "") . $search;
 
 $filter = buildFilter();
-$having = ($filter ? " HAVING " : "") . $filter;
-
-$query .= $where . $having;
+$having = "HAVING piutang > 0 " . ($filter ? " AND " : "") . $filter;
 
 $db->query = $query;
 $data = $db->exec('all');

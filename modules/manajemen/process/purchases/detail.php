@@ -40,7 +40,7 @@ foreach ($data_items as $index => $item) {
 
 // page section
 $title = 'Detail Pembelian';
-Page::setActive("manajemen.purchases.create");
+Page::setActive("manajemen.trn_purchases");
 Page::setTitle($title);
 Page::setModuleName($title);
 Page::setBreadcrumbs([

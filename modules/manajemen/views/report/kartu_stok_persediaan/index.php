@@ -21,21 +21,21 @@
         <div class="row">
             <div class="col-3">
                 <label>Dari Tgl</label>
-                <?= \Core\Form::input('date', 'from_date', ['class' => 'form-control filters', 'placeholder' => 'Dari Tgl']) ?>
+                <?= \Core\Form::input('date', 'start_date', ['class' => 'form-control filters', 'placeholder' => 'Dari Tgl']) ?>
             </div>
             <div class="col-3">
                 <label>Sampai Tgl</label>
-                <?= \Core\Form::input('date', 'to_date', ['class' => 'form-control filters', 'placeholder' => 'Sampai Tgl']) ?>
+                <?= \Core\Form::input('date', 'end_date', ['class' => 'form-control filters', 'placeholder' => 'Sampai Tgl']) ?>
             </div>
             <div class="col-3">
                 <label>Barang</label>
-                <?= \Core\Form::input('options-obj:mst_items,name,name', 'employee_name', ['class' => 'form-control filters', 'placeholder' => 'Pilih barang', 'required' => '']) ?>
+                <?= \Core\Form::input('options-obj:mst_items,name,name', 'item_name', ['class' => 'form-control filters', 'placeholder' => 'Pilih barang', 'required' => '']) ?>
             </div>
         </div>
 
         <div class="mt-4">
             <button class="btn btn-primary" onclick="window.reportData.draw()">Submit</button>
-            <button class="btn btn-success" onclick="">Export XLS</button>
+            <button class="btn btn-success" onclick="downloadReport()">Export XLS</button>
         </div>
 
         <div class="table-responsive my-4">

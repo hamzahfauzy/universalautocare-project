@@ -10,44 +10,34 @@ $error_msg  = get_flash_msg('error');
 $db = new Database;
 
 $order   = Request::get('order', [['column' => 1, 'dir' => 'asc']]);
-$filterByDate  = Request::get('filterByDate', [
-    'start_date' => date('Y-m-d'),
-    'end_date' => date('Y-m-d'),
-]);
 
-$search_fields = ['trn_purchases.code', 'trn_purchases.date', 'mst_suppliers.name', 'mst_categories.name', 'mst_items.name', 'trn_purchase_items.total_qty', 'trn_purchase_items.price', 'trn_purchase_items.total_price'];
-$query = "SELECT 
-                trn_purchases.code, 
-                trn_purchases.date,
-                mst_suppliers.name supplier_name,
-                mst_categories.name category_name,
-                mst_items.name product_name,
-                CONCAT(FORMAT(trn_purchase_items.total_qty,0), ' ',trn_purchase_items.unit),
-                CONCAT('Rp. ',FORMAT(trn_purchase_items.price,0)) price,
-                CONCAT('Rp. ',FORMAT(trn_purchase_items.total_price,0)) total,
-                trn_purchases.status
-              FROM trn_purchases
-              LEFT JOIN mst_suppliers ON mst_suppliers.id = trn_purchases.supplier_id
-              LEFT JOIN trn_purchase_items ON trn_purchase_items.purchase_id = trn_purchases.id
-              LEFT JOIN mst_items ON mst_items.id = trn_purchase_items.item_id
-              LEFT JOIN mst_categories ON mst_categories.ID = mst_items.category_id
-              ";
+$search_fields = ['B.name', 'B.name', 'C.name', 'A.price', 'A.total_qty'];
 
-$where = "WHERE (trn_purchases.date BETWEEN '$filterByDate[start_date]' AND '$filterByDate[end_date]')";
-
+$where = "WHERE ((Coalesce(A.total_qty, 0) - Coalesce(A.outgoing_qty, 0)) > 0)";
 $search = buildSearch($search_fields);
 $where .= ($search ? " AND " : "") . $search;
 
 $filter = buildFilter();
 $having = ($filter ? " HAVING " : "") . $filter;
 
-$query .= $where . $having;
+$query = "SELECT 
+            B.name category_name, 
+            C.name item_name, 
+            CONCAT(SUM(Coalesce(A.total_qty, 0) - Coalesce(A.outgoing_qty, 0)), ' ', C.unit) As jlh_stok, 
+            A.price base_price, 
+            A.price * SUM(Coalesce(A.total_qty, 0) - Coalesce(A.outgoing_qty, 0)) As total_persediaan 
+        From trn_purchase_items A
+        Left Join mst_items C On A.item_id = C.id 
+        Left Join mst_categories B On B.id = C.category_id 
+        $where
+        Group By B.name, A.item_id, C.name, A.price
+        $having";
 
 $db->query = $query;
 
 $data = $db->exec('all');
 
-$filename = "purchases-detail-download-" . date('Y-m-d H:i:s') . ".xlsx";
+$filename = "stock-download-" . date('Y-m-d H:i:s') . ".xlsx";
 
 $spreadsheet = new Spreadsheet();
 $sheet = $spreadsheet->getActiveSheet();
