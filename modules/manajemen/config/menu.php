@@ -262,6 +262,7 @@ return [
             'manajemen.report.stok_persediaan',
             'manajemen.report.kartu_stok_persediaan',
             'manajemen.report.cash',
+            'manajemen.report.cash.recap',
             'manajemen.report.piutang_customer',
             'manajemen.report.hutang_supplier',
         ],
@@ -337,6 +338,12 @@ return [
                 'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-stream',
                 'route' => routeTo('manajemen/report/cash'),
                 'activeState' => 'manajemen.report.cash'
+            ],
+            [
+                'label' => 'manajemen.menu.cash_recap',
+                'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-stream',
+                'route' => routeTo('manajemen/report/cash/recap'),
+                'activeState' => 'manajemen.report.cash.recap'
             ],
             [
                 'label' => 'manajemen.menu.piutang_customer',
