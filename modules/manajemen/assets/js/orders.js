@@ -140,7 +140,7 @@ function calculateTotalOrder()
         totalServiceValue += parseInt(item.total_price)
     })
 
-    const total_item_value = $("#total_item_value").val() == '' ? 0 : $("#total_item_value").val().replace(',','')
+    const total_item_value = $("#total_item_value").val() == '' ? 0 : $("#total_item_value").val().replaceAll(',','')
 
     $('input[name="trn_orders[total_service_value]"]').val(format_number(totalServiceValue))
     $('input[name="trn_orders[total_value]"]').val(format_number(totalServiceValue+parseInt(total_item_value)))
