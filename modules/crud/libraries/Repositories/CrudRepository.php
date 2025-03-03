@@ -287,7 +287,26 @@ class CrudRepository
         {
             $columns[] = is_array($field) ? $key : $field;
             if(is_array($field) && isset($field['search']) && !$field['search']) continue;
-            $search_columns[] = is_array($field) ? $key : $field;
+            
+            if(!is_array($field))
+            {
+                $search_columns[] = $field;
+                continue;
+            }
+
+            if(isset($field['search'])){
+                if(is_array($field['search']))
+                {
+                    array_push($search_columns, ...$field['search']);
+                }
+                else
+                {
+                    $search_columns[] = $field['search'];
+                }
+                continue;
+            }
+
+            $search_columns[] = $key;
         }
 
         $where = "";
@@ -344,9 +363,7 @@ class CrudRepository
             $this->db->query = "SELECT * FROM $this->table $where ORDER BY ".$col_order." ".$order[0]['dir']." LIMIT $start,$length";
             $data  = $this->db->exec('all');
     
-            $total = $this->db->exists($this->table,$where,[
-                $col_order => $order[0]['dir']
-            ]);
+            $total = $this->db->exists($this->table,$where);
         }
 
 

@@ -210,100 +210,35 @@ return [
             'label' => 'No. Order',
             'type' => 'text',
         ],
-        'date' => [
+        'order_date' => [
             'label' => 'Tanggal Order',
-            'type' => 'date',
+            'type' => 'text',
+            'search' => ['trn_orders.date','trn_orders.done_date']
         ],
-        'employee_id' => [
-            'label' => 'Karyawan',
-            'type' => 'options-obj:mst_employees,id,name',
+        'employee' => [
+            'label' => 'Karyawan / Partner',
+            'type' => 'text',
+            'search' => ['mst_employees.name','mst_partners.name']
         ],
-        'partner_id' => [
-            'label' => 'Partner',
-            'type' => 'options-obj:mst_partners,id,name',
-        ],
-        'total_value' => [
+        'nilai_order' => [
             'label' => 'Nilai Order',
-            'type' => 'number',
-            'attr' => [
-                'data-type' => 'currency',
-                'class' => 'form-control',
-                'required' => 'required',
-                'min' => 1
-            ]
+            'type' => 'text',
+            'search' => ['trn_orders.total_item_value','trn_orders.total_service_value']
         ],
-        'customer_id' => [
+        'customer' => [
             'label' => 'Customer',
-            'type' => 'options-obj:mst_customers,id,name',
+            'type' => 'text',
+            'search' => 'mst_customers.name'
         ],
-        // 'order_type' => [
-        //     'label' => 'Tipe Order',
-        //     'type' => 'options:BENGKEL|DOORSMEER',
-        // ],
-        // 'done_date' => [
-        //     'label' => 'Tanggal Selesai',
-        //     'type' => 'date',
-        // ],
-        // 'close_date' => [
-        //     'label' => 'Tanggal Closing',
-        //     'type' => 'date',
-        // ],
-        // 'customer_police_number' => [
-        //     'label' => 'Nomor Polisi Kendaraan',
-        //     'type' => 'text',
-        // ],
-        // 'customer_vehicle_type' => [
-        //     'label' => 'Jenis Kendaraan',
-        //     'type' => 'text',
-        // ],
-        // 'customer_vehicle_color' => [
-        //     'label' => 'Warna Kendaraan',
-        //     'type' => 'text',
-        // ],
-        // 'total_item_value' => [
-        //     'label' => 'Total Nilai Barang',
-        //     'type' => 'number',
-        //     'attr' => [
-        //         'data-type' => 'currency',
-        //         'class' => 'form-control',
-        //         'required' => 'required',
-        //         'min' => 1
-        //     ]
-        // ],
-        // 'total_service_value' => [
-        //     'label' => 'Total Nilai Jasa',
-        //     'type' => 'number',
-        //     'attr' => [
-        //         'data-type' => 'currency',
-        //         'class' => 'form-control',
-        //         'required' => 'required',
-        //         'min' => 1
-        //     ]
-        // ],
-        // 'total_payment' => [
-        //     'label' => 'Total Pembayaran',
-        //     'type' => 'number',
-        //     'attr' => [
-        //         'data-type' => 'currency',
-        //         'class' => 'form-control',
-        //         'required' => 'required',
-        //         'min' => 1
-        //     ]
-        // ],
-        // 'description' => [
-        //     'label' => 'Keterangan',
-        //     'type' => 'textarea',
-        // ],
-        // 'pic_url' => [
-        //     'label' => 'Foto Order',
-        //     'type' => 'text',
-        // ],
         'status' => [
             'label' => 'Status',
             'type' => 'options:NEW|APPROVE|CANCEL',
+            'search' => 'trn_orders.status'
         ],
         '_action' => true,
-        '_userstamp' => true,
+        '_userstamp' => [
+            'search' => false
+        ],
     ],
     'trn_order_items' => [
         'order_id' => [
