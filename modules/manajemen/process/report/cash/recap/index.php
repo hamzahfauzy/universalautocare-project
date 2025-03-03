@@ -17,9 +17,13 @@ if (isset($_GET['draw'])) {
 
     $search_fields = ['A.date'];
 
+    $status = isset($_GET['filter']['status']) ? $_GET['filter']['status'] : '';
+    unset($_GET['filter']['status']);
+
     $where = "WHERE (DATE_FORMAT(A.date, '%Y-%m') = '$filterByDate[month]')";
     $search = buildSearch($search_fields);
     $where .= ($search ? " AND " : "") . $search;
+    $where .= $status ? " AND status = '$status'" : '';
 
     $filter = buildFilter();
     $having = ($filter ? " HAVING " : "") . $filter;
