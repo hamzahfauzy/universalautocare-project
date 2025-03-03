@@ -34,6 +34,7 @@ if (Request::isMethod('POST')) {
         $data['pic_url'] = Storage::upload($file);
     }
 
+    $data['updated_by'] = auth()->id;
     $order = $db->update('trn_orders', $data, ['id' => $_GET['id']]);
 
     set_flash_msg(['success' => "Job Order berhasil ditambahkan"]);

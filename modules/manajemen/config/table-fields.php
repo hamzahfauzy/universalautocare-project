@@ -302,6 +302,7 @@ return [
             'label' => 'Status',
             'type' => 'options:NEW|APPROVE|CANCEL',
         ],
+        '_action' => true,
         '_userstamp' => true,
     ],
     'trn_order_items' => [

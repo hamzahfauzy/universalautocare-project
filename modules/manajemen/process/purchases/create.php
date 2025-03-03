@@ -16,6 +16,7 @@ if (Request::isMethod('POST')) {
     $data['total_item'] = count($items);
     $data['total_qty'] = array_sum(array_column($items, 'total_qty'));
     $data['total_value'] = str_replace(',', '', $data['total_value']);
+    $data['created_by'] = auth()->id;
     $purchase = $db->insert('trn_purchases', $data);
 
     foreach ($items as $index => $item) {

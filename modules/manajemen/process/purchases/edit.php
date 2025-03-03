@@ -24,6 +24,7 @@ if (Request::isMethod('POST')) {
     $data['total_item'] = count($new_items);
     $data['total_qty'] = array_sum(array_column($new_items, 'total_qty'));
     $data['total_value'] = str_replace(',', '', $data['total_value']);
+    $data['updated_by'] = auth()->id;
     $purchase = $db->update('trn_purchases', $data, ['id' => $_GET['id']]);
 
 

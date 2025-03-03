@@ -17,6 +17,7 @@ if (Request::isMethod('POST')) {
     $data['total_value'] = str_replace(',', '', $data['total_value']);
     $data['total_service_value'] = str_replace(',', '', $data['total_service_value']);
     $data['order_type'] = $_GET['filter']['order_type'];
+    $data['created_by'] = auth()->id;
 
     $file = $_FILES['pic_url'];
     $name = $file['name'];
@@ -48,7 +49,7 @@ $title = 'Data Job Order';
 $types = ['BENGKEL' => 'workshop', 'DOORSMEER' => 'carwash'];
 $order_type = $_GET['filter']['order_type'];
 Page::setActive('manajemen.'.$types[$order_type].'_orders');
-Page::setTitle($title);
+Page::setTitle($title.' '.ucwords(strtolower($order_type)));
 Page::setModuleName($title);
 Page::setBreadcrumbs([
     [
