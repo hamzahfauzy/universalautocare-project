@@ -13,7 +13,7 @@ $db = new Database;
 
 if (Request::isMethod('POST')) {
     $data = isset($_POST[$tableName]) ? $_POST[$tableName] : [];
-    $items = $_POST['items'];
+    $items = isset($_POST['items']) ? $_POST['items'] : [];
     $data['total_value'] = str_replace(',', '', $data['total_value']);
     $data['total_service_value'] = str_replace(',', '', $data['total_service_value']);
     $data['order_type'] = $_GET['filter']['order_type'];
@@ -22,11 +22,10 @@ if (Request::isMethod('POST')) {
     $file = $_FILES['pic_url'];
     $name = $file['name'];
 
-    if(!empty($name))
-    {
+    if (!empty($name)) {
         $data['pic_url'] = Storage::upload($file);
     }
-    
+
     $order = $db->insert('trn_orders', $data);
 
     foreach ($items as $item) {
@@ -34,9 +33,6 @@ if (Request::isMethod('POST')) {
         $item['total_price'] = $item['price'] * $item['qty'];
         $db->insert('trn_order_items', $item);
     }
-
-    
-
 
     set_flash_msg(['success' => "Job Order berhasil ditambahkan"]);
 

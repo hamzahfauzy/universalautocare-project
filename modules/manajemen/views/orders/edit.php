@@ -157,7 +157,7 @@ $attr  = ['class' => "form-control"];
                                 <td><?= $item['qty'] ?></td>
                                 <td><?= $item['unit'] ?></td>
                                 <td id="total_price_<?= $idx + 1 ?>">Rp. <?= number_format($item['total_price']) ?></td>
-                                <td><a href="<?= routeTo('crud/delete', ['table' => 'trn_order_items', 'id' => $item['id'], 'order_id' => $_GET['id'], 'order_type' => $_GET['filter']['order_type']]) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Apakah anda yakin menghapus data ini?')"><i class="fas fa-trash"></i></button></td>
+                                <td><a href="<?= routeTo('crud/delete', ['table' => 'trn_order_items', 'id' => $item['id'], 'order_id' => $_GET['id'], 'filter' => ['order_type' => $_GET['filter']['order_type']]]) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Apakah anda yakin menghapus data ini?')"><i class="fas fa-trash"></i></button></td>
                             </tr>
                         <?php endforeach ?>
                     </tbody>

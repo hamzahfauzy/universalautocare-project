@@ -405,6 +405,7 @@ return [
         //     'label' => 'Keterangan',
         //     'type' => 'textarea',
         // ],
+        '_action' => true,
         '_userstamp' => true,
     ],
     'trn_outgoing_items' => [
