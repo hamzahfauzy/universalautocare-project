@@ -114,7 +114,7 @@ $attr  = ['class' => "form-control"];
                             <input type="file" name="pic_url" class="form-control">
 
                             <?php if($data->pic_url): ?>
-                                <a href="<?=$data->pic_url?>" target="_blank">Lihat File</a>
+                                <a href="<?=asset($data->pic_url)?>" target="_blank">Lihat File</a>
                             <?php endif ?>
                         </div>
                     </div>
