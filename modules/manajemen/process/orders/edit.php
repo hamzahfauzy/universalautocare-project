@@ -13,7 +13,7 @@ $db = new Database;
 
 if (Request::isMethod('POST')) {
     $data = isset($_POST[$tableName]) ? $_POST[$tableName] : [];
-    $items = $_POST['items'];
+    $items = isset($_POST['items']) ? $_POST['items'] : [];
 
     foreach ($items as $item) {
         $item['order_id'] = $_GET['id'];
@@ -76,7 +76,7 @@ $customer = $db->single('mst_customers', ['id' => $data->customer_id]);
 $data->customer = $customer;
 
 // page section
-$title = 'Edit Data Job Order';
+$title = 'Edit Data Job Order ' . $_GET['filter']['order_type'];
 $types = ['BENGKEL' => 'workshop', 'DOORSMEER' => 'carwash'];
 $order_type = $_GET['filter']['order_type'];
 Page::setActive('manajemen.' . $types[$order_type] . '_orders');

@@ -92,7 +92,7 @@ return [
             'min' => 1
         ]
     ],
-    
+
     // 'total_payment_before' => [
     //     'label' => 'Total Pembayaran Sebelumnya',
     //     'type' => 'number',
@@ -103,13 +103,6 @@ return [
     //         'min' => 1
     //     ]
     // ],
-    
-    
-    
-    // 'status' => [
-    //     'label' => 'Status',
-    //     'type' => 'options:NEW|APPROVE|CANCEL',
-    // ],
     'description' => [
         'label' => 'Keterangan',
         'type' => 'textarea',
@@ -117,5 +110,10 @@ return [
             'class' => 'form-control select2-search__field'
         ]
     ],
+    'status' => [
+        'label' => 'Status',
+        'type' => 'options:NEW|APPROVE|CANCEL',
+    ],
+    '_action' => true,
     '_userstamp' => true,
 ];
