@@ -32,7 +32,7 @@ $query = "SELECT
 $db->query = $query;
 $total = $this->db->exec('exists');
 
-$db->query .= " ORDER BY ".$col_order." ".$order[0]['dir']." LIMIT $start,$length";
+$db->query .= " ORDER BY $this->table.date DESC LIMIT $start,$length";
 $data  = $this->db->exec('all');
 
 
