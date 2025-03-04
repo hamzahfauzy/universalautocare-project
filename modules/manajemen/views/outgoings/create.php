@@ -40,7 +40,12 @@ $attr  = ['class' => "form-control"];
                         <label class="mb-2 col-4">No. Order</label>
                         <div class="col-8">
                             <div class="d-flex">
-                                <?= \Core\Form::input('options-obj:trn_orders,id,code', $tableName . '[order_id]', array_merge($attr, ['placeholder' => 'Pilih Customer', 'required' => ''])) ?>
+                                <select name="<?=$tableName?>[order_id]" id="" class="form-control">
+                                    <option value="">- Pilih -</option>
+                                    <?php foreach($orders as $order): ?>
+                                    <option value="<?=$order->id?>"><?=$order->code?></option>
+                                    <?php endforeach ?>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -132,7 +137,7 @@ $attr  = ['class' => "form-control"];
                 </div>
                 <div class="form-group mb-3">
                     <label class="mb-2 w-100">No Pembelian</label>
-                    <?= \Core\Form::input('options-obj:trn_purchases,id,code', 'purchase', array_merge($attr, ['class' => 'form-control select2insidemodal', 'placeholder' => 'Pilih No Pembelian'])) ?>
+                    <select name="purchase" id="purchase-select" class="form-control select2insidemodal"></select>
                 </div>
             </div>
             <div class="modal-footer">

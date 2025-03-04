@@ -17,7 +17,8 @@ $('.add-item-button').click(function(){
         code: selectedData.purchase,
         name: selectedData.product,
         qty: 1,
-        price: parseInt(selectedItem.product.dataset.price),
+        max_qty: selectedItem.purchase.dataset.maxqty,
+        price: parseInt(selectedItem.purchase.dataset.price),
         total_price: 0,
         unit: selectedItem.product.dataset.unit,
         category_name: selectedData.category,
@@ -41,7 +42,7 @@ $('.add-item-button').click(function(){
                 <td>${data.category_name}</td>
                 <td>${data.name}</td>
                 <td>Rp. ${format_number(data.price)}</td>
-                <td><input type="number" class="form-control qty-input" style="width:100px" name="items[${items.length}][outgoing_qty]" value="${data.qty}" data-key="${items.length+1}"></td>
+                <td><input type="number" class="form-control qty-input" min="1" max="${data.max_qty}" style="width:100px" name="items[${items.length}][outgoing_qty]" value="${data.qty}" data-key="${items.length+1}"></td>
                 <td>${data.unit}</td>
                 <td id="total_price_${items.length+1}">Rp. ${format_number(data.total_price)}</td>
                 <td><button class="btn btn-sm btn-danger remove-item-button" type="button" data-target="#item_${items.length+1}" data-key="${items.length+1}"><i class="fas fa-trash"></i></button></td>
@@ -91,6 +92,20 @@ $('select[name=category]').on('select2:selecting', function(e) {
         res.data.products.forEach(data => {
             var newOption = `<option value="${data.id}" data-price="${data.price}" data-unit="${data.unit}">${data.name}</option>`
             $('select[name=product]').append(newOption)
+        })
+    })
+});
+
+$('select[name=product]').on('select2:selecting', function(e) {
+    // retrieve product by category
+    const product_id = e.params.args.data.id
+    fetch('/manajemen/purchases/load-item-by-product?product_id='+product_id).then(res => res.json())
+    .then(res => {
+        $('select[name=purchase]').html('<option value="" data-price="0" data-maxqty="0">- Pilih -</option>')
+        
+        res.data.forEach(data => {
+            var newOption = `<option value="${data.id}" data-price="${data.price}" data-maxqty="${data.max_qty}">${data.code}</option>`
+            $('select[name=purchase]').append(newOption)
         })
     })
 });
