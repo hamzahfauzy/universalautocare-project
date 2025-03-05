@@ -289,57 +289,23 @@ return [
             'type' => 'text',
         ],
         'date' => [
-            'label' => 'Tanggal Pengeluaran',
+            'label' => 'Tgl. Pengeluaran',
             'type' => 'date',
         ],
-        'employee_id' => [
-            'label' => 'Karyawan',
-            'type' => 'options-obj:mst_employees,id,name',
+        'employee' => [
+            'label' => 'Customer / Karyawan',
+            'type' => 'text',
+            'search' => ['mst_customers.name', 'mst_employees.name']
         ],
-        'total_outgoing_items' => [
-            'label' => 'Total Item',
-            'type' => 'number',
-        ],
-        'total_outgoing_qty' => [
-            'label' => 'Total Kuantitas',
-            'type' => 'number',
+        'items_qty' => [
+            'label' => 'Total Items / Qty',
+            'type' => 'text',
+            'search' => ['trn_outgoings.total_outgoing_items', 'trn_outgoings.total_outgoing_qty']
         ],
         'status' => [
             'label' => 'Status',
-            'type' => 'options:NEW|APPROVE|CANCEL',
+            'type' => 'text',
         ],
-        // 'order_id' => [
-        //     'label' => 'Order',
-        //     'type' => 'options-obj:trn_orders,id,code',
-        // ],
-        // 'customer_police_number' => [
-        //     'label' => 'Nomor Polisi Kendaraan',
-        //     'type' => 'text',
-        // ],
-        // 'total_value' => [
-        //     'label' => 'Total Nilai Order',
-        //     'type' => 'number',
-        //     'attr' => [
-        //         'data-type' => 'currency',
-        //         'class' => 'form-control',
-        //         'required' => 'required',
-        //         'min' => 1
-        //     ]
-        // ],
-        // 'total_outgoing_value' => [
-        //     'label' => 'Total Nilai Pengeluaran',
-        //     'type' => 'number',
-        //     'attr' => [
-        //         'data-type' => 'currency',
-        //         'class' => 'form-control',
-        //         'required' => 'required',
-        //         'min' => 1
-        //     ]
-        // ],
-        // 'description' => [
-        //     'label' => 'Keterangan',
-        //     'type' => 'textarea',
-        // ],
         '_action' => true,
         '_userstamp' => true,
     ],
