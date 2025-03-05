@@ -47,7 +47,7 @@ function format_number(value)
     return new Intl.NumberFormat().format(value)
 }
 
-$('input[name="trn_cash[total_payment]"], input[name="trn_cash[discount]"]').change(function(){
+$('input[name="trn_cash[cash_total]"], input[name="trn_cash[discount]"]').change(function(){
     calculateTotalCash()
 })
 
