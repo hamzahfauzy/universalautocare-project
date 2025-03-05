@@ -14,4 +14,5 @@ return [
     'created_by' => 'Dibuat Oleh',
     'updated_by' => 'Diubah Oleh',
     'updated_at' => 'Diubah Pada',
+    'restrict delete' => 'Tidak bisa menghapus data',
 ];

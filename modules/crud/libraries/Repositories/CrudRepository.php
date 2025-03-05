@@ -241,7 +241,15 @@ class CrudRepository
     {
         $data = $this->find($clause);
         $this->beforeDelete($data);
+        ob_start();
         $this->db->delete($this->table, $clause);
+        $output = ob_get_clean();
+        if($output)
+        {
+            $message = substr($output, 0, strlen('Cannot delete')) == 'Cannot delete' ? __('crud.label.restrict delete') : $output;
+            redirectBack(['error' => $message]);
+            die;
+        }
         $this->afterDelete($data);
 
         return true;

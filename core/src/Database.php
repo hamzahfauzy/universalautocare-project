@@ -248,7 +248,7 @@ class Database
                 } catch (\mysqli_sql_exception $e) {
                     if($this->get_error) return $e->getMessage();
                     echo $e->getMessage();
-                    die();
+                    return;
                 }
             }
         }

@@ -16,10 +16,10 @@ CREATE TABLE trn_purchases (
     created_by INT DEFAULT NULL,
     updated_by INT DEFAULT NULL,
 
-    CONSTRAINT fk_trn_purchases_supplier_id FOREIGN KEY (supplier_id) REFERENCES mst_suppliers(id) ON DELETE SET NULL,
-    CONSTRAINT fk_trn_purchases_employee_id FOREIGN KEY (employee_id) REFERENCES mst_employees(id) ON DELETE SET NULL,
-    CONSTRAINT fk_trn_purchases_created_by FOREIGN KEY (created_by) REFERENCES users(id) ON DELETE SET NULL,
-    CONSTRAINT fk_trn_purchases_updated_by FOREIGN KEY (updated_by) REFERENCES users(id) ON DELETE SET NULL
+    CONSTRAINT fk_trn_purchases_supplier_id FOREIGN KEY (supplier_id) REFERENCES mst_suppliers(id) ON DELETE RESTRICT,
+    CONSTRAINT fk_trn_purchases_employee_id FOREIGN KEY (employee_id) REFERENCES mst_employees(id) ON DELETE RESTRICT,
+    CONSTRAINT fk_trn_purchases_created_by FOREIGN KEY (created_by) REFERENCES users(id) ON DELETE RESTRICT,
+    CONSTRAINT fk_trn_purchases_updated_by FOREIGN KEY (updated_by) REFERENCES users(id) ON DELETE RESTRICT
 );
 
 CREATE TABLE trn_purchase_items (
@@ -38,10 +38,10 @@ CREATE TABLE trn_purchase_items (
     created_by INT DEFAULT NULL,
     updated_by INT DEFAULT NULL,
 
-    CONSTRAINT fk_trn_purchase_items_purchase_id FOREIGN KEY (purchase_id) REFERENCES trn_purchases(id) ON DELETE SET NULL,
-    CONSTRAINT fk_trn_purchase_items_item_id FOREIGN KEY (item_id) REFERENCES mst_items(id) ON DELETE SET NULL,
-    CONSTRAINT fk_trn_purchase_items_created_by FOREIGN KEY (created_by) REFERENCES users(id) ON DELETE SET NULL,
-    CONSTRAINT fk_trn_purchase_items_updated_by FOREIGN KEY (updated_by) REFERENCES users(id) ON DELETE SET NULL
+    CONSTRAINT fk_trn_purchase_items_purchase_id FOREIGN KEY (purchase_id) REFERENCES trn_purchases(id) ON DELETE CASCADE,
+    CONSTRAINT fk_trn_purchase_items_item_id FOREIGN KEY (item_id) REFERENCES mst_items(id) ON DELETE RESTRICT,
+    CONSTRAINT fk_trn_purchase_items_created_by FOREIGN KEY (created_by) REFERENCES users(id) ON DELETE RESTRICT,
+    CONSTRAINT fk_trn_purchase_items_updated_by FOREIGN KEY (updated_by) REFERENCES users(id) ON DELETE RESTRICT
 );
 
 CREATE TABLE trn_orders (
@@ -70,11 +70,11 @@ CREATE TABLE trn_orders (
     created_by INT DEFAULT NULL,
     updated_by INT DEFAULT NULL,
     
-    CONSTRAINT fk_trn_orders_employee_id FOREIGN KEY (employee_id) REFERENCES mst_employees(id) ON DELETE SET NULL,
-    CONSTRAINT fk_trn_orders_customer_id FOREIGN KEY (customer_id) REFERENCES mst_customers(id) ON DELETE SET NULL,
-    CONSTRAINT fk_trn_orders_partner_id FOREIGN KEY (partner_id) REFERENCES mst_partners(id) ON DELETE SET NULL,
-    CONSTRAINT fk_trn_orders_created_by FOREIGN KEY (created_by) REFERENCES users(id) ON DELETE SET NULL,
-    CONSTRAINT fk_trn_orders_updated_by FOREIGN KEY (updated_by) REFERENCES users(id) ON DELETE SET NULL
+    CONSTRAINT fk_trn_orders_employee_id FOREIGN KEY (employee_id) REFERENCES mst_employees(id) ON DELETE RESTRICT,
+    CONSTRAINT fk_trn_orders_customer_id FOREIGN KEY (customer_id) REFERENCES mst_customers(id) ON DELETE RESTRICT,
+    CONSTRAINT fk_trn_orders_partner_id FOREIGN KEY (partner_id) REFERENCES mst_partners(id) ON DELETE RESTRICT,
+    CONSTRAINT fk_trn_orders_created_by FOREIGN KEY (created_by) REFERENCES users(id) ON DELETE RESTRICT,
+    CONSTRAINT fk_trn_orders_updated_by FOREIGN KEY (updated_by) REFERENCES users(id) ON DELETE RESTRICT
 );
 
 CREATE TABLE trn_order_items (
@@ -92,10 +92,10 @@ CREATE TABLE trn_order_items (
     created_by INT DEFAULT NULL,
     updated_by INT DEFAULT NULL,
     
-    CONSTRAINT fk_trn_order_items_order_id FOREIGN KEY (order_id) REFERENCES trn_orders(id) ON DELETE SET NULL,
-    CONSTRAINT fk_trn_order_items_service_id FOREIGN KEY (service_id) REFERENCES mst_services(id) ON DELETE SET NULL,
-    CONSTRAINT fk_trn_order_items_created_by FOREIGN KEY (created_by) REFERENCES users(id) ON DELETE SET NULL,
-    CONSTRAINT fk_trn_order_items_updated_by FOREIGN KEY (updated_by) REFERENCES users(id) ON DELETE SET NULL
+    CONSTRAINT fk_trn_order_items_order_id FOREIGN KEY (order_id) REFERENCES trn_orders(id) ON DELETE CASCADE,
+    CONSTRAINT fk_trn_order_items_service_id FOREIGN KEY (service_id) REFERENCES mst_services(id) ON DELETE RESTRICT,
+    CONSTRAINT fk_trn_order_items_created_by FOREIGN KEY (created_by) REFERENCES users(id) ON DELETE RESTRICT,
+    CONSTRAINT fk_trn_order_items_updated_by FOREIGN KEY (updated_by) REFERENCES users(id) ON DELETE RESTRICT
 
 );
 
@@ -118,10 +118,10 @@ CREATE TABLE trn_outgoings (
     created_by INT DEFAULT NULL,
     updated_by INT DEFAULT NULL,
 
-    CONSTRAINT fk_trn_outgoings_order_id FOREIGN KEY (order_id) REFERENCES trn_orders(id) ON DELETE SET NULL,
-    CONSTRAINT fk_trn_outgoings_employee_id FOREIGN KEY (employee_id) REFERENCES mst_employees(id) ON DELETE SET NULL,
-    CONSTRAINT fk_trn_outgoings_created_by FOREIGN KEY (created_by) REFERENCES users(id) ON DELETE SET NULL,
-    CONSTRAINT fk_trn_outgoings_updated_by FOREIGN KEY (updated_by) REFERENCES users(id) ON DELETE SET NULL
+    CONSTRAINT fk_trn_outgoings_order_id FOREIGN KEY (order_id) REFERENCES trn_orders(id) ON DELETE RESTRICT,
+    CONSTRAINT fk_trn_outgoings_employee_id FOREIGN KEY (employee_id) REFERENCES mst_employees(id) ON DELETE RESTRICT,
+    CONSTRAINT fk_trn_outgoings_created_by FOREIGN KEY (created_by) REFERENCES users(id) ON DELETE RESTRICT,
+    CONSTRAINT fk_trn_outgoings_updated_by FOREIGN KEY (updated_by) REFERENCES users(id) ON DELETE RESTRICT
 );
 
 CREATE TABLE trn_outgoing_items (
@@ -140,11 +140,11 @@ CREATE TABLE trn_outgoing_items (
     created_by INT DEFAULT NULL,
     updated_by INT DEFAULT NULL,
 
-    CONSTRAINT fk_trn_outgoing_items_purchase_id FOREIGN KEY (purchase_id) REFERENCES trn_purchases(id) ON DELETE SET NULL,
-    CONSTRAINT fk_trn_outgoing_items_outgoing_id FOREIGN KEY (outgoing_id) REFERENCES trn_outgoings(id) ON DELETE SET NULL,
-    CONSTRAINT fk_trn_outgoing_items_item_id FOREIGN KEY (item_id) REFERENCES mst_items(id) ON DELETE SET NULL,
-    CONSTRAINT fk_trn_outgoing_items_created_by FOREIGN KEY (created_by) REFERENCES users(id) ON DELETE SET NULL,
-    CONSTRAINT fk_trn_outgoing_items_updated_by FOREIGN KEY (updated_by) REFERENCES users(id) ON DELETE SET NULL
+    CONSTRAINT fk_trn_outgoing_items_purchase_id FOREIGN KEY (purchase_id) REFERENCES trn_purchases(id) ON DELETE RESTRICT,
+    CONSTRAINT fk_trn_outgoing_items_outgoing_id FOREIGN KEY (outgoing_id) REFERENCES trn_outgoings(id) ON DELETE CASCADE,
+    CONSTRAINT fk_trn_outgoing_items_item_id FOREIGN KEY (item_id) REFERENCES mst_items(id) ON DELETE RESTRICT,
+    CONSTRAINT fk_trn_outgoing_items_created_by FOREIGN KEY (created_by) REFERENCES users(id) ON DELETE RESTRICT,
+    CONSTRAINT fk_trn_outgoing_items_updated_by FOREIGN KEY (updated_by) REFERENCES users(id) ON DELETE RESTRICT
 );
 
 CREATE TABLE trn_cash (
@@ -172,7 +172,7 @@ CREATE TABLE trn_cash (
     created_by INT DEFAULT NULL,
     updated_by INT DEFAULT NULL,
 
-    CONSTRAINT fk_trn_cash_bank_id FOREIGN KEY (bank_id) REFERENCES mst_banks(id) ON DELETE SET NULL,
-    CONSTRAINT fk_trn_cash_created_by FOREIGN KEY (created_by) REFERENCES users(id) ON DELETE SET NULL,
-    CONSTRAINT fk_trn_cash_updated_by FOREIGN KEY (updated_by) REFERENCES users(id) ON DELETE SET NULL
+    CONSTRAINT fk_trn_cash_bank_id FOREIGN KEY (bank_id) REFERENCES mst_banks(id) ON DELETE RESTRICT,
+    CONSTRAINT fk_trn_cash_created_by FOREIGN KEY (created_by) REFERENCES users(id) ON DELETE RESTRICT,
+    CONSTRAINT fk_trn_cash_updated_by FOREIGN KEY (updated_by) REFERENCES users(id) ON DELETE RESTRICT
 );
