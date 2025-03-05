@@ -25,6 +25,7 @@ if (Request::isMethod('POST')) {
     $data['total_outgoing_items'] = count($new_items);
     $data['total_outgoing_qty'] = array_sum(array_column($new_items, 'outgoing_qty'));
     $data['total_outgoing_value'] = str_replace(',', '', $data['total_outgoing_value']);
+    $data['updated_by'] = auth()->id;
     $outgoing = $db->update('trn_outgoings', $data, ['id' => $_GET['id']]);
 
     set_flash_msg(['success' => "Pengeluaran berhasil diedit"]);

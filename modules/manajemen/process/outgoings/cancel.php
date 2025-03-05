@@ -5,7 +5,8 @@ use Core\Request;
 
 $db = new Database;
 $db->update('trn_outgoings',[
-    'status' => 'CANCEL'
+    'status' => 'CANCEL',
+    'updated_by' => auth()->id
 ], [
     'id' => $_GET['id']
 ]);

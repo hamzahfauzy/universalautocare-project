@@ -16,6 +16,7 @@ if (Request::isMethod('POST')) {
     $data['total_outgoing_items'] = count($items);
     $data['total_outgoing_qty'] = array_sum(array_column($items, 'outgoing_qty'));
     $data['total_outgoing_value'] = str_replace(',', '', $data['total_outgoing_value']);
+    $data['created_by'] = auth()->id;
     $outgoing = $db->insert('trn_outgoings', $data);
 
     foreach ($items as $index => $item) {

@@ -9,7 +9,8 @@ $outgoing = $db->single('trn_outgoings', [
 ]);
 
 $db->update('trn_outgoings',[
-    'status' => 'APPROVE'
+    'status' => 'APPROVE',
+    'updated_by' => auth()->id
 ], [
     'id' => $_GET['id']
 ]);
