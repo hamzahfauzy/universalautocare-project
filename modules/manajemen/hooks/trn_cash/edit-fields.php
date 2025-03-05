@@ -60,4 +60,6 @@ if(isset($_GET['filter']))
     $fields['cash_total']['attr']['col'] = 'col-6';
 }
 
+unset($fields['status']);
+
 return $fields;
