@@ -8,6 +8,26 @@ $outgoing = $db->single('trn_outgoings', [
     'id' => $_GET['id']
 ]);
 
+$items = $db->all('trn_outgoing_items', [
+    'outgoing_id' => $outgoing->id
+]);
+
+// validation
+foreach($items as $item)
+{
+    $purchase_item = $db->single('trn_purchase_items', [
+        'purchase_id' => $item->purchase_id,
+        'item_id' => $item->item_id
+    ]);
+
+    if($purchase_item->total_qty < ($purchase_item->outgoing_qty + $item->outgoing_qty))
+    {
+        $item = $db->single('mst_items', ['id' => $item->item_id]);
+        redirectBack(['error' => 'Maaf! Total keluaran barang '.$item->name.' tidak valid']);
+        break;
+    }
+}
+
 $db->update('trn_outgoings',[
     'status' => 'APPROVE',
     'updated_by' => auth()->id
@@ -15,9 +35,6 @@ $db->update('trn_outgoings',[
     'id' => $_GET['id']
 ]);
 
-$items = $db->all('trn_outgoing_items', [
-    'outgoing_id' => $outgoing->id
-]);
 
 foreach($items as $item)
 {
