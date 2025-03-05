@@ -5,6 +5,12 @@ $('.add-item-button').click(function(){
         product: $('select[name=product]').find(':selected')[0],
         purchase: $('select[name=purchase]').find(':selected')[0],
     }
+
+    if(!selectedItem.category.index || !selectedItem.product.index || !selectedItem.purchase.index)
+    {
+        alert('Tidak dapat menambahkan item karena ada field yang tidak dipilih')
+        return
+    }
     
     const selectedData = {
         category: sanitizeSelected(selectedItem.category.text),
@@ -18,7 +24,7 @@ $('.add-item-button').click(function(){
         alert('Barang sudah ada dalam daftar')
         return
     }
-    
+
     const data = {
         key:items.length+1,
         code: selectedData.purchase,
