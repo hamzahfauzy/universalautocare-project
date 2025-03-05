@@ -103,6 +103,6 @@ return [
         'label' => 'Status',
         'type' => 'options:NEW|APPROVE|CANCEL',
     ],
-    '_action' => true,
+    '_action_button' => true,
     '_userstamp' => true,
 ];

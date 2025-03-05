@@ -56,9 +56,9 @@ $attr = 'form-control';
                             <td><?= $item->total_item . " Items / " . $item->total_qty . " " . $unit ?></td>
                             <td>Rp. <?= number_format($item->total_value) ?></td>
                             <td>
-                                <a class="btn btn-primary" href="<?= routeTo('manajemen/status/purchases/new', ['id' => $item->id]) ?>" onclick="return confirm('Apakah anda yakin akan memperbarui data ini ?')"><i class="fa-solid fa-pencil"></i> New</a>
-                                <a class="btn btn-success" href="<?= routeTo('manajemen/status/purchases/approve', ['id' => $item->id]) ?>" onclick="return confirm('Apakah anda yakin akan mengapprove data ini ?')"><i class="fa-solid fa-square-check"></i> Approve</a>
-                                <a class="btn btn-danger" href="<?= routeTo('manajemen/status/purchases/cancel', ['id' => $item->id]) ?>" onclick="return confirm('Apakah anda yakin akan mengcancel data ini ?')"><i class="fa-solid fa-ban"></i> Cancel</a>
+                                <a class="btn btn-sm btn-primary" href="<?= routeTo('manajemen/status/purchases/new', ['id' => $item->id]) ?>" onclick="return confirm('Apakah anda yakin akan memperbarui data ini ?')"><i class="fa-solid fa-pencil"></i> New</a>
+                                <a class="btn btn-sm btn-success" href="<?= routeTo('manajemen/status/purchases/approve', ['id' => $item->id]) ?>" onclick="return confirm('Apakah anda yakin akan mengapprove data ini ?')"><i class="fa-solid fa-square-check"></i> Approve</a>
+                                <a class="btn btn-sm btn-danger" href="<?= routeTo('manajemen/status/purchases/cancel', ['id' => $item->id]) ?>" onclick="return confirm('Apakah anda yakin akan mengcancel data ini ?')"><i class="fa-solid fa-ban"></i> Cancel</a>
 
                             </td>
                         </tr>

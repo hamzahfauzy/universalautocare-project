@@ -1,5 +1,8 @@
 <?php
 
+use Core\Request;
+use Core\Route;
+
 if(isset($_GET['filter']))
 {
     $cash_group = $_GET['filter']['cash_group'];
@@ -48,6 +51,11 @@ if(isset($_GET['filter']))
     unset($fields['total_value']);
     // unset($fields['bank_id']);
     unset($fields['description']);
+}
+
+if(Request::getRoute() == 'manajemen/status/cash')
+{
+    unset($fields['_userstamp']);
 }
 
 return $fields;

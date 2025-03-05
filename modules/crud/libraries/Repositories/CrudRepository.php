@@ -293,7 +293,7 @@ class CrudRepository
         $search_columns = [];
         foreach($fields as $key => $field)
         {
-            $columns[] = is_array($field) ? $key : $field;
+            $columns[] = is_array($field) || $field == true ? $key : $field;
             if(is_array($field) && isset($field['search']) && !$field['search']) continue;
             
             if(!is_array($field))
@@ -412,6 +412,7 @@ class CrudRepository
                 if($col == '_action_button')
                 {
                     $results[$key][] = $action;
+                    $isActionExists = true;
                     continue;
                 }
                 
