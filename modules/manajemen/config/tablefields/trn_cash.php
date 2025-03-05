@@ -92,17 +92,6 @@ return [
             'min' => 1
         ]
     ],
-
-    // 'total_payment_before' => [
-    //     'label' => 'Total Pembayaran Sebelumnya',
-    //     'type' => 'number',
-    //     'attr' => [
-    //         'data-type' => 'currency',
-    //         'class' => 'form-control',
-    //         'required' => 'required',
-    //         'min' => 1
-    //     ]
-    // ],
     'description' => [
         'label' => 'Keterangan',
         'type' => 'textarea',

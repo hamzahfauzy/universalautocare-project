@@ -427,7 +427,7 @@ class CrudRepository
                 $data_value = "";
                 if(is_array($field))
                 {
-                    $data_value = \Core\Form::getData($field['type'],$d->{$col},true);
+                    $data_value = \Core\Form::getData($field['type'],$d->{$col});
                     if($field['type'] == 'number')
                     {
                         $data_value = (int) $data_value;

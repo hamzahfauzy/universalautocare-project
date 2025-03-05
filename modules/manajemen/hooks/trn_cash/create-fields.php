@@ -6,7 +6,7 @@ if(isset($_GET['filter']))
 {
     $cash_group = $_GET['filter']['cash_group'];
     $code = ['PENGELUARAN KAS' => 'BPK', 'PENERIMAAN KAS' => 'KAS', 'BIAYA KAS' => 'COST'];
-    $referenceType = ['PENGELUARAN KAS' => 'trn_purchases,code,code', 'PENERIMAAN KAS' => 'trn_orders,code,code', 'BIAYA KAS' => 'mst_costs,name,name'];
+    $referenceType = ['PENGELUARAN KAS' => 'options-obj:trn_purchases,code,code', 'PENERIMAAN KAS' => "options-obj:trn_orders,code,code|RAW(status = 'APPROVE' AND total_value <> COALESCE(total_payment,0))", 'BIAYA KAS' => 'options-obj:mst_costs,name,name'];
 
     $db = new Database;
     $db->query = "SELECT COUNT(*) as `counter` FROM trn_cash WHERE cash_group = '$cash_group' AND created_at LIKE '%" . date('Y-m') . "%'";
@@ -15,7 +15,7 @@ if(isset($_GET['filter']))
     $code = $code[$cash_group] . date('Ym') . sprintf("%04d", $counter + 1);
     $fields['code']['attr']['value'] = $code;
 
-    $fields['reference_number']['type'] = 'options-obj:'.$referenceType[$cash_group];
+    $fields['reference_number']['type'] = $referenceType[$cash_group];
 
     if($cash_group == 'PENERIMAAN KAS')
     {
@@ -69,5 +69,7 @@ if(isset($_GET['filter']))
     $fields['cash_total']['attr']['col'] = 'col-6';
     
 }
+
+unset($fields['status']);
 
 return $fields;
