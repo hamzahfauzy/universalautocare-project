@@ -31,8 +31,8 @@ return [
         'label' => 'Sumber Kas',
         'type' => 'options:CASH|TRANSFER|E-MONEY|BG (BILYET GIRO)',
     ],
-    'total_payment' => [
-        'label' => 'Total Pembayaran',
+    'cash_total' => [
+        'label' => 'Total Kas',
         'type' => 'number',
         'attr' => [
             'data-type' => 'currency',
@@ -45,12 +45,12 @@ return [
         'label' => 'Bank',
         'type' => 'options-obj:mst_banks,id,name',
     ],
-    'cash_total' => [
-        'label' => 'Total Kas',
+    'total_payment' => [
+        'label' => 'Total Pembayaran',
         'type' => 'number',
         'attr' => [
-            'readonly' => 'readonly',
             'data-type' => 'currency',
+            'readonly' => 'readonly',
             'class' => 'form-control',
             'required' => 'required',
             'min' => 1

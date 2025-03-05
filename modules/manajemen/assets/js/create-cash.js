@@ -53,9 +53,9 @@ $('input[name="trn_cash[total_payment]"], input[name="trn_cash[discount]"]').cha
 
 function calculateTotalCash()
 {
-    const val1 = $('input[name="trn_cash[total_payment]"]').val()
+    const val1 = $('input[name="trn_cash[cash_total]"]').val()
     const val2 = $('input[name="trn_cash[discount]"]').val()
     const total = parseInt(val1.replace(',','')) + parseInt(val2.replace(',',''))
 
-    $('input[name="trn_cash[cash_total]"]').val(isNaN(total) ? 0 : format_number(total))
+    $('input[name="trn_cash[total_payment]"]').val(isNaN(total) ? 0 : format_number(total))
 }
