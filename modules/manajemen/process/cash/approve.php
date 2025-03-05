@@ -14,8 +14,9 @@ $data = $db->single('trn_cash', ['id' => $_GET['id']]);
 $paymentTable = $data->cash_group == 'PENERIMAAN KAS' ? 'trn_orders' : 'trn_purchases';
 if(in_array($data->cash_group, ['PENERIMAAN KAS', 'PENGELUARAN KAS']))
 {
+    $paymentData = $db->single($paymentTable, ['code' => $data->reference_number]);
     $db->update($paymentTable,[
-        'total_payment' => $order->total_payment + $data->total_payment
+        'total_payment' => $paymentData->total_payment + $data->total_payment
     ], [
         'code' => $data->reference_number
     ]);
