@@ -77,7 +77,7 @@ $counter = $db->exec('single')?->counter ?? 0;
 
 $code = "SPG" . date('Ym') . sprintf("%04d", $counter + 1);
 
-$db->query = "SELECT * FROM trn_orders WHERE status = 'APPROVE' AND total_value <> total_payment";
+$db->query = "SELECT * FROM trn_orders WHERE status = 'APPROVE' AND total_value <> COALESCE(total_payment,0)";
 $orders = $db->exec('all');
 
 return view('manajemen/views/outgoings/create', compact('error_msg', 'old', 'tableName', 'code','orders'));

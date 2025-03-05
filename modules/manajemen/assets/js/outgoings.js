@@ -11,6 +11,13 @@ $('.add-item-button').click(function(){
         product: sanitizeSelected(selectedItem.product.text),
         purchase: sanitizeSelected(selectedItem.purchase.text),
     }
+
+    // validate
+    const validator = items.find(item => item.product == $('select[name=product]').val() && item.code == selectedData.purchase)
+    if(validator){
+        alert('Barang sudah ada dalam daftar')
+        return
+    }
     
     const data = {
         key:items.length+1,

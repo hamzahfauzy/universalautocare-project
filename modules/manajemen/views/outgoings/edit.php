@@ -40,7 +40,7 @@ $attr  = ['class' => "form-control"];
                         <label class="mb-2 col-4">No. Order</label>
                         <div class="col-8">
                             <div class="d-flex">
-                                <?= \Core\Form::input('options-obj:trn_orders,id,code', $tableName . '[order_id]', array_merge($attr, ['placeholder' => 'Pilih Customer', 'required' => '', 'value' => $data->order_id])) ?>
+                                <?= \Core\Form::input('options-obj:trn_orders,id,code', $tableName . '[order_id]', array_merge($attr, ['placeholder' => 'Pilih Customer', 'disabled' => 'disabled', 'value' => $data->order_id])) ?>
                             </div>
                         </div>
                     </div>
