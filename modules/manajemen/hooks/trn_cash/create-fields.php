@@ -6,7 +6,7 @@ if(isset($_GET['filter']))
 {
     $cash_group = $_GET['filter']['cash_group'];
     $code = ['PENGELUARAN KAS' => 'BPK', 'PENERIMAAN KAS' => 'KAS', 'BIAYA KAS' => 'COST'];
-    $referenceType = ['PENGELUARAN KAS' => 'options-obj:trn_purchases,code,code', 'PENERIMAAN KAS' => "options-obj:trn_orders,code,code|RAW(status = 'APPROVE' AND total_value <> COALESCE(total_payment,0))", 'BIAYA KAS' => 'options-obj:mst_costs,name,name'];
+    $referenceType = ['PENGELUARAN KAS' => "options-obj:trn_purchases,code,code|RAW(status = 'APPROVE' AND total_value <> COALESCE(total_payment,0))", 'PENERIMAAN KAS' => "options-obj:trn_orders,code,code|RAW(status = 'APPROVE' AND total_value <> COALESCE(total_payment,0))", 'BIAYA KAS' => 'options-obj:mst_costs,name,name'];
 
     $db = new Database;
     $db->query = "SELECT COUNT(*) as `counter` FROM trn_cash WHERE cash_group = '$cash_group' AND created_at LIKE '%" . date('Y-m') . "%'";

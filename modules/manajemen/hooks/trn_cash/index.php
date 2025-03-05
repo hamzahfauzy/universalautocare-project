@@ -18,8 +18,11 @@ if($filter)
 $where = $where ." ". $having;
 
 $this->db->query = "SELECT 
-                        $this->table.*, 
-                        CONCAT(reference_number, ' / ', reference_date, '<br>', reference_name, ' / ', police_number_reference) reference_number,
+                        $this->table.*,
+                        CASE 
+                            WHEN cash_group = 'PENERIMAAN KAS' THEN CONCAT(reference_number, ' / ', reference_date, '<br>', reference_name, ' / ', police_number_reference)
+                            ELSE reference_number
+                        END reference_number,
                         CONCAT('DISC ', FORMAT(discount, 0), ' / ', FORMAT(total_payment, 0), '<br>', FORMAT(cash_total, 0)) total_payment
                     FROM $this->table 
                     $where 

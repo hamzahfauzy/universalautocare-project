@@ -35,12 +35,21 @@ if(isset($_GET['filter']))
     
     if($cash_group == 'PENGELUARAN KAS')
     {
-        $fields['reference_number']['label'] = 'No. Referensi (No. Pembelian)';
-        $fields['reference_date']['label'] = 'Tgl. Pembelian';
-        $fields['reference_name']['label'] = 'Supplier Pembelian';
-        $fields['total_payment']['label'] = 'Nilai Keluar Kas';
-        $fields['cash_total']['label'] = 'Total Kas Keluar (Bayar)';
-        $fields['total_value']['label'] = 'Total Nilai Pembelian';
+        $fields['code']['label'] = 'No. BPK';
+        $fields['date']['label'] = 'Tgl. BPK';
+        $fields['cash_type']['label'] = 'Tipe';
+        $fields['cash_resource']['label'] = 'Sumber';
+        $fields['reference_number']['label'] = 'Referensi';
+        $fields['total_payment']['label'] = 'Pengeluaran Kas';
+        $fields['total_payment']['type'] = 'text';
+
+        unset($fields['reference_name']);
+        unset($fields['reference_date']);
+        unset($fields['police_number_reference']);
+        unset($fields['cash_total']);
+        unset($fields['total_value']);
+        unset($fields['bank_id']);
+        unset($fields['description']);
     }
 
     if($cash_group == 'BIAYA KAS')
