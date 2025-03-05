@@ -23,8 +23,8 @@ if(isset($_GET['filter']))
         $fields['reference_date']['label'] = 'Tgl. Order';
         $fields['reference_name']['label'] = 'Customer Order';
         $fields['police_number_reference']['label'] = 'No. Polisi';
-        $fields['total_payment']['label'] = 'Nilai Terima Kas';
-        $fields['cash_total']['label'] = 'Total Terima Kas (Bayar)';
+        $fields['cash_total']['label'] = 'Nilai Terima Kas';
+        $fields['total_payment']['label'] = 'Total Terima Kas (Bayar)';
         $fields['total_value']['label'] = 'Total Nilai Order';
         
         $fields['police_number_reference']['attr']['col'] = 'col-6';
@@ -41,8 +41,8 @@ if(isset($_GET['filter']))
         $fields['reference_number']['label'] = 'No. Referensi (No. Pembelian)';
         $fields['reference_date']['label'] = 'Tgl. Pembelian';
         $fields['reference_name']['label'] = 'Supplier Pembelian';
-        $fields['total_payment']['label'] = 'Nilai Keluar Kas';
-        $fields['cash_total']['label'] = 'Total Kas Keluar (Bayar)';
+        $fields['cash_total']['label'] = 'Nilai Keluar Kas';
+        $fields['total_payment']['label'] = 'Total Kas Keluar (Bayar)';
         $fields['total_value']['label'] = 'Total Nilai Pembelian';
         $fields['reference_date']['attr']['col'] = 'col-6';
         $fields['total_value']['attr']['col'] = 'col-6';
@@ -57,8 +57,8 @@ if(isset($_GET['filter']))
         unset($fields['reference_name']);
         unset($fields['total_value']);
         $fields['reference_number']['label'] = 'No. Referensi (Biaya)';
-        $fields['total_payment']['label'] = 'Nilai Biaya Kas';
-        $fields['cash_total']['label'] = 'Total Biaya Kas (Bayar)';
+        $fields['cash_total']['label'] = 'Nilai Biaya Kas';
+        $fields['total_payment']['label'] = 'Total Biaya Kas (Bayar)';
     }
 
     $fields['cash_type']['attr']['col'] = 'col-6';
