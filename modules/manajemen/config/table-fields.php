@@ -155,7 +155,7 @@ return [
             'label' => 'Status',
             'type' => 'options:NEW|APPROVE|CANCEL',
         ],
-        '_action' => true,
+        '_action_button' => true,
         '_userstamp' => true,
     ],
     'trn_purchase_items' => [
@@ -235,7 +235,7 @@ return [
             'type' => 'options:NEW|APPROVE|CANCEL',
             'search' => 'trn_orders.status'
         ],
-        '_action' => true,
+        '_action_button' => true,
         '_userstamp' => [
             'search' => false
         ],
@@ -306,7 +306,7 @@ return [
             'label' => 'Status',
             'type' => 'text',
         ],
-        '_action' => true,
+        '_action_button' => true,
         '_userstamp' => true,
     ],
     'trn_outgoing_items' => [
