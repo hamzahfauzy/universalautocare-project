@@ -14,8 +14,8 @@
     <tbody>
         <?php foreach ($data as $item): ?>
             <tr>
-                <td><?= $item->notbpk ?></td>
-                <td><?= $item->tgltbpk ?></td>
+                <td><?= $item->nobpk ?></td>
+                <td><?= $item->tglbpk ?></td>
                 <td><?= $item->cash_type ?></td>
                 <td><?= $item->cash_resource ?></td>
                 <td>

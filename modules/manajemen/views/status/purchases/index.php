@@ -38,6 +38,7 @@ $attr = 'form-control';
                         <th>Tgl. Pembelian</th>
                         <th>Supplier / Karyawan</th>
                         <th>Total Items / Qty</th>
+                        <th>Total Bayar / Pengeluaran</th>
                         <th>Status</th>
                         <th>Aksi</th>
                     </tr>
@@ -49,6 +50,9 @@ $attr = 'form-control';
                             <td><?= $item->tglpembelian ?></td>
                             <td><?= $item->supplier_id ?> - <?= $item->namasupplier ?> <br> <?= $item->namakaryawan ?></td>
                             <td><?= $item->total_item . " Items / " . $item->total_qty . " PCS" ?> <br> Rp. <?= number_format($item->total_value) ?></td>
+                            <td>
+                                Rp. <?= number_format($item->totalbayar) ?> / Rp. <?= number_format($item->totalpengeluaran); ?>
+                            </td>
                             <td><?=$item->status?></td>
                             <td>
                                 <?php if($item->totalbayar == 0 && $item->totalpengeluaran == 0): ?>
