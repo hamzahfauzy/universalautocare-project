@@ -36,30 +36,24 @@ $attr = 'form-control';
                     <tr>
                         <th>No. Pembelian</th>
                         <th>Tgl. Pembelian</th>
-                        <th>Supplier</th>
-                        <th>Karyawan</th>
+                        <th>Supplier / Karyawan</th>
                         <th>Total Items / Qty</th>
-                        <th>Nilai Pembelian</th>
+                        <th>Status</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($data as $item):
-                        $supplier = $db->single('mst_suppliers', ['id' => $item->supplier_id]);
-                        $employee = $db->single('mst_employees', ['id' => $item->employee_id]);
-                    ?>
+                    <?php foreach ($data as $item):?>
                         <tr>
-                            <td><?= $item->code ?></td>
-                            <td><?= $item->date ?></td>
-                            <td><?= $supplier->name ?></td>
-                            <td><?= $employee->name ?></td>
-                            <td><?= $item->total_item . " Items / " . $item->total_qty . " " . $unit ?></td>
-                            <td>Rp. <?= number_format($item->total_value) ?></td>
+                            <td><?= $item->nopembelian ?></td>
+                            <td><?= $item->tglpembelian ?></td>
+                            <td><?= $item->supplier_id ?> - <?= $item->namasupplier ?> <br> <?= $item->namakaryawan ?></td>
+                            <td><?= $item->total_item . " Items / " . $item->total_qty . " PCS" ?> <br> Rp. <?= number_format($item->total_value) ?></td>
+                            <td><?=$item->status?></td>
                             <td>
-                                <a class="btn btn-sm btn-primary" href="<?= routeTo('manajemen/status/purchases/new', ['id' => $item->id]) ?>" onclick="return confirm('Apakah anda yakin akan memperbarui data ini ?')"><i class="fa-solid fa-pencil"></i> New</a>
-                                <a class="btn btn-sm btn-success" href="<?= routeTo('manajemen/status/purchases/approve', ['id' => $item->id]) ?>" onclick="return confirm('Apakah anda yakin akan mengapprove data ini ?')"><i class="fa-solid fa-square-check"></i> Approve</a>
+                                <?php if($item->totalbayar == 0 && $item->totalpengeluaran == 0): ?>
                                 <a class="btn btn-sm btn-danger" href="<?= routeTo('manajemen/status/purchases/cancel', ['id' => $item->id]) ?>" onclick="return confirm('Apakah anda yakin akan mengcancel data ini ?')"><i class="fa-solid fa-ban"></i> Cancel</a>
-
+                                <?php endif ?>
                             </td>
                         </tr>
                     <?php endforeach ?>

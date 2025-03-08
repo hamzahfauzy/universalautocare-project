@@ -1,13 +1,4 @@
-<?php
-
-use Core\Database;
-
-get_header();
-$db = new Database();
-
-$attr = 'form-control';
-
-?>
+<?php get_header(); ?>
 <style>
     table td img {
         max-width: 150px;
@@ -36,39 +27,34 @@ $attr = 'form-control';
                     <tr>
                         <th>No. Order</th>
                         <th>Tgl. Order</th>
-                        <th>Karyawan</th>
-                        <th>Partner</th>
+                        <th>Karyawan / Partner</th>
                         <th>Customer</th>
                         <th>Nilai Order</th>
-                        <th>Total Nilai Order</th>
+                        <th>Status</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($data as $item):
-                        $partner = $db->single('mst_partners', ['id' => $item->partner_id]);
-                        $employee = $db->single('mst_employees', ['id' => $item->employee_id]);
-                        $customer = $db->single('mst_customers', ['id' => $item->customer_id]);
-                    ?>
+                    <?php foreach ($data as $item): ?>
                         <tr>
-                            <td><?= $item->code ?></td>
-                            <td><?= $item->date ?></td>
-                            <td><?= $employee->name ?></td>
-                            <td><?= $partner->name ?></td>
+                            <td><?= $item->noorder ?><br>Rp. <?= number_format($item->total_value) ?></td>
+                            <td><?= $item->tglorder ?></td>
+                            <td><?= $item->employee_id ?> - <?= $item->namakaryawan ?><br><?= $item->namapartner ?></td>
                             <td>
-                                <?= $customer->name ?><br>
-                                <?= $item->customer_police_number . " / " . $customer->phone . " / " . $item->customer_vehicle_type ?>
+                                <?= $item->namacustomer ?><br>
+                                <?= $item->customer_police_number . " / " . $item->telpcustomer . " / " . $item->customer_vehicle_type ?>
                             </td>
                             <td>
                                 Barang : Rp. <?= number_format($item->total_item_value) ?>
                                 <br>
                                 Jasa : Rp. <?= number_format($item->total_service_value) ?>
                             </td>
-                            <td>Rp. <?= number_format($item->total_value) ?></td>
+                            <td><?=$item->status?></td>
                             <td>
                                 <a class="btn btn-sm btn-primary" href="<?= routeTo('manajemen/status/orders/new', ['id' => $item->id, 'filter' => ['order_type' => $_GET['filter']['order_type']]]) ?>" onclick="return confirm('Apakah anda yakin akan memperbarui data ini ?')"><i class="fa-solid fa-pencil"></i> New</a>
-                                <a class="btn btn-sm btn-success" href="<?= routeTo('manajemen/status/orders/approve', ['id' => $item->id, 'filter' => ['order_type' => $_GET['filter']['order_type']]]) ?>" onclick="return confirm('Apakah anda yakin akan mengapprove data ini ?')"><i class="fa-solid fa-square-check"></i> Approve</a>
-                                <a class="btn btn-sm btn-danger" href="<?= routeTo('manajemen/status/orders/cancel', ['id' => $item->id, 'filter' => ['order_type' => $_GET['filter']['order_type']]]) ?>" onclick="return confirm('Apakah anda yakin akan mengcancel data ini ?')"><i class="fa-solid fa-ban"></i> Cancel</a>
+                                <?php if($item->totalbayar == 0 && $item->totalbarang == 0): ?>
+                                    <a class="btn btn-sm btn-danger" href="<?= routeTo('manajemen/status/orders/cancel', ['id' => $item->id, 'filter' => ['order_type' => $_GET['filter']['order_type']]]) ?>" onclick="return confirm('Apakah anda yakin akan mengcancel data ini ?')"><i class="fa-solid fa-ban"></i> Cancel</a>
+                                <?php endif ?>
 
                             </td>
                         </tr>

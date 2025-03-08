@@ -55,7 +55,7 @@ $('.add-item-button').click(function(){
                 <td>${data.category_name}</td>
                 <td>${data.name}</td>
                 <td>Rp. ${format_number(data.price)}</td>
-                <td><input type="number" class="form-control qty-input" min="1" max="${data.max_qty}" style="width:100px" name="items[${items.length}][outgoing_qty]" value="${data.qty}" data-key="${items.length+1}"></td>
+                <td><input type="number" step=".1" class="form-control qty-input" min="1" max="${data.max_qty}" style="width:100px" name="items[${items.length}][outgoing_qty]" value="${data.qty}" data-key="${items.length+1}"></td>
                 <td>${data.unit}</td>
                 <td id="total_price_${items.length+1}">Rp. ${format_number(data.total_price)}</td>
                 <td><button class="btn btn-sm btn-danger remove-item-button" type="button" data-target="#item_${items.length+1}" data-key="${items.length+1}"><i class="fas fa-trash"></i></button></td>
@@ -89,7 +89,7 @@ $(document.body).on('change', '.qty-input', function(){
     const index = items.findIndex(item => item.key == key);
     const item = items[index]
 
-    item.qty = parseInt($(this).val())
+    item.qty = parseFloat($(this).val())
     item.total_price = item.price * item.qty
     $('#total_price_'+key).html('Rp. ' + format_number(item.total_price))
     calculateTotalOrder()

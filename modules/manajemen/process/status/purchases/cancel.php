@@ -1,7 +1,6 @@
 <?php
 
 use Core\Database;
-use Core\Request;
 
 $db = new Database;
 $db->update('trn_purchases', [

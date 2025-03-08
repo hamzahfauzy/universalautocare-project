@@ -36,31 +36,22 @@ $attr = 'form-control';
                     <tr>
                         <th>No. Pengeluaran</th>
                         <th>Tgl. Pengeluaran</th>
-                        <th>Customer</th>
-                        <th>Karyawan</th>
+                        <th>Customer / Karyawan</th>
                         <th>Total Items / Qty</th>
-                        <th>Nilai Pengeluaran</th>
+                        <th>Status</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($data as $item):
-                        $order = $db->single('trn_orders', ['id' => $item->order_id]);
-                        $customer = $db->single('mst_customers', ['id' => $order->customer_id]);
-                        $employee = $db->single('mst_employees', ['id' => $item->employee_id]);
-                    ?>
+                    <?php foreach ($data as $item): ?>
                         <tr>
-                            <td><?= $item->code ?></td>
-                            <td><?= $item->date ?></td>
-                            <td><?= $customer->name ?></td>
-                            <td><?= $employee->name ?></td>
-                            <td><?= $item->total_outgoing_items . " Items / " . $item->total_outgoing_qty . " " . $unit ?></td>
-                            <td>Rp. <?= number_format($item->total_outgoing_value) ?></td>
+                            <td><?= $item->nopengeluaran ?></td>
+                            <td><?= $item->tglpengeluaran ?></td>
+                            <td><?= $item->idcustomer ?> - <?= $item->namacustomer ?><br><?= $item->namakaryawan ?></td>
+                            <td><?= $item->total_outgoing_items . " Items / " . $item->total_outgoing_qty . " PCS" ?><br>Rp. <?= number_format($item->total_outgoing_value) ?></td>
+                            <td><?=$item->status?></td>
                             <td>
-                                <a class="btn btn-sm btn-primary" href="<?= routeTo('manajemen/status/outgoings/new', ['id' => $item->id]) ?>" onclick="return confirm('Apakah anda yakin akan memperbarui data ini ?')"><i class="fa-solid fa-pencil"></i> New</a>
-                                <a class="btn btn-sm btn-success" href="<?= routeTo('manajemen/status/outgoings/approve', ['id' => $item->id]) ?>" onclick="return confirm('Apakah anda yakin akan mengapprove data ini ?')"><i class="fa-solid fa-square-check"></i> Approve</a>
                                 <a class="btn btn-sm btn-danger" href="<?= routeTo('manajemen/status/outgoings/cancel', ['id' => $item->id]) ?>" onclick="return confirm('Apakah anda yakin akan mengcancel data ini ?')"><i class="fa-solid fa-ban"></i> Cancel</a>
-
                             </td>
                         </tr>
                     <?php endforeach ?>

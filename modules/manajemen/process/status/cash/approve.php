@@ -22,5 +22,5 @@ if(in_array($data->cash_group, ['PENERIMAAN KAS', 'PENGELUARAN KAS']))
 
 set_flash_msg(['success' => "Data berhasil diapprove"]);
 
-header('location:' . routeTo('manajemen/status/cash', ['filter' => ['cash_group' => $_GET['filter']['cash_group']]]));
+header('location:' . routeTo('manajemen/status/cash', ['filter' => ['cash_group' => $data->cash_group]]));
 die();

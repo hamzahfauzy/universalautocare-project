@@ -125,7 +125,7 @@ return [
         ],
         'total_qty' => [
             'label' => 'Total Kuantitas',
-            'type' => 'number',
+            'type' => 'text',
         ],
         'total_value' => [
             'label' => 'Total Nilai Pembelian',
@@ -183,7 +183,7 @@ return [
         ],
         'total_qty' => [
             'label' => 'Total Kuantitas',
-            'type' => 'number',
+            'type' => 'text',
         ],
         'outgoing_qty' => [
             'label' => 'Kuantitas Pengeluaran',

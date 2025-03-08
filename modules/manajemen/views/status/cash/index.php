@@ -1,13 +1,4 @@
-<?php
-
-use Core\Database;
-
-get_header();
-$db = new Database();
-
-$attr = 'form-control';
-
-?>
+<?php get_header(); ?>
 <style>
     table td img {
         max-width: 150px;
@@ -23,15 +14,8 @@ $attr = 'form-control';
         <p class="h4 m-0"><?php get_title() ?></p>
     </div>
     <div class="card-body">
-        <?php if ($error_msg) : ?>
-            <div class="alert alert-danger"><?= $error_msg ?></div>
-        <?php endif ?>
-        <?php if ($success_msg) : ?>
-            <div class="alert alert-success"><?= $success_msg ?></div>
-        <?php endif ?>
-
         <div class="table-responsive my-4">
-            
+            <?php require 'table/'.str_replace(' ', '-', strtolower($_GET['filter']['cash_group'])).'.php' ?>
         </div>
     </div>
 </div>
