@@ -30,7 +30,7 @@
                         <th>Karyawan / Partner</th>
                         <th>Customer</th>
                         <th>Nilai Order</th>
-                        <th>Total Bayar / Total Barang</th>
+                        <th>Total Bayar / Total Pengeluaran</th>
                         <th>Status</th>
                         <th>Aksi</th>
                     </tr>
@@ -50,7 +50,7 @@
                                 <br>
                                 Jasa : Rp. <?= number_format($item->total_service_value) ?>
                             </td>
-                            <td>Rp. <?= number_format($item->totalbayar) ?> / <?= $item->totalbarang ?></td>
+                            <td>Rp. <?= number_format($item->totalbayar) ?> / <?= $item->totalbarang ?>x</td>
                             <td><?=$item->status?></td>
                             <td>
                                 <?php if($item->totalbayar == 0 && $item->totalbarang == 0): ?>

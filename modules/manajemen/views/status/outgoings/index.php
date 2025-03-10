@@ -48,7 +48,7 @@ $attr = 'form-control';
                             <td><?= $item->nopengeluaran ?></td>
                             <td><?= $item->tglpengeluaran ?></td>
                             <td><?= $item->idcustomer ?> - <?= $item->namacustomer ?><br><?= $item->namakaryawan ?></td>
-                            <td><?= $item->total_outgoing_items . " Items / " . $item->total_outgoing_qty . " PCS" ?><br>Rp. <?= number_format($item->total_outgoing_value) ?></td>
+                            <td><?= $item->total_outgoing_items . " Items / " . $item->total_outgoing_qty ?><br>Rp. <?= number_format($item->total_outgoing_value) ?></td>
                             <td><?=$item->status?></td>
                             <td>
                                 <a class="btn btn-sm btn-danger" href="<?= routeTo('manajemen/status/outgoings/cancel', ['id' => $item->id]) ?>" onclick="return confirm('Apakah anda yakin akan mengcancel data ini ?')"><i class="fa-solid fa-ban"></i> Cancel</a>
