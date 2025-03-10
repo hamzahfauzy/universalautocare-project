@@ -15,7 +15,7 @@ if(in_array($payment->cash_group, ['PENERIMAAN KAS', 'PENGELUARAN KAS']))
 {
     $paymentData = $db->single($paymentTable, ['code' => $data->reference_number]);
     $db->update($paymentTable,[
-        'total_payment' => $paymentData->total_payment - $data->total_payment
+        'total_payment' => $paymentData->total_payment - $payment->total_payment
     ], [
         'code' => $payment->reference_number
     ]);
