@@ -50,7 +50,7 @@
                                 <br>
                                 Jasa : Rp. <?= number_format($item->total_service_value) ?>
                             </td>
-                            <td>Rp. <?= number_format($item->totalbayar) ?> / <?= number_format($item->totalbarang) ?></td>
+                            <td>Rp. <?= number_format($item->totalbayar) ?> / <?= $item->totalbarang ?></td>
                             <td><?=$item->status?></td>
                             <td>
                                 <?php if($item->totalbayar == 0 && $item->totalbarang == 0): ?>
