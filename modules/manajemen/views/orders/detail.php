@@ -33,14 +33,14 @@
                     <label class="mb-2 col-4">Partner</label>
                     <div class="col-8">
                         <div class="d-flex">
-                            <?= $data->partner_id ?>
+                            <?= $data->partner->name ?>
                         </div>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label class="mb-2 col-4">Karyawan</label>
                     <div class="col-8">
-                        <?= $data->employee_id ?>
+                        <?= $data->employee->name ?>
                     </div>
                 </div>
                 <div class="row mb-3">

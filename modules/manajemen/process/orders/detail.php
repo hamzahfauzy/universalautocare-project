@@ -16,7 +16,6 @@ $data = $db->single('trn_orders', ['id' => $_GET['id']]);
 
 $code = $data->code;
 
-
 $data_items = $db->all('trn_order_items', ['order_id' => $_GET['id']]);
 
 $items = [];
@@ -41,6 +40,8 @@ foreach ($data_items as $index => $item) {
 $customer = $db->single('mst_customers', ['id' => $data->customer_id]);
 
 $data->customer = $customer;
+$data->partner = $db->single('mst_partners', ['id' => $data->partner_id]);
+$data->employee = $db->single('mst_employees', ['id' => $data->employee_id]);
 
 // page section
 $title = 'Detail Data Job Order ' . $data->order_type;
