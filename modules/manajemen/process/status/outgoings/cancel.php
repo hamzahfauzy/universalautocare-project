@@ -13,8 +13,17 @@ foreach($items as $item)
     $purchase_id = $item->purchase_id;
     $outgoing_qty = $item->outgoing_qty;
     $item_id = $item->item_id;
-    $db->query = "Update trn_purchase_items Set outgoing_qty = Coalesce(outgoing_qty, 0) - $outgoing_qty Where item_id = $item_id And purchase_id = $purchase_id";
-    $db->exec();
+
+    $purchase_item = $db->single('trn_purchase_items', [
+        'purchase_id' => $purchase_id,
+        'item_id' => $item_id
+    ]);
+
+    $db->update('trn_purchase_items', [
+        'outgoing_qty' => $purchase_item->outgoing_qty - $outgoing_qty
+    ], [
+        'id' => $purchase_item->id
+    ]);
 }
 
 $db->update('trn_outgoings', [
