@@ -29,7 +29,7 @@ if (Request::isMethod('POST')) {
 }
 
 // page section
-$title = 'Cetak ' . $_GET['filter']['type'] . ' Job Order ' . $_GET['filter']['order_type'];
+$title = 'Cetak '.($_GET['filter']['type'] == 'invoice' ? 'Invoice' : '').' Job Order ' . ucwords(strtolower($_GET['filter']['order_type']));
 $types = ['BENGKEL' => 'workshop', 'DOORSMEER' => 'carwash'];
 $order_type = $_GET['filter']['order_type'];
 Page::setActive('manajemen.print.' . $types[$order_type] . '_' . $_GET['filter']['type']);
