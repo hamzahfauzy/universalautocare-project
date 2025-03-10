@@ -23,11 +23,11 @@ NO. ORDER : <?= renderRight('#' . $order->code, 31 - strlen("NO. ORDER :")) ?>
 
 TGL. ORDER : <?= renderRight(date('d-m-Y', strtotime($order->date)), 31 - strlen("TGL. ORDER :")) ?>
 
-KARYAWAN : <?=$order->employee->name?> <?= renderRight(date('d-m-Y', strtotime($order->done_date)), 31 - strlen("KARYAWAN : ".$order->employee->name)) ?>
+KARYAWAN : <?=substr($order->employee->name,0,10)?> <?= renderRight(date('d-m-Y', strtotime($order->done_date)), 31 - strlen("KARYAWAN : ".substr($order->employee->name,0,10))) ?>
 
 --------------------------------
-<?=$order->customer->name?> <?= renderRight($order->customer->phone, 31 - strlen($order->customer->name))?> 
-<?=$order->partner->name?> <?= renderRight($order->customer_police_number, 31 - strlen($order->partner->name))?> 
+<?=substr($order->customer->name,0,20)?> <?= renderRight($order->customer->phone, 31 - strlen(substr($order->customer->name,0,20)))?> 
+<?=substr($order->partner->name,0,20)?> <?= renderRight($order->customer_police_number, 31 - strlen(substr($order->partner->name,0,20)))?> 
 --------------------------------
 <?= centerText("Deskripsi Item(s)", 32) ?>
 
