@@ -14,16 +14,13 @@ foreach($items as $item)
     $outgoing_qty = $item->outgoing_qty;
     $item_id = $item->item_id;
 
-    $purchase_item = $db->single('trn_purchase_items', [
+    $purchaseItem = $db->single('trn_purchase_items', [
         'purchase_id' => $purchase_id,
         'item_id' => $item_id
     ]);
-
-    $db->update('trn_purchase_items', [
-        'outgoing_qty' => $purchase_item->outgoing_qty - $outgoing_qty
-    ], [
-        'id' => $purchase_item->id
-    ]);
+    $sisa = $purchaseItem->outgoing_id-$outgoing_qty;
+    $db->query = "Update trn_purchase_items Set outgoing_qty = $sisa Where item_id = $item_id And purchase_id = $purchase_id";
+    $db->exec();
 }
 
 $db->update('trn_outgoings', [
