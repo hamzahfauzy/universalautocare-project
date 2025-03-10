@@ -36,7 +36,12 @@ $attr = 'form-control';
 
             <div class="form-group mb-3">
                 <label class="mb-2 col-4">No. Order</label>
-                <?= \Core\Form::input('options-obj:trn_orders,code,code|order_type,' . $_GET['filter']['order_type'].',status,APPROVE', 'code', ['class' => 'form-control select2', 'placeholder' => 'Pilih Order', 'required' => '']) ?>
+                <select name="code" id="" class="form-control select2">
+                    <option value="">- Pilih -</option>
+                    <?php foreach($orders as $order): ?>
+                    <option value="<?=$order->code?>"><?=$order->code?></option>
+                    <?php endforeach ?>
+                </select>
             </div>
 
             <div class="form-group">

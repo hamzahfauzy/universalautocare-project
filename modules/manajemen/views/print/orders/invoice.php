@@ -42,7 +42,7 @@ foreach ($order->items as $index => $item):
 ?>
 #<?= wordwrap($service->name, 32, "\n", true); ?>
 
-x <?= $item->qty ?> <?= $item->unit ?> @<?= number_format($item->price) ?> <?= renderRight("Rp. " . number_format($item->total_price), 31 - strlen('x ' . $item->qty . ' ' . $item->unit . ' @' . number_format($item->price))) ?>
+x <?= $item->qty ?> <?= $item->unit ?>
 <?php if(end($order->items) != $item): ?>
 
 ................................
