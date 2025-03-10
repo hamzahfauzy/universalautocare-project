@@ -3,10 +3,8 @@ $date = \Core\Form::getData('date', $order->date);
 $doneDate = \Core\Form::getData('date', $order->done_date);
 ?>
 <pre>
-<div style="width:230px">
-<center>
-    <img src="<?= getSidebarLogo() ?>" alt="" width="100" height="81">
-</center>
+<div style="width:230px;margin:0;text-align:center">
+<img src="<?= getSidebarLogo() ?>" alt="" height="81">
 </div>
 --------------------------------
 <?= centerText("UNIVERSAL AUTO CARE", 32) ?>
@@ -16,6 +14,7 @@ $doneDate = \Core\Form::getData('date', $order->done_date);
 <?= centerText("0813-9607-8292", 32) ?>
 
 <?= centerText("Sumatera Utara", 32) ?>
+
 
 <?= centerText("ORDER", 32) ?>
 
@@ -45,7 +44,9 @@ Jenis Kendaraan <?= renderRight($order->customer_vehicle_type, 31 - strlen("Jeni
 Warna Kendaraan <?= renderRight($order->customer_vehicle_color, 31 - strlen("Warna Kendaraan")) ?>
 
 Keterangan
+<?php if($order->description): ?>
 <?= $order->description ?>
+<?php endif ?>
 
 --------------------------------
 

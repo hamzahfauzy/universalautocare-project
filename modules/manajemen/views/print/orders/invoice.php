@@ -3,10 +3,8 @@ $date = \Core\Form::getData('date', $order->date);
 $doneDate = \Core\Form::getData('date', $order->done_date);
 ?>
 <pre>
-<div style="width:230px">
-<center>
-    <img src="<?= getSidebarLogo() ?>" alt="" width="100" height="81">
-</center>
+<div style="width:230px;margin:0;text-align:center">
+<img src="<?= getSidebarLogo() ?>" alt="" height="81">
 </div>
 --------------------------------
 <?= centerText("UNIVERSAL AUTO CARE", 32) ?>
@@ -17,13 +15,21 @@ $doneDate = \Core\Form::getData('date', $order->done_date);
 
 <?= centerText("Sumatera Utara", 32) ?>
 
+
 <?= centerText("INVOICE", 32) ?>
 
 --------------------------------
-NO ORDER : <?= renderRight('#' . $order->code, 31 - strlen("NO ORDER :")) ?>
+NO. ORDER : <?= renderRight('#' . $order->code, 31 - strlen("NO. ORDER :")) ?>
+
+TGL. ORDER : <?= renderRight(date('d-m-Y', strtotime($order->date)), 31 - strlen("TGL. ORDER :")) ?>
+
+KARYAWAN : <?=$order->employee->name?> <?= renderRight(date('d-m-Y', strtotime($order->done_date)), 31 - strlen("KARYAWAN : ".$order->employee->name)) ?>
 
 --------------------------------
-<?= centerText("Item(s) Jasa", 32) ?>
+<?=$order->customer->name?> <?= renderRight($order->customer->phone, 31 - strlen($order->customer->name))?> 
+<?=$order->partner->name?> <?= renderRight($order->customer_police_number, 31 - strlen($order->partner->name))?> 
+--------------------------------
+<?= centerText("Deskripsi Item(s)", 32) ?>
 
 --------------------------------
 <?php
@@ -37,17 +43,20 @@ foreach ($order->items as $index => $item):
 #<?= wordwrap($service->name, 32, "\n", true); ?>
 
 x <?= $item->qty ?> <?= $item->unit ?> @<?= number_format($item->price) ?> <?= renderRight("Rp. " . number_format($item->total_price), 31 - strlen('x ' . $item->qty . ' ' . $item->unit . ' @' . number_format($item->price))) ?>
-
+<?php if(end($order->items) != $item): ?>
 ................................
+<?php endif ?>
 <?php endforeach ?>
-Total Barang <?= renderRight('Rp. ' . number_format($order->total_item_value), 31 - strlen("Total Barang")) ?>
-
-Total Jasa <?= renderRight('Rp. ' . number_format($order->total_service_value),  31 - strlen("Total Jasa")) ?>
 
 --------------------------------
-Grand Total <?= renderRight('Rp. ' . number_format($order->total_value), 31 - strlen("Grand Total")) ?>
+Total <?= renderRight('Rp. ' . number_format($order->total_value), 31 - strlen("Total")) ?>
+
+Pembayaran <?= renderRight('Rp. ' . number_format($order->total_payment), 31 - strlen("Pembayaran")) ?>
 
 --------------------------------
+Sisa/Lunas <?= renderRight('Rp. ' . number_format($order->total_value-$order->total_payment), 31 - strlen("Sisa/Lunas")) ?>
+
+
 <?= centerText('Notes', 32) ?>
 
 <?= centerText('Harap tidak meninggalkan barang berharga', 32) ?>

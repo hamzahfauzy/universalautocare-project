@@ -30,8 +30,9 @@ $attr = 'form-control';
             <div class="alert alert-success"><?= $success_msg ?></div>
         <?php endif ?>
 
-        <form method="post" enctype="multipart/form-data" target="_blank">
-            <?= csrf_field() ?>
+        <form enctype="multipart/form-data" target="_blank">
+            <input type="hidden" name="filter[order_type]" value="<?=$_GET['filter']['order_type']?>">
+            <input type="hidden" name="filter[type]" value="<?=$_GET['filter']['type']?>">
 
             <div class="form-group mb-3">
                 <label class="mb-2 col-4">No. Order</label>

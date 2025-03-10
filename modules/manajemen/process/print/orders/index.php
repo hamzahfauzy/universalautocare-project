@@ -9,9 +9,10 @@ $error_msg  = get_flash_msg('error');
 $success_msg = get_flash_msg('success');
 $db = new Database;
 
-if (Request::isMethod('POST')) {
+if (isset($_GET['code'])) {
 
-    $order = $db->single('trn_orders', ['code' => $_POST['code']]);
+    $code = $_GET['code'];
+    $order = $db->single('trn_orders', ['code' => $code]);
     $customer = $db->single('mst_customers', ['id' => $order->customer_id]);
     $order->customer = $customer;
     $employee = $db->single('mst_employees', ['id' => $order->employee_id]);
