@@ -44,8 +44,8 @@ foreach ($order->items as $index => $item):
 
 x <?= $item->qty ?> <?= $item->unit ?> @<?= number_format($item->price) ?> <?= renderRight("Rp. " . number_format($item->total_price), 31 - strlen('x ' . $item->qty . ' ' . $item->unit . ' @' . number_format($item->price))) ?>
 <?php if(end($order->items) != $item): ?>
-................................
 
+................................
 <?php endif ?>
 <?php endforeach ?>
 
