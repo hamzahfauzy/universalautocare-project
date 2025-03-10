@@ -53,8 +53,8 @@
                             <td>Rp. <?= number_format($item->totalbayar) ?> / <?= number_format($item->totalbarang) ?></td>
                             <td><?=$item->status?></td>
                             <td>
-                                <a class="btn btn-sm btn-primary" href="<?= routeTo('manajemen/status/orders/new', ['id' => $item->id, 'filter' => ['order_type' => $_GET['filter']['order_type']]]) ?>" onclick="return confirm('Apakah anda yakin akan memperbarui data ini ?')"><i class="fa-solid fa-pencil"></i> New</a>
                                 <?php if($item->totalbayar == 0 && $item->totalbarang == 0): ?>
+                                    <a class="btn btn-sm btn-primary" href="<?= routeTo('manajemen/status/orders/new', ['id' => $item->id, 'filter' => ['order_type' => $_GET['filter']['order_type']]]) ?>" onclick="return confirm('Apakah anda yakin akan memperbarui data ini ?')"><i class="fa-solid fa-pencil"></i> New</a>
                                     <a class="btn btn-sm btn-danger" href="<?= routeTo('manajemen/status/orders/cancel', ['id' => $item->id, 'filter' => ['order_type' => $_GET['filter']['order_type']]]) ?>" onclick="return confirm('Apakah anda yakin akan mengcancel data ini ?')"><i class="fa-solid fa-ban"></i> Cancel</a>
                                 <?php endif ?>
 
