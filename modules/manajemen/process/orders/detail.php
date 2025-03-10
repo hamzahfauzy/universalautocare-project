@@ -2,8 +2,6 @@
 
 use Core\Database;
 use Core\Page;
-use Core\Request;
-use Core\Storage;
 
 $tableName = 'trn_orders';
 $module = 'manajemen';
@@ -30,9 +28,9 @@ foreach ($data_items as $index => $item) {
         'id' => $item->id,
         'key' => $index + 1,
         'name' => $service->name,
-        'qty' => (int) $item->qty,
-        'price' => (int) $item->price,
-        'total_price' => (int) $item->total_price,
+        'qty' => (double) $item->qty,
+        'price' => (double) $item->price,
+        'total_price' => (double) $item->total_price,
         'unit' => $item->unit,
         'category_name' => $category->name,
         'category' => $category->id,

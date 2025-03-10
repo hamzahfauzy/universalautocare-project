@@ -51,7 +51,7 @@ $attr = 'form-control';
                             <td><?= $item->supplier_id ?> - <?= $item->namasupplier ?> <br> <?= $item->namakaryawan ?></td>
                             <td><?= $item->total_item . " Items / " . $item->total_qty . " PCS" ?> <br> Rp. <?= number_format($item->total_value) ?></td>
                             <td>
-                                <?= number_format($item->totalbayar) ?> / <?= number_format($item->totalpengeluaran); ?>
+                                Rp. <?= number_format($item->totalbayar) ?> / <?= number_format($item->totalpengeluaran, 2); ?>
                             </td>
                             <td><?=$item->status?></td>
                             <td>

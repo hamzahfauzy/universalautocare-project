@@ -38,7 +38,7 @@ $attr  = ['class' => "form-control"];
                     <label class="mb-2 col-4">No. Order</label>
                     <div class="col-8">
                         <div class="d-flex">
-                            <?=$data->order_id ?>
+                            <?=$order->code ?>
                         </div>
                     </div>
                 </div>
