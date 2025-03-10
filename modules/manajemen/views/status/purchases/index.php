@@ -38,7 +38,7 @@ $attr = 'form-control';
                         <th>Tgl. Pembelian</th>
                         <th>Supplier / Karyawan</th>
                         <th>Total Items / Qty</th>
-                        <th>Total Bayar / Wty Pengeluaran</th>
+                        <th>Total Bayar / Qty Pengeluaran</th>
                         <th>Status</th>
                         <th>Aksi</th>
                     </tr>
