@@ -30,6 +30,7 @@
                         <th>Karyawan / Partner</th>
                         <th>Customer</th>
                         <th>Nilai Order</th>
+                        <th>Total Bayar / Total Barang</th>
                         <th>Status</th>
                         <th>Aksi</th>
                     </tr>
@@ -49,6 +50,7 @@
                                 <br>
                                 Jasa : Rp. <?= number_format($item->total_service_value) ?>
                             </td>
+                            <td>Rp. <?= number_format($item->totalbayar) ?> / <?= number_format($item->totalbarang) ?></td>
                             <td><?=$item->status?></td>
                             <td>
                                 <a class="btn btn-sm btn-primary" href="<?= routeTo('manajemen/status/orders/new', ['id' => $item->id, 'filter' => ['order_type' => $_GET['filter']['order_type']]]) ?>" onclick="return confirm('Apakah anda yakin akan memperbarui data ini ?')"><i class="fa-solid fa-pencil"></i> New</a>
