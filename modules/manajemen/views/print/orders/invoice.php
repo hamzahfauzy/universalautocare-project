@@ -57,6 +57,7 @@ Pembayaran <?= renderRight('Rp. ' . number_format($order->total_payment), 31 - s
 --------------------------------
 Sisa/Lunas <?= renderRight('Rp. ' . number_format($order->total_value-$order->total_payment), 31 - strlen("Sisa/Lunas")) ?>
 
+--------------------------------
 
 <?= centerText('Notes', 32) ?>
 
