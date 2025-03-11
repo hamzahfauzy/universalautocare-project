@@ -25,7 +25,7 @@
             </div>
             <div class="col-3">
                 <label>Supplier</label>
-                <?= \Core\Form::input('options-obj:mst_suppliers,name,name', 'customer_name', ['class' => 'form-control filters', 'placeholder' => 'Pilih Supplier', 'required' => '']) ?>
+                <?= \Core\Form::input('options-obj:mst_suppliers,name,name', 'supplier_name', ['class' => 'form-control filters', 'placeholder' => 'Pilih Supplier', 'required' => '']) ?>
             </div>
             <div class="col-3">
                 <label>Karyawan</label>

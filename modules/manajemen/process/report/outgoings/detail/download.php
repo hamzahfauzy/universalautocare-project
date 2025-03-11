@@ -22,7 +22,7 @@ $query = "SELECT
             mst_customers.name customer_name,
             mst_categories.name category_name,
             mst_items.name product_name,
-            CONCAT(FORMAT(trn_outgoing_items.outgoing_qty,0), ' ',trn_outgoing_items.unit),
+            CONCAT(trn_outgoing_items.outgoing_qty, ' ',trn_outgoing_items.unit),
             CONCAT('Rp. ',FORMAT(trn_outgoing_items.price,0)) price,
             CONCAT('Rp. ',FORMAT(trn_outgoing_items.total_price,0)) total,
             trn_outgoings.status

@@ -30,4 +30,4 @@ Page::pushFoot('<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dis
 Page::pushFoot("<script src='https://cdnjs.cloudflare.com/ajax/libs/qs/6.11.0/qs.min.js'></script>");
 Page::pushFoot("<script src='" . asset('assets/manajemen/js/reports.js') . "'></script>");
 
-return view('manajemen/views/report/orders/DETAIL', compact('error_msg', 'old', 'order', 'db'));
+return view('manajemen/views/report/orders/detail', compact('error_msg', 'old', 'order', 'db'));

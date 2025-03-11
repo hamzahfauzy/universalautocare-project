@@ -23,7 +23,7 @@ if (isset($_GET['draw'])) {
                 mst_suppliers.name supplier_name,
                 mst_categories.name category_name,
                 mst_items.name product_name,
-                CONCAT(FORMAT(trn_purchase_items.total_qty,0), ' ',trn_purchase_items.unit),
+                CONCAT(trn_purchase_items.total_qty, ' ',trn_purchase_items.unit),
                 CONCAT('Rp. ',FORMAT(trn_purchase_items.price,0)) price,
                 CONCAT('Rp. ',FORMAT(trn_purchase_items.total_price,0)) total,
                 trn_purchases.status

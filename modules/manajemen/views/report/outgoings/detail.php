@@ -41,7 +41,7 @@
             </div>
             <div class="col">
                 <label>Status</label>
-                <?= \Core\Form::input('options:- Pilih -|NEW|APPROVE|CANCEL', 'status', ['class' => 'form-control', 'placeholder filters' => 'Pilih Status', 'required' => '']) ?>
+                <?= \Core\Form::input('options:- Pilih -|NEW|APPROVE|CANCEL', 'status', ['class' => 'form-control filters', 'placeholder' => 'Pilih Status', 'required' => '']) ?>
             </div>
         </div>
 

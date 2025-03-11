@@ -37,7 +37,7 @@
             </div>
             <div class="col">
                 <label>Status</label>
-                <?= \Core\Form::input('options:- Pilih -|NEW|APPROVE|CANCEL', 'status', ['class' => 'form-control', 'placeholder filters' => 'Pilih Status', 'required' => '']) ?>
+                <?= \Core\Form::input('options:- Pilih -|NEW|APPROVE|CANCEL', 'status', ['class' => 'form-control filters', 'placeholder' => 'Pilih Status', 'required' => '']) ?>
             </div>
         </div>
 
@@ -60,24 +60,6 @@
                         <th>Status</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <?php foreach ([] as $item):
-                        $order = $db->single('trn_orders', ['id' => $item->order_id]);
-                        $customer = $db->single('mst_customers', ['id' => $order->customer_id]);
-                        $employee = $db->single('mst_employees', ['id' => $item->employee_id]);
-                    ?>
-                        <tr>
-                            <td><?= $item->code ?></td>
-                            <td><?= $item->date ?></td>
-                            <td><?= $order->code ?></td>
-                            <td><?= $customer->name ?></td>
-                            <td><?= $employee->name ?></td>
-                            <td><?= $item->total_outgoing_items . " / " . $item->total_outgoing_qty . $unit ?></td>
-                            <td>Rp. <?= number_format($item->total_outgoing_value) ?></td>
-                            <td><?= $item->status ?></td>
-                        </tr>
-                    <?php endforeach ?>
-                </tbody>
             </table>
         </div>
     </div>
