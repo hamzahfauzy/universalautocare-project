@@ -26,8 +26,8 @@ if (isset($_GET['draw'])) {
                 mst_employees.name employee_name,
                 mst_partners.name partner_name,
                 CONCAT('Rp. ',FORMAT(trn_orders.total_value,0)) total_value,
-                CONCAT('Rp. ',FORMAT(trn_orders.total_item_value,0)) total_item_value,
-                CONCAT('Rp. ',FORMAT(trn_orders.total_service_value,0)) total_service_value,
+                CONCAT('Rp. ',FORMAT(Coalesce(trn_orders.total_payment, 0),0)) total_payment,
+                CONCAT('Rp. ',FORMAT(trn_orders.total_value - Coalesce(trn_orders.total_payment, 0),0)) total_sisa,
                 trn_orders.status
               FROM trn_orders
               LEFT JOIN mst_employees ON mst_employees.id = trn_orders.employee_id
@@ -35,7 +35,7 @@ if (isset($_GET['draw'])) {
               LEFT JOIN mst_partners ON mst_partners.id = trn_orders.partner_id
               ";
 
-    $where = "WHERE (trn_orders.date BETWEEN '$filterByDate[start_date]' AND '$filterByDate[end_date]')";
+    $where = "WHERE (trn_orders.done_date >= NOW() AND trn_orders.total_value <> trn_orders.total_payment) AND (trn_orders.date BETWEEN '$filterByDate[start_date]' AND '$filterByDate[end_date]')";
 
     $search = buildSearch($search_fields);
     $where .= ($search ? " AND " : "") . $search;
