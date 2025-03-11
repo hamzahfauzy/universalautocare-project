@@ -35,7 +35,7 @@ if (isset($_GET['draw'])) {
               LEFT JOIN mst_partners ON mst_partners.id = trn_orders.partner_id
               ";
 
-    $where = "WHERE (trn_orders.done_date >= NOW() AND trn_orders.total_value <> trn_orders.total_payment) AND (trn_orders.date BETWEEN '$filterByDate[start_date]' AND '$filterByDate[end_date]')";
+    $where = "WHERE (trn_orders.done_date >= NOW() OR trn_orders.total_value <> trn_orders.total_payment) AND (trn_orders.date BETWEEN '$filterByDate[start_date]' AND '$filterByDate[end_date]')";
 
     $search = buildSearch($search_fields);
     $where .= ($search ? " AND " : "") . $search;
