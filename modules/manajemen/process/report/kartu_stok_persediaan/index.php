@@ -31,7 +31,7 @@ if (isset($_GET['draw'])) {
     $sampaiTgl = $filterByDate['end_date'];
 
     $search_fields = ['trn_purchases.code', 'trn_purchases.date', 'mst_suppliers.name', 'mst_employees.name','mst_partners.name','trn_purchases.total_payment'];
-    $query = "Select Tampil.TglDokumen, Tampil.Jenis, Tampil.NoDokumen, Tampil.Keterangan, Tampil.StokPenerimaan, Tampil.StokPengeluaran, SUM(Tampil.StokPenerimaan - Tampil.StokPengeluaran) OVER (ORDER BY Tampil.TglDokumen) AS Stok 
+    $query = "Select Tampil.TglDokumen, Tampil.Jenis, Tampil.NoDokumen, Tampil.Keterangan, Tampil.StokPenerimaan, Tampil.StokPengeluaran, SUM(Tampil.StokPenerimaan - Tampil.StokPengeluaran) OVER (ORDER BY Tampil.TglDokumen ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS Stok 
 From 
 (
 	Select 0 As Nomor, 'SALDOAWAL' As Jenis, Concat(Result.KodeProduk, ' - ', Result.NamaProduk) As NoDokumen, 
