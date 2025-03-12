@@ -43,7 +43,7 @@
                         <?= $data->employee->name ?>
                     </div>
                 </div>
-                <div class="row mb-3">
+                <div class="row mb-3 d-none">
                     <label class="mb-2 col-4">Total Barang</label>
                     <div class="col-8">
                         <?= number_format($data->total_item_value) ?>
