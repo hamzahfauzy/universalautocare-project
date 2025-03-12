@@ -71,7 +71,7 @@ From
 	Union 
 
 	Select 1 As Nomor, 'PEMBELIAN' As Jenis, A.code As NoDokumen, A.date As TglDokumen, 
-		Concat(C.name, ' - ', C.phone) As Keterangan, SUM(FORMAT(B.total_qty, 0)) As StokPenerimaan, 0 As StokPengeluaran 
+		Concat(C.name, ' - ', C.phone) As Keterangan, SUM(B.total_qty) As StokPenerimaan, 0 As StokPengeluaran 
 	From trn_purchases A
 		Inner Join trn_purchase_items B On A.id = B.purchase_id 
 		Left Join mst_suppliers C On A.supplier_id = C.id 
@@ -82,7 +82,7 @@ From
 	Union
 
 	Select 2 As Nomor, 'PENGELUARAN' As Jenis, A.code As NoDokumen, A.date As TglDokumen, 
-		Concat(C.Code, ' / ', D.name, ' - ', D.phone) As Keterangan, 0 As StokPenerimaan, SUM(FORMAT(B.outgoing_qty, 0)) As StokPengeluaran
+		Concat(C.Code, ' / ', D.name, ' - ', D.phone) As Keterangan, 0 As StokPenerimaan, SUM(B.outgoing_qty) As StokPengeluaran
 	From trn_outgoings A
 		Inner Join trn_outgoing_items B On A.id = B.outgoing_id 
 		Left Join trn_orders C On A.order_id = C.id And C.status = 'APPROVE' 
