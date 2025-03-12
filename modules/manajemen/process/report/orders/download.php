@@ -32,7 +32,7 @@ $search_fields = ['trn_orders.done_date','trn_orders.code','trn_orders.date','ms
               LEFT JOIN mst_employees ON mst_employees.id = trn_orders.employee_id
               LEFT JOIN mst_customers ON mst_customers.id = trn_orders.customer_id
               LEFT JOIN mst_partners ON mst_partners.id = trn_orders.partner_id
-              LEFT JOIN (Select SUM(FORMAT(trn_outgoings.total_outgoing_value, 0)) As total_outgoing_value, trn_outgoings.order_id From trn_outgoings Where trn_outgoings.status = 'APPROVE' Group By trn_outgoings.order_id) Z ON trn_orders.id = Z.order_id";
+              LEFT JOIN (Select SUM(trn_outgoings.total_outgoing_value) As total_outgoing_value, trn_outgoings.order_id From trn_outgoings Where trn_outgoings.status = 'APPROVE' Group By trn_outgoings.order_id) Z ON trn_orders.id = Z.order_id";
 
 $where = "WHERE (trn_orders.date BETWEEN '$filterByDate[start_date]' AND '$filterByDate[end_date]')";
 
