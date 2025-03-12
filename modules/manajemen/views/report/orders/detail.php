@@ -88,7 +88,9 @@
                     <div class="row">
                         <label class="col" style="font-weight: bold;">File Dokumen</label>
                         <div class="col">
-                            <button class="btn btn-primary">Preview</button>
+                            <?php if($order->pic_url): ?>
+                            <a href="<?= asset($order->pic_url) ?>" target="_blank" class="btn btn-primary">Preview</a>
+                            <?php endif ?>
                         </div>
                     </div>
                 </div>
