@@ -29,7 +29,6 @@
 
             <div class="mt-4">
                 <button class="btn btn-primary" type="submit">Submit</button>
-                <button class="btn btn-success" type="button">Export XLS</button>
             </div>
 
         </form>
@@ -109,20 +108,85 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($order->items as $item):
+                        <?php foreach ($order->services as $index => $item):
 
                             $service = $db->single('mst_services', ['id' => $item->service_id]);
                             $category = $db->single('mst_categories', ['id' => $service->category_id]);
 
                         ?>
                             <tr>
-                                <td><?= $item->order_number ?></td>
+                                <td><?= $index+1 ?></td>
                                 <td><?= $category->name ?></td>
                                 <td><?= $service->name ?></td>
                                 <td>Rp. <?= number_format($item->price) ?></td>
                                 <td><?= $item->qty ?></td>
                                 <td><?= $item->unit ?></td>
                                 <td>Rp. <?= number_format($item->total_price) ?></td>
+                            </tr>
+                        <?php endforeach ?>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="table-responsive my-4">
+                <table class="table table-striped" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Kategori</th>
+                            <th>Keterangan</th>
+                            <th>@Harga</th>
+                            <th>Qty</th>
+                            <th>Satuan</th>
+                            <th>Jumlah Jasa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($order->items as $index => $item): ?>
+                            <tr>
+                                <td><?= $index+1 ?></td>
+                                <td><?= $item->category_name ?></td>
+                                <td><?= $item->item_name ?></td>
+                                <td>Rp. <?= number_format($item->item_price) ?></td>
+                                <td><?= $item->item_qty ?></td>
+                                <td><?= $item->item_unit ?></td>
+                                <td>Rp. <?= number_format($item->item_total_price) ?></td>
+                            </tr>
+                        <?php endforeach ?>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="table-responsive my-4">
+                <table class="table table-striped" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>No Terima Kas</th>
+                            <th>Tgl. Terima Kas</th>
+                            <th>Tipe</th>
+                            <th>Sumber</th>
+                            <th>Bank</th>
+                            <th>Discount</th>
+                            <th>Nilai Terima Kas</th>
+                            <th>Total Bayar</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php 
+                        foreach ($order->cash as $index => $cash): 
+                            $bank = $db->single('mst_banks', ['id' => $cash->bank_id]);
+                        ?>
+                            <tr>
+                                <td><?= $index+1 ?></td>
+                                <td><?= $cash->code ?></td>
+                                <td><?= $cash->date ?></td>
+                                <td><?= $cash->cash_type ?></td>
+                                <td><?= $bank->name ?></td>
+                                <td>Rp. <?= number_format($cash->discount) ?></td>
+                                <td>Rp. <?= number_format($cash->total_payment) ?></td>
+                                <td>Rp. <?= number_format($cash->cash_total) ?></td>
+                                <td><?= $cash->status ?></td>
                             </tr>
                         <?php endforeach ?>
                     </tbody>

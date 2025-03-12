@@ -13,10 +13,30 @@ $order = null;
 
 if (isset($_GET['code'])) {
     $order = $db->single('trn_orders', ['code' => $_GET['code']]);
-    $order->items = $db->all('trn_order_items', ['order_id' => $order->id]);
+    $order->services = $db->all('trn_order_items', ['order_id' => $order->id]);
     $order->customer = $db->single('mst_customers', ['id' => $order->customer_id]);
     $order->employee = $db->single('mst_employees', ['id' => $order->employee_id]);
     $order->partner = $db->single('mst_partners', ['id' => $order->partner_id]);
+
+    $db->query = "SELECT 
+                    mst_categories.name category_name,
+                    mst_items.name item_name,
+                    trn_outgoing_items.price item_price,
+                    trn_outgoing_items.outgoing_qty item_qty,
+                    mst_items.unit item_unit,
+                    trn_outgoing_items.total_price item_total_price
+                FROM trn_outgoings 
+                LEFT JOIN trn_outgoing_items ON trn_outgoing_items.outgoing_id = trn_outgoings.id
+                LEFT JOIN mst_items ON mst_items.id = trn_outgoing_items.item_id
+                LEFT JOIN mst_categories ON mst_categories.id = mst_items.category_id
+                WHERE trn_outgoings.order_id = $order->id";
+
+    $order->items = $db->exec('all');
+
+    $order->cash = $db->all('trn_cash', [
+        'reference_number' => $order->code
+    ]);
+
 }
 
 // page section
