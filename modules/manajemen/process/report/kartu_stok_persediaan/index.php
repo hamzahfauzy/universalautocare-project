@@ -66,7 +66,7 @@ From
 
 	) Result 
 	
-	Group By Result.KodeProduk, Result.NamaProduk, Result.Satuan, Result.IdTransaksi     
+	Group By Result.KodeProduk, Result.NamaProduk, Result.Satuan 
 		
 	Union 
 
