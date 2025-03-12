@@ -220,10 +220,9 @@ return [
             'type' => 'text',
             'search' => ['mst_employees.name','mst_partners.name']
         ],
-        'nilai_order' => [
+        'total_value' => [
             'label' => 'Nilai Order',
             'type' => 'text',
-            'search' => ['trn_orders.total_item_value','trn_orders.total_service_value']
         ],
         'customer' => [
             'label' => 'Customer',

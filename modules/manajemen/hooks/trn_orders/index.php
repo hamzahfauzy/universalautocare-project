@@ -22,7 +22,7 @@ $query = "SELECT
                 CONCAT(date,' <br> ',done_date) order_date,
                 CONCAT(mst_employees.name, ' <br>', mst_partners.name) employee,
                 CONCAT(mst_customers.name,'<br>',$this->table.customer_police_number,' / ',mst_customers.phone,' / ',$this->table.customer_vehicle_type) customer,
-                CONCAT('Barang : ', FORMAT($this->table.total_item_value,0), '<br>Jasa : ', FORMAT($this->table.total_service_value,0)) nilai_order
+                CONCAT('Rp. ', FORMAT(total_value,0)) total_value
             FROM $this->table 
             LEFT JOIN mst_employees ON mst_employees.id = $this->table.employee_id
             LEFT JOIN mst_partners ON mst_partners.id = $this->table.partner_id

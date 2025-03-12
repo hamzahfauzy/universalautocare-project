@@ -45,10 +45,7 @@
                                 <?= $item->namacustomer ?><br>
                                 <?= $item->customer_police_number . " / " . $item->telpcustomer . " / " . $item->customer_vehicle_type ?>
                             </td>
-                            <td>
-                                Barang : Rp. <?= number_format($item->total_item_value) ?>
-                                <br>
-                                Jasa : Rp. <?= number_format($item->total_service_value) ?>
+                            <td>Rp. <?= number_format($item->total_value) ?>
                             </td>
                             <td>Rp. <?= number_format($item->totalbayar) ?> / <?= $item->totalbarang ?>x</td>
                             <td><?=$item->status?></td>
