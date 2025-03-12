@@ -43,11 +43,11 @@
                 <thead>
                     <tr>
                         <th>Tgl Transaksi</th>
+                        <th>Jenis Transaksi</th>
                         <th>No Dokumen</th>
                         <th>Keterangan</th>
-                        <th>@Harga</th>
-                        <th>Qty</th>
-                        <th>Jumlah</th>
+                        <th>Qty Beli</th>
+                        <th>Qty Keluar</th>
                         <th>Saldo Persediaan</th>
                     </tr>
                 </thead>
