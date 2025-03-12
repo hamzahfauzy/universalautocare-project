@@ -9,39 +9,81 @@ $old        = get_flash_msg('old');
 $error_msg  = get_flash_msg('error');
 $db = new Database;
 
+$filter = Request::get('filter', []);
 $order   = Request::get('order', [['column' => 1, 'dir' => 'asc']]);
 $filterByDate  = Request::get('filterByDate', [
     'start_date' => date('Y-m-d'),
     'end_date' => date('Y-m-d'),
 ]);
 
-$search_fields = ['trn_purchases.code', 'trn_purchases.date', 'mst_suppliers.name', 'mst_categories.name', 'mst_items.name', 'trn_purchase_items.total_qty', 'trn_purchase_items.price', 'trn_purchase_items.total_price'];
-$query = "SELECT 
-                trn_purchases.code, 
-                trn_purchases.date,
-                mst_suppliers.name supplier_name,
-                mst_categories.name category_name,
-                mst_items.name product_name,
-                CONCAT(FORMAT(trn_purchase_items.total_qty,0), ' ',trn_purchase_items.unit),
-                CONCAT('Rp. ',FORMAT(trn_purchase_items.price,0)) price,
-                CONCAT('Rp. ',FORMAT(trn_purchase_items.total_price,0)) total,
-                trn_purchases.status
-              FROM trn_purchases
-              LEFT JOIN mst_suppliers ON mst_suppliers.id = trn_purchases.supplier_id
-              LEFT JOIN trn_purchase_items ON trn_purchase_items.purchase_id = trn_purchases.id
-              LEFT JOIN mst_items ON mst_items.id = trn_purchase_items.item_id
-              LEFT JOIN mst_categories ON mst_categories.ID = mst_items.category_id
-              ";
+$id = $filter['item'];
+$dariTgl = $filterByDate['start_date'];
+$sampaiTgl = $filterByDate['end_date'];
 
-$where = "WHERE (trn_purchases.date BETWEEN '$filterByDate[start_date]' AND '$filterByDate[end_date]')";
+$search_fields = ['trn_purchases.code', 'trn_purchases.date', 'mst_suppliers.name', 'mst_employees.name','mst_partners.name','trn_purchases.total_payment'];
+$query = "Select Tampil.Nomor, Tampil.Jenis, Tampil.NoDokumen, Tampil.TglDokumen, Tampil.Keterangan,
+	Tampil.StokPenerimaan, Tampil.StokPengeluaran 
+From 
+(
+	Select 0 As Nomor, 'SALDOAWAL' As Jenis, Concat(Result.KodeProduk, ' - ', Result.NamaProduk) As NoDokumen, 
+		'$dariTgl' As TglDokumen, Result.Satuan As Keterangan, 
+		SUM(Result.JlhQty) As StokPenerimaan, 0 As StokPengeluaran 
+	From 
+		(
+		Select F.id As KodeProduk, F.name As NamaProduk, F.unit As Satuan, 0 As JlhQty, 0 As IdTransaksi  
+		From mst_items F Where F.id = $id 
+		
+		Union
+		
+		Select Z.id As KodeProduk, Z.name As NamaProduk, Z.unit As Satuan, 
+			SUM(Case When Y.total_qty Is Null Then 0 Else Y.total_qty End) As JlhQty, X.Code As IdTransaksi  
+		From trn_purchases X
+			Inner Join trn_purchase_items Y On X.id = Y.purchase_id 
+			Left Join mst_items Z On Y.item_id = Z.id  
+		Where X.date < '$dariTgl' And X.status = 'APPROVE' 
+			And Y.item_id = $id 
+		Group By Z.id, Z.name, Z.unit, X.Code  
 
-$search = buildSearch($search_fields);
-$where .= ($search ? " AND " : "") . $search;
+		Union 
 
-$filter = buildFilter();
-$having = ($filter ? " HAVING " : "") . $filter;
+		Select C.id As KodeProduk, C.name As NamaProduk, C.unit As Satuan, 
+			SUM(Case When -B.outgoing_qty Is Null Then 0 Else -B.outgoing_qty End) As JlhQty, A.Code As IdTransaksi 
+		From trn_outgoings A
+			Inner Join trn_outgoing_items B On A.id = B.outgoing_id  
+			Left Join mst_items C On B.item_id = C.id  
+		Where A.date < '$dariTgl' And A.status = 'APPROVE'
+			And B.item_id = $id 
+		Group By C.id, C.name, C.unit, A.Code  
 
-$query .= $where . $having;
+	) Result 
+	
+	Group By Result.KodeProduk, Result.NamaProduk, Result.Satuan, Result.IdTransaksi     
+		
+	Union 
+
+	Select 1 As Nomor, 'PEMBELIAN' As Jenis, A.code As NoDokumen, A.date As TglDokumen, 
+		Concat(C.name, ' - ', C.phone) As Keterangan, SUM(FORMAT(B.total_qty, 0)) As StokPenerimaan, 0 As StokPengeluaran 
+	From trn_purchases A
+		Inner Join trn_purchase_items B On A.id = B.purchase_id 
+		Left Join mst_suppliers C On A.supplier_id = C.id 
+	Where A.date >= '$dariTgl' And A.date <= '$sampaiTgl' 
+		And A.status = 'APPROVE' And B.item_id = $id  
+	Group By A.code, A.date, Concat(C.name, ' - ', C.phone)  
+
+	Union
+
+	Select 2 As Nomor, 'PENGELUARAN' As Jenis, A.code As NoDokumen, A.date As TglDokumen, 
+		Concat(C.Code, ' / ', D.name, ' - ', D.phone) As Keterangan, 0 As StokPenerimaan, SUM(FORMAT(B.outgoing_qty, 0)) As StokPengeluaran
+	From trn_outgoings A
+		Inner Join trn_outgoing_items B On A.id = B.outgoing_id 
+		Left Join trn_orders C On A.order_id = C.id And C.status = 'APPROVE' 
+		Left Join mst_customers D On C.customer_id = D.id 
+	Where A.date >= '$dariTgl' And A.date <= '$sampaiTgl' 
+		And A.status = 'APPROVE' And B.item_id = $id  
+	Group By A.code, A.date, Concat(C.Code, ' / ', D.name, ' - ', D.phone)    
+		
+) Tampil 
+Order By Tampil.TglDokumen, Tampil.Nomor, Tampil.NoDokumen";
 
 $db->query = $query;
 
