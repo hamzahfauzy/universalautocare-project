@@ -46,8 +46,6 @@ if (isset($_GET['draw'])) {
 
     $query .= $where . $having;
 
-    echo $query;
-
     return (new CrudRepository(''))->dataTableFromQuery($query);
 }
 
