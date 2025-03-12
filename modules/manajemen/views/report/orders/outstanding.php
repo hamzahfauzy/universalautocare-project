@@ -66,8 +66,8 @@
                         <th>Karyawan</th>
                         <th>Partner</th>
                         <th>Nilai Order</th>
-                        <th>Nilai Barang</th>
-                        <th>Nilai Jasa</th>
+                        <th>Nilai Bayar</th>
+                        <th>Sisa</th>
                         <th>Status</th>
                     </tr>
                 </thead>
