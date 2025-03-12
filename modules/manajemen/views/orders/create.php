@@ -56,10 +56,10 @@ $attr  = ['class' => "form-control"];
                             <?= \Core\Form::input('options-obj:mst_employees,id,name', $tableName . '[employee_id]', array_merge($attr, ['placeholder' => 'Pilih Karyawan', 'required' => ''])) ?>
                         </div>
                     </div>
-                    <div class="row mb-3">
+                    <div class="row mb-3 d-none">
                         <label class="mb-2 col-4">Total Barang</label>
                         <div class="col-8">
-                            <input type="text" name="<?= $tableName ?>[total_item_value]" id="total_item_value" data-type="currency" class="form-control" placeholder="Total Barang" value="" required>
+                            <input type="text" name="<?= $tableName ?>[total_item_value]" id="total_item_value" data-type="currency" class="form-control" placeholder="Total Barang" value="0" required>
                         </div>
                     </div>
                     <div class="row mb-3">
