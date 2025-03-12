@@ -89,7 +89,7 @@ $db->query = $query;
 
 $data = $db->exec('all');
 
-$filename = "purchases-detail-download-" . date('Y-m-d H:i:s') . ".xlsx";
+$filename = "kartu-stok-download-" . date('Y-m-d H:i:s') . ".xlsx";
 
 $spreadsheet = new Spreadsheet();
 $sheet = $spreadsheet->getActiveSheet();
