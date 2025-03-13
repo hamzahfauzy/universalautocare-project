@@ -1,6 +1,9 @@
 <?php
 
 use Core\Database;
+use Spipu\Html2Pdf\Exception\ExceptionFormatter;
+use Spipu\Html2Pdf\Exception\Html2PdfException;
+use Spipu\Html2Pdf\Html2Pdf;
 
 $tableName = 'trn_orders';
 $module = 'manajemen';
@@ -42,4 +45,17 @@ $data->customer = $customer;
 $data->partner = $db->single('mst_partners', ['id' => $data->partner_id]);
 $data->employee = $db->single('mst_employees', ['id' => $data->employee_id]);
 
-return view('manajemen/views/print/orders/struk', compact('error_msg', 'old', 'tableName', 'code', 'data', 'items'));
+try {
+    $html2pdf = new Html2Pdf('L', array(205, 135), 'en', true, 'UTF-8');
+    $html2pdf->pdf->SetDisplayMode('fullpage');
+    
+    $content = view('manajemen/views/print/orders/struk', compact('error_msg', 'old', 'tableName', 'code', 'data', 'items'));
+
+    $html2pdf->writeHTML($content);
+    $html2pdf->output($code.'.pdf');
+} catch (Html2PdfException $e) {
+    $html2pdf->clean();
+
+    $formatter = new ExceptionFormatter($e);
+    echo $formatter->getHtmlMessage();
+}
