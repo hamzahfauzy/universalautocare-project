@@ -77,7 +77,7 @@
                     </div>
                     <div class="row">
                         <label class="col" style="font-weight: bold;">Nilai Barang</label>
-                        <div class="col">Rp. <?= number_format($order->total_item_value) ?></div>
+                        <div class="col">Rp. <?= number_format($order->total_item->total) ?></div>
                     </div>
                 </div>
                 <div class="col-4">
@@ -102,7 +102,7 @@
                         <tr>
                             <th>No</th>
                             <th>Kategori</th>
-                            <th>Keterangan</th>
+                            <th>Keterangan Jasa</th>
                             <th>@Harga</th>
                             <th>Qty</th>
                             <th>Satuan</th>
@@ -136,11 +136,11 @@
                         <tr>
                             <th>No</th>
                             <th>Kategori</th>
-                            <th>Keterangan</th>
+                            <th>Keterangan Barang</th>
                             <th>@Harga</th>
                             <th>Qty</th>
                             <th>Satuan</th>
-                            <th>Jumlah Jasa</th>
+                            <th>Jumlah Barang</th>
                         </tr>
                     </thead>
                     <tbody>

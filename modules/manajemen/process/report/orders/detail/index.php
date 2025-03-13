@@ -33,6 +33,10 @@ if (isset($_GET['code'])) {
 
     $order->items = $db->exec('all');
 
+
+    $db->query = "SELECT SUM(total_outgoing_value) total FROM trn_outgoings WHERE order_id = $order->id";
+    $order->total_item = $db->exec('single');
+
     $order->cash = $db->all('trn_cash', [
         'reference_number' => $order->code
     ]);

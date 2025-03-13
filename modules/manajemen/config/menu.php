@@ -217,7 +217,8 @@ return [
         'activeState' => [
             'manajemen.print.workshop_detail',
             'manajemen.print.workshop_invoice',
-            'manajemen.print.carwash_detail'
+            'manajemen.print.carwash_detail',
+            'manajemen.print.carwash_invoice'
         ],
         'items' => [
             [
