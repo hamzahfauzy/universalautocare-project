@@ -7,17 +7,24 @@ h2, h3 {
     font-weight: bold;
 }
 
+.header-table td {
+    padding-bottom: 8px;
+}
+
 .dashed-cell {
     border-top:1px dashed #000;
     border-bottom:1px dashed #000;
 }
 
 table.item {
+    padding-bottom: 8px;
     border-bottom:1px dashed #000;
 }
 
 table.item td {
-    padding:10px;
+    padding-left:10px;
+    padding-right:10px;
+    padding-top:8px;
 }
 
 .text-right {
@@ -52,12 +59,14 @@ table.item td {
         <td class="dashed-cell text-right" width="110">JUMLAH</td>
     </tr>
     <?php foreach ($items as $idx => $item): ?>
+        <?php for($i=0;$i<10;$i++): ?>
     <tr>
         <td><?= $item['name'] ?></td>
         <td><?= $item['qty'] ?> <?= $item['unit'] ?></td>
         <td class="text-right">Rp. <?= number_format($item['price']) ?></td>
         <td class="text-right">Rp. <?= number_format($item['total_price']) ?></td>
     </tr>
+        <?php endfor ?>
     <?php endforeach ?>
 </table>
 <br>
