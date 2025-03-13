@@ -186,8 +186,8 @@
                                 <td><?= $cash->cash_resource ?></td>
                                 <td><?= $bank->name ?></td>
                                 <td>Rp. <?= number_format($cash->discount) ?></td>
-                                <td>Rp. <?= number_format($cash->total_payment) ?></td>
                                 <td>Rp. <?= number_format($cash->cash_total) ?></td>
+                                <td>Rp. <?= number_format($cash->total_payment) ?></td>
                                 <td><?= $cash->status ?></td>
                             </tr>
                         <?php endforeach ?>
