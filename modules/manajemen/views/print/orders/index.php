@@ -36,7 +36,7 @@ $attr = 'form-control';
 
             <div class="form-group mb-3">
                 <label class="mb-2 col-4">No. Order</label>
-                <select name="code" id="code" class="form-control select2">
+                <select name="code" id="code" class="form-control select2" required>
                     <option value="">- Pilih -</option>
                     <?php foreach($orders as $order): ?>
                     <option value="<?=$order->code?>"><?=$order->code?></option>
@@ -45,9 +45,9 @@ $attr = 'form-control';
             </div>
 
             <div class="form-group">
-                <button class="btn btn-primary">Cetak</button>
+                <button class="btn btn-primary">Struk</button>
                 <?php if($_GET['filter']['type'] == 'invoice'): ?>
-                <a href="javascript:void(0)" class="btn btn-primary" onclick="window.open('/manajemen/print/orders/struk?code='+document.querySelector('#code').value)">Struk</a>
+                <a href="javascript:void(0)" class="btn btn-primary" onclick="document.querySelector('#code').value && window.open('/manajemen/print/orders/struk?code='+document.querySelector('#code').value)">Faktur</a>
                 <?php endif ?>
             </div>
 
