@@ -46,10 +46,10 @@ table.item td {
 <br>
 <table class="item" cellpadding="5" cellspacing="0">
     <tr class="header-table">
-        <td class="dashed-cell" width="300">KETERANGAN</td>
-        <td class="dashed-cell" width="50">QTY</td>
+        <td class="dashed-cell" width="350">KETERANGAN</td>
+        <td class="dashed-cell">QTY</td>
         <td class="dashed-cell text-right" width="110">@HARGA</td>
-        <td class="dashed-cell text-right" width="120">JUMLAH</td>
+        <td class="dashed-cell text-right" width="110">JUMLAH</td>
     </tr>
     <?php foreach ($items as $idx => $item): ?>
     <tr>
@@ -63,15 +63,20 @@ table.item td {
 <br>
 <table cellpadding="5" cellspacing="0">
     <tr>
-        <td width="450">
+        <td width="550">
             <b>CUSTOMER :</b> <?= $data->customer->name ?> (<?= $data->customer->phone ?>)<br>
             <b>NO PLAT/POLISI :</b> <?= $data->customer_police_number ?><br>
             <b>KENDARAAN :</b> <?= $data->customer_vehicle_type ?> / <?= $data->customer_vehicle_color ?>
         </td>
-        <td class="text-right" width="280">
-            <b>TOTAL :</b> Rp. <?= number_format($data->total_value) ?><br>
-            <b>BAYAR :</b> Rp. <?= number_format($data->total_payment) ?><br>
-            <b>SISA :</b> Rp. <?= number_format($data->total_value-$data->total_payment) ?>
+        <td>
+            <b>TOTAL</b> <br> 
+            <b>BAYAR</b> <br>
+            <b>SISA</b> <br>
+        </td>
+        <td class="text-right" width="135">
+            Rp. <?= number_format($data->total_value) ?><br>
+            Rp. <?= number_format($data->total_payment) ?><br>
+            Rp. <?= number_format($data->total_value-$data->total_payment) ?>
         </td>
     </tr>
 </table>
