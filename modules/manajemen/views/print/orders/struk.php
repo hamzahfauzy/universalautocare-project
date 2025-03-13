@@ -19,6 +19,10 @@ table.item {
 table.item td {
     padding:10px;
 }
+
+.text-right {
+    text-align: right;
+}
 </style>
 <table cellpadding="5" cellspacing="0">
     <tr>
@@ -44,15 +48,15 @@ table.item td {
     <tr class="header-table">
         <td class="dashed-cell" width="300">KETERANGAN</td>
         <td class="dashed-cell" width="50">QTY</td>
-        <td class="dashed-cell" width="110">@HARGA</td>
-        <td class="dashed-cell" width="120">JUMLAH</td>
+        <td class="dashed-cell text-right" width="110">@HARGA</td>
+        <td class="dashed-cell text-right" width="120">JUMLAH</td>
     </tr>
     <?php foreach ($items as $idx => $item): ?>
     <tr>
         <td><?= $item['name'] ?></td>
-        <td><?= $item['qty'] ?></td>
-        <td>Rp. <?= number_format($item['price']) ?></td>
-        <td>Rp. <?= number_format($item['total_price']) ?></td>
+        <td><?= $item['qty'] ?> <?= $item['unit'] ?></td>
+        <td class="text-right">Rp. <?= number_format($item['price']) ?></td>
+        <td class="text-right">Rp. <?= number_format($item['total_price']) ?></td>
     </tr>
     <?php endforeach ?>
 </table>
@@ -64,7 +68,7 @@ table.item td {
             <b>NO PLAT/POLISI :</b> <?= $data->customer_police_number ?><br>
             <b>KENDARAAN :</b> <?= $data->customer_vehicle_type ?> / <?= $data->customer_vehicle_color ?>
         </td>
-        <td>
+        <td class="text-right" width="280">
             <b>TOTAL :</b> Rp. <?= number_format($data->total_value) ?><br>
             <b>BAYAR :</b> Rp. <?= number_format($data->total_payment) ?><br>
             <b>SISA :</b> Rp. <?= number_format($data->total_value-$data->total_payment) ?>

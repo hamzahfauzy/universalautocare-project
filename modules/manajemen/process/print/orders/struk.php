@@ -51,6 +51,7 @@ try {
     
     $content = view('manajemen/views/print/orders/struk', compact('error_msg', 'old', 'tableName', 'code', 'data', 'items'));
 
+    $html2pdf->pdf->SetTitle("Struk - ".$code);
     $html2pdf->writeHTML($content);
     $html2pdf->output($code.'.pdf');
 } catch (Html2PdfException $e) {
