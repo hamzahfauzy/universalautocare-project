@@ -66,6 +66,17 @@ table.item td {
         <td class="text-right">Rp. <?= number_format($item['total_price']) ?></td>
     </tr>
     <?php endforeach ?>
+
+    <?php if(count($items) < 10): ?>
+    <?php for($i=count($items); $i<=10; $i++): ?>
+    <tr>
+        <td>&nbsp;</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <?php endfor ?>
+    <?php endif ?>
 </table>
 <br>
 <table cellpadding="5" cellspacing="0">
