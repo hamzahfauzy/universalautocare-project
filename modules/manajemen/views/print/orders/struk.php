@@ -41,7 +41,7 @@ table.item td {
         <td width="130" style="vertical-align: bottom;" class="text-right">
             <h2>INVOICE</h2>
         </td>
-    </tr>
+    </tr> 
 </table>
 <br>
 <table class="item" cellpadding="5" cellspacing="0">
