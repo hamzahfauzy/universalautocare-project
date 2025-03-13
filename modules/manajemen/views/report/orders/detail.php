@@ -180,10 +180,10 @@
                             $bank = $db->single('mst_banks', ['id' => $cash->bank_id]);
                         ?>
                             <tr>
-                                <td><?= $index+1 ?></td>
                                 <td><?= $cash->code ?></td>
                                 <td><?= $cash->date ?></td>
                                 <td><?= $cash->cash_type ?></td>
+                                <td><?= $cash->cash_resource ?></td>
                                 <td><?= $bank->name ?></td>
                                 <td>Rp. <?= number_format($cash->discount) ?></td>
                                 <td>Rp. <?= number_format($cash->total_payment) ?></td>
