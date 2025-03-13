@@ -37,8 +37,8 @@ table.item td {
             <b>TGL ORDER :</b> <?= $data->date ?><br>
             <b>TGL EST SELESAI :</b> <?= $data->done_date ?><br>
             <b>PARTNER :</b> <?= $data->partner->name ?><br>
-        </td width="200">
-        <td style="vertical-align: bottom;">
+        </td>
+        <td width="130" style="vertical-align: bottom;" class="text-right">
             <h2>INVOICE</h2>
         </td>
     </tr>
