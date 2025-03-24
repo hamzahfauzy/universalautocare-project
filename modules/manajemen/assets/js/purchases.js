@@ -52,7 +52,7 @@ $('.add-item-button').click(async function(){
         unit: selectedItem.product.dataset.unit,
         category_name: selectedData.category,
         category: $('select[name=category]').val(),
-        product: $('select[name=product]').val(),
+        product: product_id,
     }
 
     data.total_price = data.price * data.qty
