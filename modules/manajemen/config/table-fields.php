@@ -27,7 +27,7 @@ return [
         ],
         'item_type' => [
             'label' => 'Tipe Barang',
-            'type'  => 'options:0|1',
+            'type'  => 'number',
         ],
         'status' => [
             'label' => 'Status',
