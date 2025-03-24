@@ -55,7 +55,7 @@ table.item td {
 <table class="item" cellpadding="5" cellspacing="0">
     <tr class="header-table">
         <td class="dashed-cell" width="300">KETERANGAN</td>
-        <td class="dashed-cell">QTY</td>
+        <td class="dashed-cell" width="50">QTY</td>
         <td class="dashed-cell text-right" width="110">@HARGA</td>
         <td class="dashed-cell text-right" width="110">JUMLAH</td>
     </tr>
