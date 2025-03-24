@@ -34,7 +34,7 @@ table.item td {
 <table cellpadding="5" cellspacing="0">
     <tr>
         <td width="300">
-            <br>
+            <br><br>
             <h3>UNIVERSAL AUTOCARE</h3>
             Jl. Sampul No. 29 Medan<br>
             0811-6127-988<br>
@@ -54,7 +54,7 @@ table.item td {
 <br>
 <table class="item" cellpadding="5" cellspacing="0">
     <tr class="header-table">
-        <td class="dashed-cell" width="350">KETERANGAN</td>
+        <td class="dashed-cell" width="300">KETERANGAN</td>
         <td class="dashed-cell">QTY</td>
         <td class="dashed-cell text-right" width="110">@HARGA</td>
         <td class="dashed-cell text-right" width="110">JUMLAH</td>
@@ -68,8 +68,8 @@ table.item td {
     </tr>
     <?php endforeach ?>
 
-    <?php if(count($items) < 10): ?>
-    <?php for($i=count($items); $i<=10; $i++): ?>
+    <?php if(count($items) < 9): ?>
+    <?php for($i=count($items); $i<=9; $i++): ?>
     <tr>
         <td>&nbsp;</td>
         <td></td>
