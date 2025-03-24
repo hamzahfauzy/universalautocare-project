@@ -6,8 +6,10 @@ $('.add-item-button').click(async function(){
     {
         const formData = new FormData;
         formData.append('_token', document.querySelector('meta[name=csrf_token]').content)
+        formData.append('category_id', $('select[name=category]').val())
         formData.append('name', $('#product_name').val())
         formData.append('unit', $('#product_unit').val())
+        formData.append('price', 0)
         const request = await fetch('/manajemen/products/create', {
             method: 'POST',
             body: formData
