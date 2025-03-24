@@ -34,9 +34,9 @@ table.item td {
 <table cellpadding="5" cellspacing="0">
     <tr>
         <td width="300">
-            <h3>UNIVERSAL AUTOCARE</h3>
-            JL. PABRIK TENUN MEDAN<br>
-            0813-9607-8292<br>
+            <h3>UNIVERSAL AUTOCARE</h3><br><br>
+            Jl. Sampul No. 29 Medan<br>
+            0811-6127-988<br>
             SUMATERA UTARA
         </td>
         <td width="300">

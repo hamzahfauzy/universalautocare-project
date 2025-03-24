@@ -9,9 +9,9 @@ $doneDate = \Core\Form::getData('date', $order->done_date);
 --------------------------------
 <?= centerText("UNIVERSAL AUTO CARE", 32) ?>
 
-<?= centerText("Jl. Pabrik Tenun Medan", 32) ?>
+<?= centerText("Jl. Sampul No. 29 Medan", 32) ?>
 
-<?= centerText("0813-9607-8292", 32) ?>
+<?= centerText("0811-6127-988", 32) ?>
 
 <?= centerText("Sumatera Utara", 32) ?>
 
