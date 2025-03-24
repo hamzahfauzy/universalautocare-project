@@ -28,16 +28,19 @@ if (isset($_GET['draw'])) {
     $filter = buildFilter();
     $having = ($filter ? " HAVING " : "") . $filter;
 
-    $query = "SELECT 
+    $query = "SELECT tanggal, FORMAT(penerimaan, 0) penerimaan, 
+                    FORMAT(pengeluaran,0) pengeluaran,
+                    FORMAT(biaya, 0) biaya, 
+                    FORMAT(SUM(penerimaan-(pengeluaran+biaya)),0) as cash_total
+                FROM (SELECT 
                 A.date as tanggal, 
-	            FORMAT(SUM(Coalesce(CASE WHEN A.cash_group = 'PENERIMAAN KAS' THEN A.cash_total ELSE 0 END, 0)), 0) As penerimaan, 
-	            FORMAT(SUM(Coalesce(CASE WHEN A.cash_group = 'PENGELUARAN KAS' THEN A.cash_total ELSE 0 END, 0)), 0) As pengeluaran, 
-	            FORMAT(SUM(Coalesce(CASE WHEN A.cash_group = 'BIAYA KAS' THEN A.cash_total ELSE 0 END, 0)), 0) As biaya,
-                FORMAT(SUM(Coalesce(A.cash_total, 0)), 0) As cash_total
+	            SUM(Coalesce(CASE WHEN A.cash_group = 'PENERIMAAN KAS' THEN A.cash_total ELSE 0 END, 0)) As penerimaan, 
+	            SUM(Coalesce(CASE WHEN A.cash_group = 'PENGELUARAN KAS' THEN A.cash_total ELSE 0 END, 0)) As pengeluaran, 
+	            SUM(Coalesce(CASE WHEN A.cash_group = 'BIAYA KAS' THEN A.cash_total ELSE 0 END, 0)) As biaya
               From trn_cash A
               $where
               Group By A.date
-	          $having";
+	          $having) as cash GROUP BY tanggal";
 
     return (new CrudRepository(''))->dataTableFromQuery($query);
 }

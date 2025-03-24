@@ -34,7 +34,7 @@ table.item td {
 <table cellpadding="5" cellspacing="0">
     <tr>
         <td width="300">
-        <br><br>
+            <br>
             <h3>UNIVERSAL AUTOCARE</h3>
             Jl. Sampul No. 29 Medan<br>
             0811-6127-988<br>
