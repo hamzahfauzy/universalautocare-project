@@ -123,6 +123,16 @@ $attr  = ['class' => "form-control"];
                     <label class="mb-2 w-100">Produk</label>
                     <select name="product" id="product-select" class="form-control select2insidemodal"></select>
                 </div>
+                <div id="new-product" style="display: none;">
+                    <div class="form-group mb-3">
+                        <label class="mb-2 w-100">Nama Produk</label>
+                        <input type="text" id="product_name" class="form-control">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="mb-2 w-100">Satuan</label>
+                        <input type="text" id="product_unit" class="form-control">
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

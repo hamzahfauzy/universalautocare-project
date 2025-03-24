@@ -1,8 +1,32 @@
 // var items = []
-$('.add-item-button').click(function(){
+$('.add-item-button').click(async function(){
+    var product = $('select[name=product]').find(':selected')[0]
+    var product_id = $('select[name=product]').val()
+    if($('select[name=product]').val() == -1)
+    {
+        const formData = new FormData;
+        formData.append('_token', document.querySelector('meta[name=csrf_token]').content)
+        formData.append('name', $('#product_name').val())
+        formData.append('unit', $('#product_unit').val())
+        const request = await fetch('/manajemen/products/create', {
+            method: 'POST',
+            body: formData
+        })
+
+        const response = await request.json()
+        product = {
+            text: response.data.name,
+            dataset: {
+                unit: response.data.unit,
+                price : response.data.price
+            }
+        }
+        product_id = response.data.id
+    }
+
     const selectedItem = {
         category: $('select[name=category]').find(':selected')[0],
-        product: $('select[name=product]').find(':selected')[0],
+        product: product,
     }
     
     const selectedData = {
@@ -11,7 +35,7 @@ $('.add-item-button').click(function(){
     }
 
     // validate
-    const validator = items.find(item => item.product == $('select[name=product]').val())
+    const validator = items.find(item => item.product == product_id)
     if(validator){
         alert('Barang sudah ada dalam daftar')
         return
@@ -99,7 +123,7 @@ $('select[name=category]').on('select2:selecting', function(e) {
     const category_id = e.params.args.data.id
     fetch('/manajemen/purchases/load-form-item-options?category_id='+category_id).then(res => res.json())
     .then(res => {
-        $('select[name=product]').html('<option value="" data-price="0" data-unit="PCS">- Pilih -</option>')
+        $('select[name=product]').html('<option value="" data-price="0" data-unit="PCS">- Pilih -</option><option value="-1" data-price="0" data-unit="PCS">- Buat Produk Baru -</option>')
         
         res.data.products.forEach(data => {
             var newOption = `<option value="${data.id}" data-price="${data.price}" data-unit="${data.unit}">${data.name}</option>`
@@ -107,6 +131,18 @@ $('select[name=category]').on('select2:selecting', function(e) {
         })
     })
 });
+
+$('select[name=product]').on('select2:selecting', function(e) {
+    const product_id = e.params.args.data.id
+    if(product_id == -1)
+    {
+        $('#new-product').show()
+    }
+    else
+    {
+        $('#new-product').hide()
+    }
+})
 
 
 function refreshRow()

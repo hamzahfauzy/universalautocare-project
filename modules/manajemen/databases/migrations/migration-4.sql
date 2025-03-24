@@ -1,0 +1,1 @@
+ALTER TABLE mst_items ADD COLUMN item_type INT DEFAULT 1;

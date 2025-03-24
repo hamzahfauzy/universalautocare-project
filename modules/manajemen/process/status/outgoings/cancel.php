@@ -5,7 +5,7 @@ use Core\Database;
 $id = $_GET['id'];
 
 $db = new Database;
-$db->query = "Select X.item_id, X.purchase_id, X.outgoing_qty From trn_outgoing_items X Where X.outgoing_id = $id";
+$db->query = "Select X.item_id, X.purchase_id, X.outgoing_qty From trn_outgoing_items X Where X.outgoing_id = $id AND X.purchase_id <> NULL";
 $items = $db->exec('all');
 
 foreach($items as $item)

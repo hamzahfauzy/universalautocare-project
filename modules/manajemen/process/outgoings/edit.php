@@ -15,6 +15,7 @@ if (Request::isMethod('POST')) {
     $items = $_POST['items'];
 
     foreach ($items as $index => $item) {
+        if(empty($item['purchase_id'])) unset($item['purchase_id']);
         $item['outgoing_id'] = $_GET['id'];
         $item['total_price'] = $item['price'] * $item['outgoing_qty'];
         $db->insert('trn_outgoing_items', $item);
@@ -50,21 +51,21 @@ $items = [];
 
 foreach ($data_items as $index => $item) {
     $product = $db->single('mst_items', ['id' => $item->item_id]);
-    $purchase = $db->single('trn_purchases', ['id' => $item->purchase_id]);
+    $purchase = $item->purchase_id ? $db->single('trn_purchases', ['id' => $item->purchase_id]) : null;
     $category = $db->single('mst_categories', ['id' => $product->category_id]);
     $items[] = [
         'id' => $item->id,
         'key' => $index + 1,
         'name' => $product->name,
-        'code' => $purchase->code,
-        'qty' => (int) $item->outgoing_qty,
-        'price' => (int) $item->price,
-        'total_price' => (int) $item->total_price,
+        'code' => $purchase?->code,
+        'qty' => (double) $item->outgoing_qty,
+        'price' => (double) $item->price,
+        'total_price' => (double) $item->total_price,
         'unit' => $item->unit,
         'category_name' => $category->name,
         'category' => $category->id,
         'product' => $product->id,
-        'purchase' => $purchase->id,
+        'purchase' => $purchase?->id,
     ];
 }
 
@@ -105,7 +106,7 @@ Page::pushHead('<style>.select2,.select2-selection{height:38px!important;} .sele
 Page::pushFoot('<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>');
 Page::pushFoot("<script src='" . asset('assets/crud/js/crud.js') . "'></script>");
 Page::pushFoot("<script>var items = " . json_encode($items) . "</script>");
-Page::pushFoot("<script src='" . asset('assets/manajemen/js/outgoings.js') . "'></script>");
+Page::pushFoot("<script src='" . asset('assets/manajemen/js/outgoings.js?v=1.0') . "'></script>");
 Page::pushFoot("<script>$('.select2insidemodal').select2({dropdownParent: $('#itemModal .modal-body')});</script>");
 
 Page::pushHook('edit');

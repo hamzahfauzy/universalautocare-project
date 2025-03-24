@@ -20,6 +20,7 @@ if (Request::isMethod('POST')) {
     $outgoing = $db->insert('trn_outgoings', $data);
 
     foreach ($items as $index => $item) {
+        if(empty($item['purchase_id'])) unset($item['purchase_id']);
         $item['outgoing_id'] = $outgoing->id;
         $item['total_price'] = $item['price'] * $item['outgoing_qty'];
         $db->insert('trn_outgoing_items', $item);
@@ -68,7 +69,7 @@ Page::pushHead('<style>.select2,.select2-selection{height:38px!important;} .sele
 Page::pushFoot('<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>');
 Page::pushFoot("<script src='" . asset('assets/crud/js/crud.js') . "'></script>");
 Page::pushFoot("<script>var items = []</script>");
-Page::pushFoot("<script src='" . asset('assets/manajemen/js/outgoings.js') . "'></script>");
+Page::pushFoot("<script src='" . asset('assets/manajemen/js/outgoings.js?v=1.0') . "'></script>");
 Page::pushFoot("<script>$('.select2insidemodal').select2({dropdownParent: $('#itemModal .modal-body')});</script>");
 
 Page::pushHook('create');

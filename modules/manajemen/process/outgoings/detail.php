@@ -24,13 +24,13 @@ $items = [];
 
 foreach ($data_items as $index => $item) {
     $product = $db->single('mst_items', ['id' => $item->item_id]);
-    $purchase = $db->single('trn_purchases', ['id' => $item->purchase_id]);
+    $purchase = $item->purchase_id ? $db->single('trn_purchases', ['id' => $item->purchase_id]) : null;
     $category = $db->single('mst_categories', ['id' => $product->category_id]);
     $items[] = [
         'id' => $item->id,
         'key' => $index + 1,
         'name' => $product->name,
-        'code' => $purchase->code,
+        'code' => $purchase?->code,
         'qty' => (double) $item->outgoing_qty,
         'price' => (double) $item->price,
         'total_price' => (double) $item->total_price,
@@ -38,7 +38,7 @@ foreach ($data_items as $index => $item) {
         'category_name' => $category->name,
         'category' => $category->id,
         'product' => $product->id,
-        'purchase' => $purchase->id,
+        'purchase' => $purchase?->id,
     ];
 }
 

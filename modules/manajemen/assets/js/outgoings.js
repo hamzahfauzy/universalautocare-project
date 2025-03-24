@@ -6,7 +6,7 @@ $('.add-item-button').click(function(){
         purchase: $('select[name=purchase]').find(':selected')[0],
     }
 
-    if(!selectedItem.category.index || !selectedItem.product.index || !selectedItem.purchase.index)
+    if(!selectedItem.category.index || !selectedItem.product.index || (selectedItem.product.dataset.itemtype == 1 && !selectedItem.purchase.index))
     {
         alert('Tidak dapat menambahkan item karena ada field yang tidak dipilih')
         return
@@ -30,8 +30,8 @@ $('.add-item-button').click(function(){
         code: selectedData.purchase,
         name: selectedData.product,
         qty: 1,
-        max_qty: selectedItem.purchase.dataset.maxqty,
-        price: parseInt(selectedItem.purchase.dataset.price),
+        max_qty: selectedItem.purchase.index ? selectedItem.purchase.dataset.maxqty : -1,
+        price: parseInt(selectedItem.purchase.index ? selectedItem.purchase.dataset.price : selectedItem.product.dataset.price),
         total_price: 0,
         unit: selectedItem.product.dataset.unit,
         category_name: selectedData.category,
@@ -55,7 +55,7 @@ $('.add-item-button').click(function(){
                 <td>${data.category_name}</td>
                 <td>${data.name}</td>
                 <td>Rp. ${format_number(data.price)}</td>
-                <td><input type="number" step=".1" class="form-control qty-input" min="1" max="${data.max_qty}" style="width:100px" name="items[${items.length}][outgoing_qty]" value="${data.qty}" data-key="${items.length+1}"></td>
+                <td><input type="number" step=".1" class="form-control qty-input" min="1" ${data.max_qty > 0 ? "max='"+data.max_qty+"'" : ''} style="width:100px" name="items[${items.length}][outgoing_qty]" value="${data.qty}" data-key="${items.length+1}"></td>
                 <td>${data.unit}</td>
                 <td id="total_price_${items.length+1}">Rp. ${format_number(data.total_price)}</td>
                 <td><button class="btn btn-sm btn-danger remove-item-button" type="button" data-target="#item_${items.length+1}" data-key="${items.length+1}"><i class="fas fa-trash"></i></button></td>
@@ -103,7 +103,7 @@ $('select[name=category]').on('select2:selecting', function(e) {
         $('select[name=product]').html('<option value="" data-price="0" data-unit="PCS">- Pilih -</option>')
         
         res.data.products.forEach(data => {
-            var newOption = `<option value="${data.id}" data-price="${data.price}" data-unit="${data.unit}">${data.name}</option>`
+            var newOption = `<option value="${data.id}" data-price="${data.price}" data-unit="${data.unit}" data-itemtype="${data.item_type}">${data.name}</option>`
             $('select[name=product]').append(newOption)
         })
     })

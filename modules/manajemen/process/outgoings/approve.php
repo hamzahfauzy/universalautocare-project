@@ -8,12 +8,11 @@ $outgoing = $db->single('trn_outgoings', [
     'id' => $_GET['id']
 ]);
 
-$items = $db->all('trn_outgoing_items', [
-    'outgoing_id' => $outgoing->id
-]);
+$db->query = "SELECT * FROM trn_outgoing_items WHERE outgoing_id = $outgoing->id AND purchase_id <> NULL";
+$items = $db->exec('all');
 
 // validation
-foreach($items as $item)
+foreach($items as $index => $item)
 {
     $purchase_item = $db->single('trn_purchase_items', [
         'purchase_id' => $item->purchase_id,

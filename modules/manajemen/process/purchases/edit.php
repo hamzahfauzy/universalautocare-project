@@ -53,9 +53,9 @@ foreach ($data_items as $index => $item) {
         'id' => $item->id,
         'key' => $index + 1,
         'name' => $product->name,
-        'qty' => (int) $item->total_qty,
-        'price' => (int) $item->price,
-        'total_price' => (int) $item->total_price,
+        'qty' => (double) $item->total_qty,
+        'price' => (double) $item->price,
+        'total_price' => (double) $item->total_price,
         'unit' => $item->unit,
         'category_name' => $category->name,
         'category' => $category->id,
@@ -100,7 +100,7 @@ Page::pushHead('<style>.select2,.select2-selection{height:38px!important;} .sele
 Page::pushFoot('<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>');
 Page::pushFoot("<script src='" . asset('assets/crud/js/crud.js') . "'></script>");
 Page::pushFoot("<script>var items = " . json_encode($items) . "</script>");
-Page::pushFoot("<script src='" . asset('assets/manajemen/js/purchases.js') . "'></script>");
+Page::pushFoot("<script src='" . asset('assets/manajemen/js/purchases.js?v=1.0') . "'></script>");
 Page::pushFoot("<script>$('.select2insidemodal').select2({dropdownParent: $('#itemModal .modal-body')});</script>");
 
 Page::pushHook('edit');
