@@ -29,7 +29,7 @@
             </div>
             <div class="col-3">
                 <label>Barang</label>
-                <?= \Core\Form::input('options-obj:mst_items,id,name', 'item', ['class' => 'form-control filters', 'placeholder' => 'Pilih barang', 'required' => '']) ?>
+                <?= \Core\Form::input('options-obj:mst_items,id,name|item_type,1', 'item', ['class' => 'form-control filters', 'placeholder' => 'Pilih barang', 'required' => '']) ?>
             </div>
         </div>
 
