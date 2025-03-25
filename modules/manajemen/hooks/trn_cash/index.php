@@ -28,7 +28,7 @@ $this->db->query = "SELECT
                         CONCAT('DISC ', FORMAT(discount, 0), ' / ', FORMAT(total_payment, 0), '<br>', FORMAT(cash_total, 0)) total_payment
                     FROM $this->table 
                     $where 
-                    ORDER BY ".$col_order." ".$order[0]['dir']." LIMIT $start,$length";
+                    ORDER BY date DESC, code ASC LIMIT $start,$length";
 $data  = $this->db->exec('all');
 
 $total = $this->db->exists($this->table,$where);
