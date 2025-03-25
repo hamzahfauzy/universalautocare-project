@@ -44,7 +44,7 @@ function loadBiaya(data)
 
 function format_number(value)
 {
-    return new Intl.NumberFormat().format(value)
+    return new Intl.NumberFormat('en-US').format(value)
 }
 
 $('input[name="trn_cash[cash_total]"], input[name="trn_cash[discount]"]').change(function(){
