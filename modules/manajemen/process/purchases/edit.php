@@ -100,7 +100,7 @@ Page::pushHead('<style>.select2,.select2-selection{height:38px!important;} .sele
 Page::pushFoot('<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>');
 Page::pushFoot("<script src='" . asset('assets/crud/js/crud.js') . "'></script>");
 Page::pushFoot("<script>var items = " . json_encode($items) . "</script>");
-Page::pushFoot("<script src='" . asset('assets/manajemen/js/purchases.js?v=1.1') . "'></script>");
+Page::pushFoot("<script src='" . asset('assets/manajemen/js/purchases.js?v='.strtotime('now')) . "'></script>");
 Page::pushFoot("<script>$('.select2insidemodal').select2({dropdownParent: $('#itemModal .modal-body')});</script>");
 
 Page::pushHook('edit');
