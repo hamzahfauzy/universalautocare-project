@@ -27,7 +27,7 @@ $query = "SELECT
             A.price base_price, 
             A.price * SUM(Coalesce(A.total_qty, 0) - Coalesce(A.outgoing_qty, 0)) As total_persediaan 
         From trn_purchase_items A
-        Left Join mst_items C On A.item_id = C.id 
+        Left Join mst_items C On A.item_id = C.id AND C.item_type = 1
         Left Join mst_categories B On B.id = C.category_id 
         $where
         Group By B.name, A.item_id, C.name, A.price

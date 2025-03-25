@@ -41,6 +41,8 @@ $types = ['BENGKEL' => 'workshop', 'DOORSMEER' => 'carwash'];
 Page::setActive('manajemen.status.' . $types[$order_type] . '_orders');
 Page::setTitle($title);
 Page::setModuleName($title);
-Page::pushFoot("<script>$('.datatable').dataTable()</script>");
+Page::pushFoot("<script>$('.datatable').dataTable({
+    ordering: false
+})</script>");
 
 return view('manajemen/views/status/orders/index', compact('error_msg', 'success_msg', 'old', 'data'));

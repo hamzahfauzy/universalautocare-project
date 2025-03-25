@@ -40,7 +40,7 @@ From
 	From 
 		(
 		Select F.id As KodeProduk, F.name As NamaProduk, F.unit As Satuan, 0 As JlhQty, 0 As IdTransaksi  
-		From mst_items F Where F.id = $id 
+		From mst_items F Where F.id = $id AND F.item_type = 1
 		
 		Union
 		
@@ -48,7 +48,7 @@ From
 			SUM(Case When Y.total_qty Is Null Then 0 Else Y.total_qty End) As JlhQty, X.Code As IdTransaksi  
 		From trn_purchases X
 			Inner Join trn_purchase_items Y On X.id = Y.purchase_id 
-			Left Join mst_items Z On Y.item_id = Z.id  
+			Left Join mst_items Z On Y.item_id = Z.id  AND Z.item_type = 1
 		Where X.date < '$dariTgl' And X.status = 'APPROVE' 
 			And Y.item_id = $id 
 		Group By Z.id, Z.name, Z.unit, X.Code  
@@ -59,7 +59,7 @@ From
 			SUM(Case When -B.outgoing_qty Is Null Then 0 Else -B.outgoing_qty End) As JlhQty, A.Code As IdTransaksi 
 		From trn_outgoings A
 			Inner Join trn_outgoing_items B On A.id = B.outgoing_id  
-			Left Join mst_items C On B.item_id = C.id  
+			Left Join mst_items C On B.item_id = C.id  AND C.item_type = 1
 		Where A.date < '$dariTgl' And A.status = 'APPROVE'
 			And B.item_id = $id 
 		Group By C.id, C.name, C.unit, A.Code  

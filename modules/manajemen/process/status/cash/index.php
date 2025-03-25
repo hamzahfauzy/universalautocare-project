@@ -59,6 +59,8 @@ $types = ['PENERIMAAN KAS' => 'cash_income', 'PENGELUARAN KAS' => 'cash_outcome'
 Page::setActive('manajemen.status.' . $types[$cash_group]);
 Page::setTitle($title);
 Page::setModuleName($title);
-Page::pushFoot("<script>$('.datatable').dataTable()</script>");
+Page::pushFoot("<script>$('.datatable').dataTable({
+    ordering: false
+})</script>");
 
 return view('manajemen/views/status/cash/index', compact('error_msg', 'success_msg', 'old', 'data'));

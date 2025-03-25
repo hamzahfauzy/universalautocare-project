@@ -28,6 +28,8 @@ $title = 'Update Status Pengeluaran';
 Page::setActive("manajemen.status.outgoings");
 Page::setTitle($title);
 Page::setModuleName($title);
-Page::pushFoot("<script>$('.datatable').dataTable()</script>");
+Page::pushFoot("<script>$('.datatable').dataTable({
+    ordering: false
+})</script>");
 
 return view('manajemen/views/status/outgoings/index', compact('error_msg', 'success_msg', 'old', 'data'));

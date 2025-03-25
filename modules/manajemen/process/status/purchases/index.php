@@ -31,6 +31,8 @@ $title = 'Update Status Pembelian';
 Page::setActive("manajemen.status.purchases");
 Page::setTitle($title);
 Page::setModuleName($title);
-Page::pushFoot("<script>$('.datatable').dataTable()</script>");
+Page::pushFoot("<script>$('.datatable').dataTable({
+    ordering: false
+})</script>");
 
 return view('manajemen/views/status/purchases/index', compact('error_msg', 'success_msg', 'old', 'data'));
