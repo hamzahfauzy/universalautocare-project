@@ -23,19 +23,19 @@ $data_items = $db->all('trn_order_items', ['order_id' => $data->id]);
 $items = [];
 
 foreach ($data_items as $index => $item) {
-    $service = $db->single('mst_services', ['id' => $item->service_id]);
+    $itm = $item->item_id ? $db->single('mst_items',['id' => $item->item_id]) : $db->single('mst_services', ['id' => $item->service_id]);
     $category = $db->single('mst_categories', ['id' => $service->category_id]);
     $items[] = [
         'id' => $item->id,
         'key' => $index + 1,
-        'name' => $service->name,
+        'name' => $itm->name,
         'qty' => (double) $item->qty,
         'price' => (double) $item->price,
         'total_price' => (double) $item->total_price,
         'unit' => $item->unit,
         'category_name' => $category->name,
         'category' => $category->id,
-        'service' => $service->id,
+        'item' => $itm->id,
     ];
 }
 

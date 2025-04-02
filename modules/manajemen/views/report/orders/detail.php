@@ -102,7 +102,7 @@
                         <tr>
                             <th>No</th>
                             <th>Kategori</th>
-                            <th>Keterangan Jasa</th>
+                            <th>Keterangan Barang/Jasa</th>
                             <th>@Harga</th>
                             <th>Qty</th>
                             <th>Satuan</th>
@@ -110,16 +110,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($order->services as $index => $item):
+                        <?php foreach ($order->items as $index => $item):
 
-                            $service = $db->single('mst_services', ['id' => $item->service_id]);
+                            $itm = $item->service_id ? $db->single('mst_services', ['id' => $item->service_id]) : $db->single('mst_items', ['id' => $item->item_id]);
                             $category = $db->single('mst_categories', ['id' => $service->category_id]);
 
                         ?>
                             <tr>
                                 <td><?= $index+1 ?></td>
                                 <td><?= $category->name ?></td>
-                                <td><?= $service->name ?></td>
+                                <td><?= $itm->name ?></td>
                                 <td>Rp. <?= number_format($item->price) ?></td>
                                 <td><?= $item->qty ?></td>
                                 <td><?= $item->unit ?></td>
@@ -144,7 +144,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($order->items as $index => $item): ?>
+                        <?php foreach ($order->outgoings as $index => $item): ?>
                             <tr>
                                 <td><?= $index+1 ?></td>
                                 <td><?= $item->category_name ?></td>

@@ -38,9 +38,9 @@ $qty = 0;
 foreach ($order->items as $index => $item):
     $total += $item->total_price;
     $qty += $item->qty;
-    $service = $db->single('mst_services', ['id' => $item->service_id]);
+    $itm = $item->item_id ? $db->single('mst_items',['id' => $item->item_id]) : $db->single('mst_services', ['id' => $item->service_id]);
 ?>
-#<?= wordwrap($service->name, 32, "\n", true); ?>
+#<?= wordwrap($itm->name, 32, "\n", true); ?>
 
 x <?= $item->qty ?> <?= $item->unit ?> @<?=number_format($item->price)?> <?= renderRight('Rp. '.number_format($item->total_price), 31 - strlen('x '.$item->qty.' '.$item->unit.' @'.number_format($item->price))) ?>
 <?php if(end($order->items) != $item): ?>

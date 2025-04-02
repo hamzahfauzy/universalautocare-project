@@ -1,0 +1,2 @@
+ALTER TABLE trn_order_items ADD COLUMN item_id INT DEFAULT NULL;
+ALTER TABLE trn_order_items ADD CONSTRAINT fk_trn_order_items_item_id FOREIGN KEY (item_id) REFERENCES mst_items(id) ON DELETE RESTRICT;

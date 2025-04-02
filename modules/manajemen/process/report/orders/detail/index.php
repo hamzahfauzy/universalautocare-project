@@ -13,7 +13,7 @@ $order = null;
 
 if (isset($_GET['code'])) {
     $order = $db->single('trn_orders', ['code' => $_GET['code']]);
-    $order->services = $db->all('trn_order_items', ['order_id' => $order->id]);
+    $order->items = $db->all('trn_order_items', ['order_id' => $order->id]);
     $order->customer = $db->single('mst_customers', ['id' => $order->customer_id]);
     $order->employee = $db->single('mst_employees', ['id' => $order->employee_id]);
     $order->partner = $db->single('mst_partners', ['id' => $order->partner_id]);
@@ -31,7 +31,7 @@ if (isset($_GET['code'])) {
                 LEFT JOIN mst_categories ON mst_categories.id = mst_items.category_id
                 WHERE trn_outgoings.order_id = $order->id";
 
-    $order->items = $db->exec('all');
+    $order->outgoings = $db->exec('all');
 
 
     $db->query = "SELECT SUM(total_outgoing_value) total FROM trn_outgoings WHERE order_id = $order->id";

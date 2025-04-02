@@ -133,7 +133,7 @@ $attr  = ['class' => "form-control"];
                             <th>Qty</th>
                             <th>Satuan</th>
                             <th>Jumlah Jasa</th>
-                            <th><button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#itemModal">Tambah Jasa</button></th>
+                            <th><button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#itemModal">Tambah Barang/Jasa</button></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -161,11 +161,11 @@ $attr  = ['class' => "form-control"];
             <div class="modal-body">
                 <div class="form-group mb-3">
                     <label class="mb-2 w-100">Kategori</label>
-                    <?= \Core\Form::input('options-obj:mst_categories,id,name|record_type,JASA', 'category', array_merge($attr, ['class' => 'form-control select2insidemodal', 'placeholder' => 'Pilih Kategori'])) ?>
+                    <?= \Core\Form::input('options-obj:mst_categories,id,name', 'category', array_merge($attr, ['class' => 'form-control select2insidemodal', 'placeholder' => 'Pilih Kategori'])) ?>
                 </div>
                 <div class="form-group mb-3">
-                    <label class="mb-2 w-100">Jasa</label>
-                    <select name="service" id="service-select" class="form-control select2insidemodal"></select>
+                    <label class="mb-2 w-100">Barang/Jasa</label>
+                    <select name="item" id="service-select" class="form-control select2insidemodal"></select>
                 </div>
             </div>
             <div class="modal-footer">

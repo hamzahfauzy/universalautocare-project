@@ -2,16 +2,16 @@
 $('.add-item-button').click(function(){
     const selectedItem = {
         category: $('select[name=category]').find(':selected')[0],
-        service: $('select[name=service]').find(':selected')[0],
+        item: $('select[name=item]').find(':selected')[0],
     }
     
     const selectedData = {
         category: sanitizeSelected(selectedItem.category.text),
-        service: sanitizeSelected(selectedItem.service.text),
+        item: sanitizeSelected(selectedItem.item.text),
     }
 
     // validate
-    const validator = items.find(item => item.service == $('select[name=service]').val())
+    const validator = items.find(item => item.item == $('select[name=item]').val())
     if(validator){
         alert('Jasa sudah ada dalam daftar')
         return
@@ -19,14 +19,15 @@ $('.add-item-button').click(function(){
     
     const data = {
         key:items.length+1,
-        name: selectedData.service,
+        name: selectedData.item,
         qty: 1,
-        price: parseInt(selectedItem.service.dataset.price),
+        price: parseInt(selectedItem.item.dataset.price),
         total_price: 0,
-        unit: selectedItem.service.dataset.unit,
+        record_type: selectedItem.item.dataset.recordtype,
+        unit: selectedItem.item.dataset.unit,
         category_name: selectedData.category,
         category: $('select[name=category]').val(),
-        service: $('select[name=service]').val(),
+        item: $('select[name=item]').val(),
     }
 
     data.total_price = data.price * data.qty
@@ -34,7 +35,7 @@ $('.add-item-button').click(function(){
     const row = `<tr id="item_${items.length+1}">
                 <td>
                 <input type="hidden" name="items[${items.length}][order_number]" value="${items.length+1}">
-                <input type="hidden" name="items[${items.length}][service_id]" value="${data.service}">
+                <input type="hidden" name="items[${items.length}][${data.record_type == 'JASA' ? 'service_id' : 'item_id'}]" value="${data.item}">
                 <input type="hidden" name="items[${items.length}][price]" value="${data.price}">
                 <input type="hidden" name="items[${items.length}][unit]" value="${data.unit}">
                 ${items.length+1}
@@ -86,11 +87,11 @@ $('select[name=category]').on('select2:selecting', function(e) {
     const category_id = e.params.args.data.id
     fetch('/manajemen/orders/load-form-item-options?category_id='+category_id).then(res => res.json())
     .then(res => {
-        $('select[name=service]').html('<option value="" data-price="0" data-unit="PCS">- Pilih -</option>')
+        $('select[name=item]').html('<option value="" data-recordtype="" data-price="0" data-unit="PCS">- Pilih -</option>')
         
-        res.data.services.forEach(data => {
-            var newOption = `<option value="${data.id}" data-price="${data.price}" data-unit="${data.unit}">${data.name}</option>`
-            $('select[name=service]').append(newOption)
+        res.data.forEach(data => {
+            var newOption = `<option value="${data.id}" data-recordtype="${data.record_type}" data-price="${data.price}" data-unit="${data.unit}">${data.name}</option>`
+            $('select[name=item]').append(newOption)
         })
     })
 });
