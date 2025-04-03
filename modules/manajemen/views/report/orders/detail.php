@@ -113,7 +113,7 @@
                         <?php foreach ($order->items as $index => $item):
 
                             $itm = $item->service_id ? $db->single('mst_services', ['id' => $item->service_id]) : $db->single('mst_items', ['id' => $item->item_id]);
-                            $category = $db->single('mst_categories', ['id' => $service->category_id]);
+                            $category = $db->single('mst_categories', ['id' => $itm->category_id]);
 
                         ?>
                             <tr>
