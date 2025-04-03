@@ -36,13 +36,12 @@ $('.add-item-button').click(function(){
                 <td>
                 <input type="hidden" name="items[${items.length}][order_number]" value="${items.length+1}">
                 <input type="hidden" name="items[${items.length}][${data.record_type == 'JASA' ? 'service_id' : 'item_id'}]" value="${data.item}">
-                <input type="hidden" name="items[${items.length}][price]" value="${data.price}">
                 <input type="hidden" name="items[${items.length}][unit]" value="${data.unit}">
                 ${items.length+1}
                 </td>
                 <td>${data.category_name}</td>
                 <td>${data.name}</td>
-                <td>Rp. ${format_number(data.price)}</td>
+                <td><input type="tel" class="form-control qty-input-price" data-type="currency" style="width:100px" name="items[${items.length}][price]" value="${data.price}" data-key="${items.length+1}"></td>
                 <td><input type="number" class="form-control qty-input" style="width:100px" name="items[${items.length}][qty]" value="${data.qty}" data-key="${items.length+1}"></td>
                 <td>${data.unit}</td>
                 <td id="total_price_${items.length+1}">Rp. ${format_number(data.total_price)}</td>
@@ -77,7 +76,18 @@ $(document.body).on('change', '.qty-input', function(){
     const index = items.findIndex(item => item.key == key);
     const item = items[index]
 
-    item.qty = parseInt($(this).val())
+    item.qty = parseFloat($(this).val())
+    item.total_price = item.price * item.qty
+    $('#total_price_'+key).html('Rp. ' + format_number(item.total_price))
+    calculateTotalOrder()
+})
+
+$(document.body).on('change', '.qty-input-price', function(){
+    var key = $(this).data('key')
+    const index = items.findIndex(item => item.key == key);
+    const item = items[index]
+
+    item.price = parseInt($(this).val())
     item.total_price = item.price * item.qty
     $('#total_price_'+key).html('Rp. ' + format_number(item.total_price))
     calculateTotalOrder()
