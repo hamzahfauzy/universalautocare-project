@@ -24,7 +24,7 @@ $items = [];
 
 foreach ($data_items as $index => $item) {
     $itm = $item->item_id ? $db->single('mst_items',['id' => $item->item_id]) : $db->single('mst_services', ['id' => $item->service_id]);
-    $category = $db->single('mst_categories', ['id' => $service->category_id]);
+    $category = $db->single('mst_categories', ['id' => $itm->category_id]);
     $items[] = [
         'id' => $item->id,
         'key' => $index + 1,

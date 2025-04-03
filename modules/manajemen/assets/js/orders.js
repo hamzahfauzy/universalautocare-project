@@ -56,6 +56,8 @@ $('.add-item-button').click(function(){
     calculateTotalOrder()
 
     refreshRow()
+
+    refreshCurrencyField()
 });
 
 $(document.body).on('click', '.remove-item-button', function(){
