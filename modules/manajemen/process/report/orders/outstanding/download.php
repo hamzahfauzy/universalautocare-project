@@ -53,7 +53,7 @@ $spreadsheet = new Spreadsheet();
 $sheet = $spreadsheet->getActiveSheet();
 $sheet->setCellValue('A1', 'No');
 $i = 1;
-$fields = array_keys((array) $data[0]);
+$fields = $db->getFields();
 foreach ($fields as $field) {
     $sheet->setCellValue(chr($i + 65) . '1', $field);
     $i++;
