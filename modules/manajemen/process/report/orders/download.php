@@ -15,24 +15,25 @@ $filterByDate  = Request::get('filterByDate', [
     'end_date' => date('Y-m-d'),
 ]);
 
-$search_fields = ['trn_orders.done_date','trn_orders.code','trn_orders.date','mst_customers.name','mst_employees.name','mst_partners.name'];
-    $query = "SELECT 
-                trn_orders.order_type, 
-                trn_orders.code, 
-                trn_orders.date,
-                trn_orders.done_date,
-                mst_customers.name customer_name,
-                mst_employees.name employee_name,
-                mst_partners.name partner_name,
-                CONCAT('Rp. ',FORMAT(trn_orders.total_value,0)) total_value,
-                CONCAT('Rp. ', FORMAT(Z.total_outgoing_value, 0)) total_item_value,
-                CONCAT('Rp. ',FORMAT(trn_orders.total_service_value,0)) total_service_value,
-                trn_orders.status
-              FROM trn_orders
-              LEFT JOIN mst_employees ON mst_employees.id = trn_orders.employee_id
-              LEFT JOIN mst_customers ON mst_customers.id = trn_orders.customer_id
-              LEFT JOIN mst_partners ON mst_partners.id = trn_orders.partner_id
-              LEFT JOIN (Select SUM(trn_outgoings.total_outgoing_value) As total_outgoing_value, trn_outgoings.order_id From trn_outgoings Where trn_outgoings.status = 'APPROVE' Group By trn_outgoings.order_id) Z ON trn_orders.id = Z.order_id";
+$search_fields = ['trn_orders.done_date', 'trn_orders.code', 'trn_orders.date', 'mst_customers.name', 'mst_employees.name', 'mst_partners.name'];
+$query = "SELECT 
+            trn_orders.order_type, 
+            trn_orders.code, 
+            trn_orders.date,
+            trn_orders.done_date,
+            mst_customers.name customer_name,
+            mst_employees.name employee_name,
+            mst_partners.name partner_name,
+            CONCAT('Rp. ',FORMAT(trn_orders.total_value,0)) total_value,
+            CONCAT('Rp. ', FORMAT(Z.total_outgoing_value, 0)) total_item_value,
+            CONCAT('Rp. ',FORMAT(trn_orders.total_service_value,0)) total_service_value,
+            trn_orders.status
+          FROM trn_orders
+          LEFT JOIN mst_employees ON mst_employees.id = trn_orders.employee_id
+          LEFT JOIN mst_customers ON mst_customers.id = trn_orders.customer_id
+          LEFT JOIN mst_partners ON mst_partners.id = trn_orders.partner_id
+          LEFT JOIN (Select SUM(trn_outgoings.total_outgoing_value) As total_outgoing_value, trn_outgoings.order_id From trn_outgoings Where trn_outgoings.status = 'APPROVE' Group By trn_outgoings.order_id) Z ON trn_orders.id = Z.order_id
+          ";
 
 $where = "WHERE (trn_orders.date BETWEEN '$filterByDate[start_date]' AND '$filterByDate[end_date]')";
 
