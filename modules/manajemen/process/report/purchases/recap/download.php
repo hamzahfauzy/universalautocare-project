@@ -26,9 +26,9 @@ $having = ($filter ? " HAVING " : "") . $filter;
 $query = "SELECT 
     A.date as tanggal, 
     Count(A.code) As jlh_pembelian, 
-    CONCAT(SUM(Coalesce(A.total_item, 0)), ' Item(s)') As jlh_items, 
-    CONCAT(SUM(Coalesce(A.total_qty, 0)), ' QTY') As jlh_qty, 
-    FORMAT(SUM(Coalesce(A.total_value, 0)), 0) As total_pembelian,
+    SUM(Coalesce(A.total_item, 0)) As jlh_items, 
+    SUM(Coalesce(A.total_qty, 0)) As jlh_qty, 
+    SUM(Coalesce(A.total_value, 0)) As total_pembelian,
     A.status
 From trn_purchases A
 $where

@@ -22,7 +22,7 @@ $query = "SELECT
             mst_suppliers.name supplier_name,
             mst_employees.name employee_name,
             CONCAT(trn_purchases.total_item,' item / ', trn_purchases.total_qty, ' Qty') item,
-            CONCAT('Rp. ',FORMAT(trn_purchases.total_value,0)) total,
+            trn_purchases.total_value total,
             trn_purchases.status
             FROM trn_purchases
             LEFT JOIN mst_employees ON mst_employees.id = trn_purchases.employee_id

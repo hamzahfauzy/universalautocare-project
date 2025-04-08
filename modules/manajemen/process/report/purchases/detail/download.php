@@ -23,8 +23,8 @@ $query = "SELECT
                 mst_categories.name category_name,
                 mst_items.name product_name,
                 CONCAT(trn_purchase_items.total_qty, ' ',trn_purchase_items.unit),
-                CONCAT('Rp. ',FORMAT(trn_purchase_items.price,0)) price,
-                CONCAT('Rp. ',FORMAT(trn_purchase_items.total_price,0)) total,
+                trn_purchase_items.price,
+                trn_purchase_items.total_price total,
                 trn_purchases.status
               FROM trn_purchases
               LEFT JOIN mst_suppliers ON mst_suppliers.id = trn_purchases.supplier_id

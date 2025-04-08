@@ -24,9 +24,9 @@ $query = "SELECT
             mst_customers.name customer_name,
             mst_employees.name employee_name,
             mst_partners.name partner_name,
-            CONCAT('Rp. ',FORMAT(trn_orders.total_value,0)) total_value,
-            CONCAT('Rp. ', FORMAT(Z.total_outgoing_value, 0)) total_item_value,
-            CONCAT('Rp. ',FORMAT(trn_orders.total_service_value,0)) total_service_value,
+            trn_orders.total_value,
+            Z.total_outgoing_value total_item_value,
+            trn_orders.total_service_value,
             trn_orders.status
           FROM trn_orders
           LEFT JOIN mst_employees ON mst_employees.id = trn_orders.employee_id

@@ -23,7 +23,7 @@ $query = "SELECT
             mst_customers.name customer_name,
             mst_employees.name employee_name,
             CONCAT(trn_outgoings.total_outgoing_items,' item / ', trn_outgoings.total_outgoing_qty, ' Qty') item,
-            CONCAT('Rp. ',FORMAT(trn_outgoings.total_outgoing_value,0)) total,
+            trn_outgoings.total_outgoing_value total,
             trn_outgoings.status
             FROM trn_outgoings
             LEFT JOIN trn_orders ON trn_orders.id = trn_outgoings.order_id

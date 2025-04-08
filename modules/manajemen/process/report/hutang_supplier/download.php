@@ -22,9 +22,9 @@ $query = "SELECT
             trn_purchases.date,
             mst_suppliers.name supplier_name,
             mst_employees.name employee_name,
-            FORMAT(trn_purchases.total_payment,0) total_payment,
-            FORMAT(trn_purchases.total_value,0) total_value,
-            FORMAT(trn_purchases.total_value-COALESCE(total_payment,0),0) hutang,
+            trn_purchases.total_payment,
+            trn_purchases.total_value,
+            trn_purchases.total_value-COALESCE(total_payment,0) hutang,
             trn_purchases.status
             FROM trn_purchases
             LEFT JOIN mst_suppliers ON mst_suppliers.id = trn_purchases.supplier_id

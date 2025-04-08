@@ -15,23 +15,22 @@ $filterByDate  = Request::get('filterByDate', [
     'end_date' => date('Y-m-d'),
 ]);
 
-$search_fields = ['trn_cash.code', 'trn_cash.cash_resource', 'mst_banks.name', 'trn_cash.reference_number'];
-
+$search_fields = ['trn_cash.cash_group', 'trn_cash.code', 'trn_cash.cash_resource', 'mst_banks.name', 'trn_cash.reference_number'];
 $query = "SELECT 
-                trn_cash.cash_group, 
-                trn_cash.code, 
-                trn_cash.date,
-                trn_cash.cash_type, 
-                trn_cash.cash_resource, 
-                mst_banks.name bank_name,
-                trn_cash.reference_number,
-                CONCAT('Rp. ',FORMAT(trn_cash.discount,0)) discount,
-                CONCAT('Rp. ',FORMAT(trn_cash.cash_total,0)) cash_total,
-                CONCAT('Rp. ',FORMAT(trn_cash.total_payment,0)) total_payment,
-                trn_cash.status
-              FROM trn_cash
-              LEFT JOIN mst_banks ON mst_banks.id = trn_cash.bank_id
-              ";
+            trn_cash.cash_group, 
+            trn_cash.code, 
+            trn_cash.date,
+            trn_cash.cash_type, 
+            trn_cash.cash_resource, 
+            mst_banks.name bank_name,
+            trn_cash.reference_number,
+            trn_cash.discount,
+            trn_cash.cash_total,
+            trn_cash.total_payment,
+            trn_cash.status
+            FROM trn_cash
+            LEFT JOIN mst_banks ON mst_banks.id = trn_cash.bank_id
+            ";
 
 $where = "WHERE (trn_cash.date BETWEEN '$filterByDate[start_date]' AND '$filterByDate[end_date]')";
 

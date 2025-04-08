@@ -24,9 +24,9 @@ $query = "SELECT
             mst_customers.name customer_name,
             mst_employees.name employee_name,
             mst_partners.name partner_name,
-            CONCAT('Rp. ',FORMAT(trn_orders.total_value,0)) total_value,
-            CONCAT('Rp. ',FORMAT(Coalesce(trn_orders.total_payment, 0),0)) total_payment,
-            CONCAT('Rp. ',FORMAT(trn_orders.total_value - Coalesce(trn_orders.total_payment, 0),0)) total_sisa,
+            trn_orders.total_value,
+            Coalesce(trn_orders.total_payment, 0) total_payment,
+            trn_orders.total_value - Coalesce(trn_orders.total_payment, 0) total_sisa,
             trn_orders.status
             FROM trn_orders
             LEFT JOIN mst_employees ON mst_employees.id = trn_orders.employee_id

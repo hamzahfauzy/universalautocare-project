@@ -16,7 +16,7 @@ $filterByDate  = Request::get('filterByDate', [
     'end_date' => date('Y-m-d'),
 ]);
 
-$id = $filter['item'];
+$id = $filter['item'] ?? 0;
 $dariTgl = $filterByDate['start_date'];
 $sampaiTgl = $filterByDate['end_date'];
 
