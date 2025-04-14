@@ -3,6 +3,7 @@
 return [
     'module_name' => 'Manajemen',
     'master' => 'Master',
+    'dashboard' => 'Dashboard',
     'items' => 'Barang',
     'services' => 'Jasa',
     'customers' => 'Customer',

@@ -2,6 +2,12 @@
 
 return [
     [
+        'label' => 'manajemen.menu.dashboard',
+        'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-dashboard',
+        'route' => routeTo('manajemen/dashboard/index'),
+        'activeState' => 'manajemen.dashboard'
+    ],
+    [
         'label' => 'manajemen.menu.master',
         'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-cube',
         'activeState' => [
