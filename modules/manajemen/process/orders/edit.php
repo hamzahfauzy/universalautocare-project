@@ -56,15 +56,15 @@ $data_items = $db->all('trn_order_items', ['order_id' => $_GET['id']]);
 $items = [];
 
 foreach ($data_items as $index => $item) {
-    $itm = $item->item_id ? $db->single('mst_items',['id' => $item->item_id]) : $db->single('mst_services', ['id' => $item->service_id]);
+    $itm = $item->item_id ? $db->single('mst_items', ['id' => $item->item_id]) : $db->single('mst_services', ['id' => $item->service_id]);
     $category = $db->single('mst_categories', ['id' => $itm->category_id]);
     $items[] = [
         'id' => $item->id,
         'key' => $index + 1,
         'name' => $itm->name,
-        'qty' => (double) $item->qty,
-        'price' => (double) $item->price,
-        'total_price' => (double) $item->total_price,
+        'qty' => (float) $item->qty,
+        'price' => (float) $item->price,
+        'total_price' => (float) $item->total_price,
         'unit' => $item->unit,
         'category_name' => $category->name,
         'category' => $category->id,
@@ -78,7 +78,7 @@ $data->customer = $customer;
 
 // page section
 $title = 'Edit Data Job Order ' . $_GET['filter']['order_type'];
-$types = ['BENGKEL' => 'workshop', 'DOORSMEER' => 'carwash'];
+$types = ['BENGKEL' => 'workshop', 'DOORSMEER' => 'carwash', 'RENTAL' => 'rental'];
 $order_type = $_GET['filter']['order_type'];
 Page::setActive('manajemen.' . $types[$order_type] . '_orders');
 Page::setTitle($title);
@@ -115,7 +115,7 @@ Page::pushHead('<style>.select2,.select2-selection{height:38px!important;} .sele
 Page::pushFoot('<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>');
 Page::pushFoot("<script src='" . asset('assets/crud/js/crud.js') . "'></script>");
 Page::pushFoot("<script>var items = " . json_encode($items) . "</script>");
-Page::pushFoot("<script src='" . asset('assets/manajemen/js/orders.js?v='.strtotime('now')) . "'></script>");
+Page::pushFoot("<script src='" . asset('assets/manajemen/js/orders.js?v=' . strtotime('now')) . "'></script>");
 Page::pushFoot("<script>$('.select2insidemodal').select2({dropdownParent: $('#itemModal .modal-body')});</script>");
 
 Page::pushHook('edit');

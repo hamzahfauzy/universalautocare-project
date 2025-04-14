@@ -122,6 +122,12 @@ return [
                 'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-compress-arrows-alt',
                 'route' => routeTo('crud/index', ['table' => 'trn_orders', 'filter' => ['order_type' => 'DOORSMEER']]),
                 'activeState' => 'manajemen.carwash_orders'
+            ],
+            [
+                'label' => 'manajemen.menu.rental',
+                'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-compress-arrows-alt',
+                'route' => routeTo('crud/index', ['table' => 'trn_orders', 'filter' => ['order_type' => 'RENTAL']]),
+                'activeState' => 'manajemen.rentar_orders'
             ]
         ]
     ],
@@ -162,6 +168,7 @@ return [
             'manajemen.status.outgoings',
             'manajemen.status.workshop_orders',
             'manajemen.status.carwash_orders',
+            'manajemen.status.rental_orders',
             'manajemen.status.cash_income',
             'manajemen.status.cash_outcome',
             'manajemen.status.cash_cost',
@@ -192,6 +199,12 @@ return [
                 'activeState' => 'manajemen.status.carwash_orders'
             ],
             [
+                'label' => 'manajemen.menu.rental',
+                'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-stream',
+                'route' => routeTo('manajemen/status/orders', ['filter' => ['order_type' => 'RENTAL']]),
+                'activeState' => 'manajemen.status.rental_orders'
+            ],
+            [
                 'label' => 'manajemen.menu.cash_income',
                 'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-stream',
                 'route' => routeTo('manajemen/status/cash', ['filter' => ['cash_group' => 'PENERIMAAN KAS']]),
@@ -218,7 +231,9 @@ return [
             'manajemen.print.workshop_detail',
             'manajemen.print.workshop_invoice',
             'manajemen.print.carwash_detail',
-            'manajemen.print.carwash_invoice'
+            'manajemen.print.carwash_invoice',
+            'manajemen.print.rental_detail',
+            'manajemen.print.rental_invoice'
         ],
         'items' => [
             [
@@ -244,6 +259,18 @@ return [
                 'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-stream',
                 'route' => routeTo('manajemen/print/orders', ['filter' => ['order_type' => 'DOORSMEER', 'type' => 'invoice']]),
                 'activeState' => 'manajemen.print.carwash_invoice'
+            ],
+            [
+                'label' => 'manajemen.menu.rental_order',
+                'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-stream',
+                'route' => routeTo('manajemen/print/orders', ['filter' => ['order_type' => 'RENTAL', 'type' => 'detail']]),
+                'activeState' => 'manajemen.print.rental_detail'
+            ],
+            [
+                'label' => 'manajemen.menu.rental_invoice',
+                'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-stream',
+                'route' => routeTo('manajemen/print/orders', ['filter' => ['order_type' => 'RENTAL', 'type' => 'invoice']]),
+                'activeState' => 'manajemen.print.rental_invoice'
             ],
         ]
     ],

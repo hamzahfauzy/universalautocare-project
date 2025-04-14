@@ -37,7 +37,7 @@ $data = $db->exec('all');
 
 // page section
 $title = 'Update Status Job Order ' . ucwords(strtolower($order_type));
-$types = ['BENGKEL' => 'workshop', 'DOORSMEER' => 'carwash'];
+$types = ['BENGKEL' => 'workshop', 'DOORSMEER' => 'carwash', 'RENTAL' => 'rental'];
 Page::setActive('manajemen.status.' . $types[$order_type] . '_orders');
 Page::setTitle($title);
 Page::setModuleName($title);

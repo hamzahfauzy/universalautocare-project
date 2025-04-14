@@ -30,8 +30,8 @@ if (isset($_GET['code'])) {
 }
 
 // page section
-$title = 'Cetak '.($_GET['filter']['type'] == 'invoice' ? 'Invoice' : '').' Job Order ' . ucwords(strtolower($_GET['filter']['order_type']));
-$types = ['BENGKEL' => 'workshop', 'DOORSMEER' => 'carwash'];
+$title = 'Cetak ' . ($_GET['filter']['type'] == 'invoice' ? 'Invoice' : '') . ' Job Order ' . ucwords(strtolower($_GET['filter']['order_type']));
+$types = ['BENGKEL' => 'workshop', 'DOORSMEER' => 'carwash', 'RENTAL' => 'rental'];
 $order_type = $_GET['filter']['order_type'];
 Page::setActive('manajemen.print.' . $types[$order_type] . '_' . $_GET['filter']['type']);
 Page::setTitle($title);

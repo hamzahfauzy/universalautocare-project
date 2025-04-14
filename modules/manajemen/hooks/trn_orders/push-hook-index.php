@@ -15,7 +15,7 @@ Route::additional_allowed_routes([
     'route_path' => '!crud/delete?table=trn_orders'
 ]);
 
-$types = ['BENGKEL' => 'workshop', 'DOORSMEER' => 'carwash'];
+$types = ['BENGKEL' => 'workshop', 'DOORSMEER' => 'carwash', 'RENTAL' => 'rental'];
 $order_type = $_GET['filter']['order_type'];
-Page::set_title(__('manajemen.label.'.$types[$order_type].'_orders'));
-Page::setActive('manajemen.'.$types[$order_type].'_orders');
+Page::set_title(__('manajemen.label.' . $types[$order_type] . '_orders'));
+Page::setActive('manajemen.' . $types[$order_type] . '_orders');

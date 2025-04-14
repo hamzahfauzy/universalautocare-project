@@ -21,15 +21,15 @@ $data_items = $db->all('trn_order_items', ['order_id' => $_GET['id']]);
 $items = [];
 
 foreach ($data_items as $index => $item) {
-    $itm = $item->item_id ? $db->single('mst_items',['id' => $item->item_id]) : $db->single('mst_services', ['id' => $item->service_id]);
+    $itm = $item->item_id ? $db->single('mst_items', ['id' => $item->item_id]) : $db->single('mst_services', ['id' => $item->service_id]);
     $category = $db->single('mst_categories', ['id' => $itm->category_id]);
     $items[] = [
         'id' => $item->id,
         'key' => $index + 1,
         'name' => $itm->name,
-        'qty' => (double) $item->qty,
-        'price' => (double) $item->price,
-        'total_price' => (double) $item->total_price,
+        'qty' => (float) $item->qty,
+        'price' => (float) $item->price,
+        'total_price' => (float) $item->total_price,
         'unit' => $item->unit,
         'category_name' => $category->name,
         'category' => $category->id,
@@ -45,7 +45,7 @@ $data->employee = $db->single('mst_employees', ['id' => $data->employee_id]);
 
 // page section
 $title = 'Detail Data Job Order ' . $data->order_type;
-$types = ['BENGKEL' => 'workshop', 'DOORSMEER' => 'carwash'];
+$types = ['BENGKEL' => 'workshop', 'DOORSMEER' => 'carwash', 'RENTAL' => 'rental'];
 $order_type = $data->order_type;
 Page::setActive('manajemen.' . $types[$order_type] . '_orders');
 Page::setTitle($title);

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 return [
     'module_name' => 'Manajemen',
@@ -20,6 +20,7 @@ return [
     'trn_cash' => 'Kas',
     'workshop_orders' => 'Job Order Bengkel',
     'carwash_orders' => 'Job Order Doorsmeer',
+    'rental_orders' => 'Rental Doorsmeer',
     'cash_income' => 'Penerimaan Kas',
     'cash_outcome' => 'Pengeluaran Kas',
     'cash_cost' => 'Biaya Kas',
