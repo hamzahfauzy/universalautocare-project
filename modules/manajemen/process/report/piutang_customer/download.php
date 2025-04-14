@@ -12,7 +12,7 @@ $db = new Database;
 $order   = Request::get('order', [['column' => 1, 'dir' => 'asc']]);
 unset($_GET['filter']['date']);
 
-$search_fields = ['trn_orders.code', 'trn_orders.date', 'trn_orders.order_type', 'mst_customers.name', 'mst_employees.name','mst_partners.name','trn_orders.total_payment'];
+$search_fields = ['trn_orders.code', 'trn_orders.date', 'trn_orders.order_type', 'mst_customers.name', 'mst_employees.name', 'mst_partners.name', 'trn_orders.total_payment'];
 $query = "SELECT 
                 trn_orders.code,
                 trn_orders.date,
@@ -35,6 +35,8 @@ $where = ($search ? " WHERE " : "") . $search;
 
 $filter = buildFilter();
 $having = "HAVING piutang > 0 " . ($filter ? " AND " : "") . $filter;
+
+$query .= $where . $having;
 
 $db->query = $query;
 $data = $db->exec('all');
