@@ -115,6 +115,7 @@ return [
         'activeState' => [
             'manajemen.workshop_orders',
             'manajemen.carwash_orders',
+            'manajemen.rental_orders',
         ],
         'items' => [
             [
@@ -133,7 +134,7 @@ return [
                 'label' => 'manajemen.menu.rental',
                 'icon'  => 'fa-fw fa-lg me-2 fa-solid fa-compress-arrows-alt',
                 'route' => routeTo('crud/index', ['table' => 'trn_orders', 'filter' => ['order_type' => 'RENTAL']]),
-                'activeState' => 'manajemen.rentar_orders'
+                'activeState' => 'manajemen.rental_orders'
             ]
         ]
     ],
