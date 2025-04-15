@@ -76,7 +76,7 @@
                             <h5 class="m-0 p-0">Daily/Harian</h5>
                             <span><?= $date ?></span>
                             <div style="height: 200px;"></div>
-                            <a href="" class="btn btn-primary btn-sm">Detail</a>
+                            <a href="<?=routeTo('manajemen/report/orders')?>" class="btn btn-primary btn-sm">Detail</a>
                         </td>
                     </tr>
                 </table>
@@ -95,7 +95,7 @@
                             <h5 class="m-0 p-0">By Metode/Cara Bayar</h5>
                             <span><?= $date ?></span>
                             <div style="height: 200px;"></div>
-                            <a href="" class="btn btn-primary btn-sm">Detail</a>
+                            <a href="<?=routeTo('manajemen/report/acsh')?>" class="btn btn-primary btn-sm">Detail</a>
                         </td>
                     </tr>
                 </table>
@@ -124,6 +124,7 @@
                         </tbody>
                     </table>
                 </div>
+                <a href="<?=routeTo('manajemen/report/orders')?>" class="btn btn-primary btn-sm">Detail</a>
             </div>
         </div>
     </div>
@@ -139,7 +140,7 @@
                             <h5 class="m-0 p-0">By Jenis Order</h5>
                             <span><?= $date ?></span>
                             <div style="height: 200px;"></div>
-                            <a href="" class="btn btn-primary btn-sm">Detail</a>
+                            <a href="<?=routeTo('manajemen/report/orders')?>" class="btn btn-primary btn-sm">Detail</a>
                         </td>
                     </tr>
                 </table>
