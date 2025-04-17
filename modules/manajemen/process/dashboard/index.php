@@ -57,6 +57,7 @@ $daily = $db->exec('single');
 
 $db->query = "Select A.cash_resource, SUM(A.total_value) As NilaiBayar From trn_cash A Where A.date = '$date' And A.status = 'APPROVE' And A.cash_group = 'PENERIMAAN KAS' Group By A.cash_resource";
 $paymentType = $db->exec('single') ?? [];
+print_r($paymentType);
 
 $db->query = "Select A.order_type, SUM(A.total_value) As NilaiJenisOrder From trn_orders A Where A.date = '$date' And A.status = 'APPROVE' $orderType Group By A.order_type";
 $orderTypeData = $db->exec('single') ?? [];
