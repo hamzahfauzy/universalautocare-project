@@ -110,7 +110,7 @@ $dailyChart = [
 ];
 
 $paymentChart = [
-    'labels' => $paymentType ? array_values(array_column((array) $paymentType, 'cash_resource')) : [],
+    'labels' => ['Cash', 'Other'], // $paymentType ? array_values(array_column((array) $paymentType, 'cash_resource')) : [],
     'data' => [
         [
             'label' => 'Metode Pembayaran',
@@ -121,11 +121,11 @@ $paymentChart = [
 ];
 
 $orderChart = [
-    'labels' => $orderTypeData ? array_values(array_column((array) $orderTypeData, 'order_type')) : [],
+    'labels' => ['Bengkel', 'Doorsmeer','Rental'], // $orderTypeData ? array_values(array_column((array) $orderTypeData, 'order_type')) : [],
     'data' => [
         [
             'label' => 'Tipe Order',
-            'data' => [10, 20], // $orderTypeData ? array_values(array_column((array) $orderTypeData, 'NilaiJenisOrder')) : [],
+            'data' => [10, 20, 2], // $orderTypeData ? array_values(array_column((array) $orderTypeData, 'NilaiJenisOrder')) : [],
             'borderWidth' => 1
         ]
     ]
