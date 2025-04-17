@@ -52,7 +52,7 @@ SUM(Case When DATE_ADD(\"$date\", INTERVAL -1 DAY) = A.date And A.status = 'APPR
 	Then A.total_value Else 0 End) As Last1Nilai,
 Count(Case When DATE_ADD(\"$date\", INTERVAL -1 DAY) = A.date And A.status = 'APPROVE' 
 	Then 1 Else 0 End) As Last1Trx
-From trn_orders A";
+From trn_orders A";
 $daily = $db->exec('single');
 
 $db->query = "Select A.cash_resource, SUM(A.total_value) As NilaiBayar From trn_cash A Where A.date = '$date' And A.status = 'APPROVE' And A.cash_group = 'PENERIMAAN KAS' Group By A.cash_resource";
