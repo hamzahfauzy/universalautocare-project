@@ -110,11 +110,11 @@ $dailyChart = [
 ];
 
 $paymentChart = [
-    'labels' => ['Cash', 'Other'], // $paymentType ? array_values(array_column((array) $paymentType, 'cash_resource')) : [],
+    'labels' => $paymentType ? array_values(array_column((array) $paymentType, 'cash_resource')) : [],
     'datasets' => [
         [
             'label' => 'Metode Pembayaran',
-            'data' => [12, 19], //$paymentType ? array_values(array_column((array) $paymentType, 'NilaiBayar')) : [],
+            'data' => $paymentType ? array_values(array_column((array) $paymentType, 'NilaiBayar')) : [],
             'borderWidth' => 1
         ]
     ]
