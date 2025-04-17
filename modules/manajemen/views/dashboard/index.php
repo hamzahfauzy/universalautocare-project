@@ -30,36 +30,64 @@
     <div class="col-12 col-md-3">
         <div class="card">
             <div class="card-body">
-                <h5 class="m-0 p-0">Pembelian</h5>
-                <p><?= $date ?></p>
-                <b>Rp. <?=number_format($data['purchases']->total) ?></b>
+                <div class="d-flex" style="gap: 10px;">
+                    <div class="detail-section">
+                        <a href="<?=routeTo('manajemen/report/purchases')?>" class="btn btn-primary rounded-circle h-100" style="line-height: 66px">Detail</a>
+                    </div>    
+                    <div class="data-section">
+                        <h5 class="m-0 p-0">Pembelian</h5>
+                        <p><?= $date ?></p>
+                        <b>Rp. <?=number_format($data['purchases']->total) ?></b>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     <div class="col-12 col-md-3">
         <div class="card">
             <div class="card-body">
-                <h5 class="m-0 p-0">Job Order</h5>
-                <p><?= $date ?></p>
-                <b>Rp. <?=number_format($data['orders']->total) ?></b>
+                <div class="d-flex" style="gap: 10px;">
+                    <div class="detail-section">
+                        <a href="<?=routeTo('manajemen/report/orders')?>" class="btn btn-primary rounded-circle h-100" style="line-height: 66px">Detail</a>
+                    </div>    
+                    <div class="data-section">
+                        <h5 class="m-0 p-0">Job Order</h5>
+                        <p><?= $date ?></p>
+                        <b>Rp. <?=number_format($data['orders']->total) ?></b>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     <div class="col-12 col-md-3">
         <div class="card">
             <div class="card-body">
-                <h5 class="m-0 p-0">Biaya Kas</h5>
-                <p><?= $date ?></p>
-                <b>Rp. <?=number_format($data['cash']->total) ?></b>
+                <div class="d-flex" style="gap: 10px;">
+                    <div class="detail-section">
+                        <a href="<?=routeTo('manajemen/report/cash')?>" class="btn btn-primary rounded-circle h-100" style="line-height: 66px">Detail</a>
+                    </div>    
+                    <div class="data-section">
+                        <h5 class="m-0 p-0">Biaya Kas</h5>
+                        <p><?= $date ?></p>
+                        <b>Rp. <?=number_format($data['cash']->total) ?></b>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     <div class="col-12 col-md-3">
         <div class="card">
             <div class="card-body">
-                <h5 class="m-0 p-0">Piutang</h5>
-                <p><?= $date ?></p>
-                <b>Rp. <?=number_format($data['piutang']->total) ?></b>
+                <div class="d-flex" style="gap: 10px;">
+                    <div class="detail-section">
+                        <a href="<?=routeTo('manajemen/report/piutang_customer')?>" class="btn btn-primary rounded-circle h-100" style="line-height: 66px">Detail</a>
+                    </div>    
+                    <div class="data-section">
+                        <h5 class="m-0 p-0">Piutang</h5>
+                        <p><?= $date ?></p>
+                        <b>Rp. <?=number_format($data['piutang']->total) ?></b>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -95,7 +123,7 @@
                             <h5 class="m-0 p-0">By Metode/Cara Bayar</h5>
                             <span><?= $date ?></span>
                             <div style="height: 200px;"></div>
-                            <a href="<?=routeTo('manajemen/report/acsh')?>" class="btn btn-primary btn-sm">Detail</a>
+                            <a href="<?=routeTo('manajemen/report/cash')?>" class="btn btn-primary btn-sm">Detail</a>
                         </td>
                     </tr>
                 </table>
