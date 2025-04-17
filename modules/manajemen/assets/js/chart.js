@@ -14,14 +14,20 @@ function chart(element, type = 'bar', data){
               ticks: {
                 minRotation: 90,
                 maxRotation: 90
+              },
+              grid: {
+                display: false
               }
             },
             y: {
-              beginAtZero: true
+              beginAtZero: true,
+              grid: {
+                display: false
+              }
             }
           }
         }
     }
-    console.log(options)
+    
     new Chart(ctx, options);
 }
