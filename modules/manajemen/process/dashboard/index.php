@@ -55,7 +55,7 @@ Count(Case When DATE_ADD(\"$date\", INTERVAL -1 DAY) = A.date And A.status = 'AP
 From trn_orders A";
 $daily = $db->exec('single');
 
-$db->query = "Select A.cash_resource, SUM(A.total_value) As NilaiBayar From trn_cash A Where A.date = '$date' And A.status = 'APPROVE' And A.cash_group = 'PENERIMAAN KAS' Group By A.cash_resource";
+$db->query = "Select A.cash_resource, SUM(A.cash_total) As NilaiBayar From trn_cash A Where A.date = '$date' And A.status = 'APPROVE' And A.cash_group = 'PENERIMAAN KAS' Group By A.cash_resource";
 $paymentType = $db->exec('all') ?? [];
 
 $db->query = "Select A.order_type, SUM(A.total_value) As NilaiJenisOrder From trn_orders A Where A.date = '$date' And A.status = 'APPROVE' $orderType Group By A.order_type";
@@ -89,21 +89,6 @@ $dailyChart = [
             ],
             // 'backgroundColor' => 'rgba(54, 162, 235, 0.5)',
             // 'borderColor' => 'rgba(54, 162, 235, 1)',
-            'borderWidth' => 1
-        ],
-        [
-            'label' => 'Transaksi',
-            'data' => [
-                (int) $daily?->Last7Trx,
-                (int) $daily?->Last6Trx,
-                (int) $daily?->Last5Trx,
-                (int) $daily?->Last4Trx,
-                (int) $daily?->Last3Trx,
-                (int) $daily?->Last2Trx,
-                (int) $daily?->Last1Trx,
-            ],
-            // 'backgroundColor' => 'rgba(54, 235, 123, 0.5)',
-            // 'borderColor' => 'rgba(54, 235, 123, 1)',
             'borderWidth' => 1
         ],
     ]
