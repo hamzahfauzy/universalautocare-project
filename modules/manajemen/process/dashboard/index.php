@@ -56,11 +56,10 @@ From trn_orders A";
 $daily = $db->exec('single');
 
 $db->query = "Select A.cash_resource, SUM(A.total_value) As NilaiBayar From trn_cash A Where A.date = '$date' And A.status = 'APPROVE' And A.cash_group = 'PENERIMAAN KAS' Group By A.cash_resource";
-$paymentType = $db->exec('single') ?? [];
-print_r($paymentType);
+$paymentType = $db->exec('all') ?? [];
 
 $db->query = "Select A.order_type, SUM(A.total_value) As NilaiJenisOrder From trn_orders A Where A.date = '$date' And A.status = 'APPROVE' $orderType Group By A.order_type";
-$orderTypeData = $db->exec('single') ?? [];
+$orderTypeData = $db->exec('all') ?? [];
 // return $paymentType;
 
 $db->query = "Select A.order_type, A.date As tglorder, A.code As noorder, A.customer_police_number, A.customer_vehicle_type, A.customer_vehicle_color, FORMAT(A.total_value, 0) total_value From trn_orders A Where A.date = '$date' And A.status = 'APPROVE' $orderType Order By A.id Desc Limit 10";
@@ -122,11 +121,11 @@ $paymentChart = [
 ];
 
 $orderChart = [
-    'labels' => ['Bengkel', 'Doorsmeer','Rental'], // $orderTypeData ? array_values(array_column((array) $orderTypeData, 'order_type')) : [],
+    'labels' => $orderTypeData ? array_values(array_column((array) $orderTypeData, 'order_type')) : [],
     'datasets' => [
         [
             'label' => 'Tipe Order',
-            'data' => [10, 20, 2], // $orderTypeData ? array_values(array_column((array) $orderTypeData, 'NilaiJenisOrder')) : [],
+            'data' => $orderTypeData ? array_values(array_column((array) $orderTypeData, 'NilaiJenisOrder')) : [],
             'borderWidth' => 1
         ]
     ]
