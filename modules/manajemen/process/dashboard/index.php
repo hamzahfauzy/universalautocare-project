@@ -27,32 +27,32 @@ $db->query = "Select 'JobOrder' As Keterangan,
 SUM(Case When DATE_ADD(\"$date\", INTERVAL -7 DAY) = A.date And A.status = 'APPROVE' 
 	Then A.total_value Else 0 End) As Last7Nilai,
 Count(Case When DATE_ADD(\"$date\", INTERVAL -7 DAY) = A.date And A.status = 'APPROVE' 
-	Then A.code Else 0 End) As Last7Trx,
+	Then 1 Else 0 End) As Last7Trx,
 SUM(Case When DATE_ADD(\"$date\", INTERVAL -6 DAY) = A.date And A.status = 'APPROVE' 
 	Then A.total_value Else 0 End) As Last6Nilai,
 Count(Case When DATE_ADD(\"$date\", INTERVAL -6 DAY) = A.date And A.status = 'APPROVE' 
-	Then A.code Else 0 End) As Last6Trx,
+	Then 1 Else 0 End) As Last6Trx,
 SUM(Case When DATE_ADD(\"$date\", INTERVAL -5 DAY) = A.date And A.status = 'APPROVE' 
 	Then A.total_value Else 0 End) As Last5Nilai,
 Count(Case When DATE_ADD(\"$date\", INTERVAL -5 DAY) = A.date And A.status = 'APPROVE' 
-	Then A.code Else 0 End) As Last5Trx,
+	Then 1 Else 0 End) As Last5Trx,
 SUM(Case When DATE_ADD(\"$date\", INTERVAL -4 DAY) = A.date And A.status = 'APPROVE' 
 	Then A.total_value Else 0 End) As Last4Nilai,
 Count(Case When DATE_ADD(\"$date\", INTERVAL -4 DAY) = A.date And A.status = 'APPROVE' 
-	Then A.code Else 0 End) As Last4Trx,
+	Then 1 Else 0 End) As Last4Trx,
 SUM(Case When DATE_ADD(\"$date\", INTERVAL -3 DAY) = A.date And A.status = 'APPROVE' 
 	Then A.total_value Else 0 End) As Last3Nilai,
 Count(Case When DATE_ADD(\"$date\", INTERVAL -3 DAY) = A.date And A.status = 'APPROVE' 
-	Then A.code Else 0 End) As Last3Trx,
+	Then 1 Else 0 End) As Last3Trx,
 SUM(Case When DATE_ADD(\"$date\", INTERVAL -2 DAY) = A.date And A.status = 'APPROVE' 
 	Then A.total_value Else 0 End) As Last2Nilai,
 Count(Case When DATE_ADD(\"$date\", INTERVAL -2 DAY) = A.date And A.status = 'APPROVE' 
-	Then A.code Else 0 End) As Last2Trx,
+	Then 1 Else 0 End) As Last2Trx,
 SUM(Case When DATE_ADD(\"$date\", INTERVAL -1 DAY) = A.date And A.status = 'APPROVE' 
 	Then A.total_value Else 0 End) As Last1Nilai,
 Count(Case When DATE_ADD(\"$date\", INTERVAL -1 DAY) = A.date And A.status = 'APPROVE' 
-	Then A.code Else 0 End) As Last1Trx
-From trn_orders A ";
+	Then 1 Else 0 End) As Last1Trx
+From trn_orders A";
 $daily = $db->exec('single');
 
 $db->query = "Select A.cash_resource, SUM(A.total_value) As NilaiBayar From trn_cash A Where A.date = '$date' And A.status = 'APPROVE' And A.cash_group = 'PENERIMAAN KAS' Group By A.cash_resource";
