@@ -114,7 +114,7 @@ $paymentChart = [
     'data' => [
         [
             'label' => 'Metode Pembayaran',
-            'data' => $paymentType ? array_values(array_column((array) $paymentType, 'NilaiBayar')) : [],
+            'data' => [12, 19], //$paymentType ? array_values(array_column((array) $paymentType, 'NilaiBayar')) : [],
             'borderWidth' => 1
         ]
     ]
@@ -125,7 +125,7 @@ $orderChart = [
     'data' => [
         [
             'label' => 'Tipe Order',
-            'data' => $orderTypeData ? array_values(array_column((array) $orderTypeData, 'NilaiJenisOrder')) : [],
+            'data' => [10, 20], // $orderTypeData ? array_values(array_column((array) $orderTypeData, 'NilaiJenisOrder')) : [],
             'borderWidth' => 1
         ]
     ]
